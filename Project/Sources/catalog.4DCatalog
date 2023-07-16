@@ -2,7 +2,7 @@
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
 <base name="YAUT" uuid="26692BC715FE4F71B307FDB43721B2DB" collation_locale="en">
 	<schema name="DEFAULT_SCHEMA"/>
-	<base_extra>
+	<base_extra __stringCompHash="icu:72.1.0" __keywordBuildingHash="icu:72.1.0">
 		<journal_file journal_file_enabled="true"/>
 	</base_extra>
 </base>

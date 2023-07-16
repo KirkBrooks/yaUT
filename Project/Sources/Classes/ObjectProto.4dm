@@ -7,6 +7,18 @@ Note that you must pass in the object each of these functions applies to.
 We are mimicking the behaviour and functions of the actual object proto class
 the only way to have access to This, for instance, would be to instantiate this
 class using composition - passing in the object at construction. 
+
+=== Comparing Objects & collections ===
+There are two ways to think about comparing objects: 
+1) are the two references actually the same object
+2) do the objects containt the same key:value pairs
+
+If $a and $b are both references to the same object $a is $b and thus they are also equal
+If $a and $b have the same keys and values they are equal, but actually two different objects
+
+Comparisons involving objects with $useExact are True when $a IS $b
+$a and $b are EQUAL when they have the same key:value pairs
+
 */
 Class constructor
 	
@@ -60,7 +72,7 @@ Function fromEntries($entries : Collection)->$object : Object
 	End if 
 	
 Function objCompare($obj_a : Object; $obj_b : Object) : Object
-	// compares the object values
+	// recursively compares the object values
 	var $keys_a; $keys_b : Collection
 	var $key : Text
 	
@@ -117,7 +129,7 @@ Function colCompare($col_a : Collection; $col_b : Collection) : Object
 	return New object("is"; False; "equal"; True)
 	
 Function getObjectValueByPath($object : Object; $path : Text)->$value : Variant
-/* Return the value in object by path
+/* Return the value in object by dot notation path
 Supports getting values from a string path. For an entity this
 can also be a path along a relation as long as it's a many to one
 	
@@ -223,7 +235,7 @@ Function compareStrings($str_a : Text; $str_b : Text; $options : Object) : Boole
 Function compare($value_a; $value_b; $useExact : Boolean) : Boolean
 /*  compares $value_a to $value_b
 by default compares values to values
-	
+$useExact to 
 */
 	var $valueType_a; $valueType_b : Integer
 	var $options; $dataClass : Object
@@ -235,7 +247,7 @@ by default compares values to values
 		: ($valueType_a=Is undefined) || ($valueType_b=Is undefined) || ($valueType_a#$valueType_b)
 			return False
 			
-		: ($valueType_a=Is text)
+		: ($valueType_a=Is text)  //  uses compareStrings().  useExact to match case and diacriticals
 			$options:=New object()
 			If ($useExact)
 				$options:=New object("diacritical"; True; "strict"; True)
@@ -248,11 +260,11 @@ by default compares values to values
 		: ($valueType_a=Is real)
 			return Round($value_b; 14)=Round($value_a; 14)  // deal with rounding errors
 			
-		: ($valueType_a=Is picture)
+		: ($valueType_a=Is picture)  //  uses Equal pictures
 			var $picMask : Picture
 			return Equal pictures($value_a; $value_b; $picMask)
 			
-		: ($valueType_b=Is object) && (OB Instance of($value_b; 4D.Entity))
+		: ($valueType_b=Is object) && (OB Instance of($value_b; 4D.Entity))  //  comparing entities
 			$dataClass:=$value_b.getDataClass()
 			
 			Case of 
@@ -267,7 +279,7 @@ by default compares values to values
 					
 			End case 
 			
-		: ($valueType_a=Is collection)
+		: ($valueType_a=Is collection)  // exact match - order and content
 			return Generate digest(JSON Stringify array($value_a); MD5 digest)=Generate digest(JSON Stringify array($value_b); MD5 digest)
 			
 		: ($valueType_b=Is object)

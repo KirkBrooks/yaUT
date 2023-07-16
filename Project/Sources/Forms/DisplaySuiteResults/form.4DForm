@@ -16,7 +16,7 @@
 		"onClick",
 		"onSelectionChange"
 	],
-	"windowTitle": "window title",
+	"windowTitle": "YAUT Results",
 	"destination": "detailScreen",
 	"pages": [
 		{
@@ -26,8 +26,8 @@
 			"objects": {
 				"suite_LB": {
 					"type": "listbox",
-					"left": 9,
-					"top": 11,
+					"left": 4,
+					"top": 36,
 					"width": 847,
 					"height": 290,
 					"events": [
@@ -44,6 +44,8 @@
 					"hideFocusRing": true,
 					"scrollbarHorizontal": "automatic",
 					"scrollbarVertical": "automatic",
+					"sizingX": "grow",
+					"sizingY": "grow",
 					"columns": [
 						{
 							"header": {
@@ -132,11 +134,26 @@
 							"textAlign": "left"
 						}
 					]
+				},
+				"Input": {
+					"type": "input",
+					"left": 11,
+					"top": 8,
+					"width": 685,
+					"height": 17,
+					"dataSource": "Form:C1466.suite.name",
+					"enterable": false,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"fontSize": 18,
+					"fontWeight": "bold",
+					"stroke": "#6495ed"
 				}
 			}
 		}
 	],
-	"geometryStamp": 14,
+	"geometryStamp": 19,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
