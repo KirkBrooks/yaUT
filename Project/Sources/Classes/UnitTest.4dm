@@ -16,11 +16,12 @@ Class constructor($description : Text)
 	This._expectValueKind:="undef"
 	This._testValue:=Null
 	This._result:=False  //  always boolean
+	This.__not:=False
 	This.ms:=0
 	
 	//mark:  --- computed attributes
 Function get pass : Boolean
-	return Bool(This._result)
+	return This.__not ? Not(This._result) : This._result
 	
 Function get isErr : Boolean
 	return This._error#""
@@ -41,7 +42,7 @@ Function get displayline : Text
 	//mark:  --- Expect
 Function expect($valueIn) : cs.UnitTest
 	If (Value type($valueIn)=Is undefined)
-		This._error:="Value in is undefined."
+		This._error:="Expect(): valueIn is undefined."
 		return This
 	End if 
 	
@@ -57,11 +58,6 @@ for strings this means they match exactly - e.g. case sensitive
 - Use .toMatch() for objects and collections
 */
 	This._equalTo($input)
-	return This
-	
-Function notToEqual($input) : cs.UnitTest
-	This._equalTo()
-	This._result:=Not(This._result)
 	return This
 	
 Function toBe($input) : cs.UnitTest
@@ -86,7 +82,7 @@ object & collection:  means $input evaluates to the same reference as expected v
 			This._result:=This.is(This._expectValue; $input)
 			
 		Else 
-			This._error:="Incorrect input data type"
+			This._error:="toBe(): Incorrect input data type"
 			This._result:=False
 	End case 
 	
@@ -96,7 +92,7 @@ Function toMatch($pattern) : cs.UnitTest
 	// applies regex pattern to expectedValue
 	
 	If (This._expectValueKind#"text")
-		This._error:="This test can only be applied to text values"
+		This._error:="toMatch(): This test can only be applied to text values"
 		This._result:=False
 		return This
 	End if 
@@ -114,44 +110,29 @@ Function toContain($obj) : cs.UnitTest
 	This._result:=This._objectContains(This._expectValue; $obj)
 	return This
 	
-Function notToContain($obj) : cs.UnitTest
-	// when the expected value is an object test all the values in $obj
-	If (This._expectValueKind#"object")
-		This._result:=False
-		return This
-	End if 
-	
-	This._result:=Not(This._objectContains(This._expectValue; $obj))
-	return This
-	
-Function notToMatch($formula : 4D.Function) : cs.UnitTest
-	var $params : Collection
-	This._result:=Not(This.compare(This._expectValue; This._eval($formula; Copy parameters(2)); False))
-	return This
-	
 Function toBeNull() : cs.UnitTest
 	This._result:=This._expectValue=Null
-	return This
-	
-Function notToBeNull() : cs.UnitTest
-	This._result:=This._expectValue#Null
 	return This
 	
 Function scalarToContain($value : Variant) : cs.UnitTest
 	//  value in must be a scalar collection
 	If (This._expectValueKind#"collection")
-		This._error:="Incorrect expected value - must be scalar collection"
+		This._error:="scalarToContain(): Incorrect expected value - must be scalar collection"
 		return This
 	End if 
 	
 	If (Not(This._isScalarValue($value)))
-		This._error:="Value must be a number, date, boolean or text."
+		This._error:="scalarToContain(): Value must be a number, date, boolean or text."
 		return This
 	End if 
 	
 	This._result:=This._expectValue.indexOf($value)>-1
 	return This
 	
+Function not() : cs.UnitTest
+	//  reverse the result value
+	This.__not:=True
+	return This
 	
 	//mark:  --- privates
 Function _equalTo($input)
@@ -162,14 +143,14 @@ Function _equalTo($input)
 	
 	Case of 
 		: (Not(This._isScalarValue($input)))
-			This._error:="Incompatible data type - only scalar values supported."
+			This._error:="_equalTo(): Incompatible data type - only scalar values supported."
 			This._result:=False
 			
 		: ($valueKind="object") && (OB Instance of($input; 4D.Function))  //  evaluate the formula
 			This._result:=This.compare(This._expectValue; This._eval($input; Copy parameters(2)); True)
 			
 		: ($valueKind#This._expectValueKind)
-			This._error:="Expected value and input are different kinds. "
+			This._error:="_equalTo(): Expected value and input are different kinds. "
 			This._result:=False
 		Else 
 			This._result:=This._expectValue=$input
