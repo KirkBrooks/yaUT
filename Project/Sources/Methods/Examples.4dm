@@ -1,7 +1,8 @@
 //%attributes = {}
 
 var $test : Object
-
+var $pass : Boolean
+var $resultText; $str : Text
 
 /*  Basic   
 // instantiate the class and enter the description 
@@ -24,26 +25,27 @@ $pass:=$test.pass  //  $pass = True
 
 $test:=cs.UnitTest  //  make the constructor
 
-$result:="My Unit Test\n"  // a text variable to hold the results
+$resultText:="My Unit Test\n"  // a text variable to hold the results
 
-$result+=$test.new("1 is equal to 1").expect(1).toEqual(1).displayline+"\n"
-$result+=$test.new("1 is not equal to 5").expect(1).not().toEqual(5).displayline+"\n"
-$result+=$test.new("1 is not null").expect(1).not().toBeNull().displayline+"\n"
+$resultText+=$test.new("1 is equal to 1").expect(1).toEqual(1).displayline+"\n"
+$resultText+=$test.new("1 is not equal to 5").expect(1).not().toEqual(5).displayline+"\n"
+$resultText+=$test.new("1 is not null").expect(1).not().toBeNull().displayline+"\n"
 $str:="This is a line of text"
-$result+=$test.new("$str contains 'line of text'").expect($str).toMatch("line of text").displayline+"\n"
+$resultText+=$test.new("$str contains 'line of text'").expect($str).toMatch("line of text").displayline+"\n"
 
-ALERT($result)
+ALERT($resultText)
 
 
 /* Writing to a collection */
 $test:=cs.UnitTest  //  make the constructor
 
-$result:=New collection()
+var $testCol : Collection
+$testCol:=New collection()
 
-$result.push($test.new("1 is equal to 1").expect(1).toEqual(1))
-$result.push($test.new("1 is not equal to 5").expect(1).not().toEqual(5))
-$result.push($test.new("1 is not null").expect(1).not().toBeNull())
+$testCol.push($test.new("1 is equal to 1").expect(1).toEqual(1))
+$testCol.push($test.new("1 is not equal to 5").expect(1).not().toEqual(5))
+$testCol.push($test.new("1 is not null").expect(1).not().toBeNull())
 $str:="This is a line of text"
-$result.push($test.new("$str contains 'line of text'").expect($str).toMatch("line of text"))
+$testCol.push($test.new("$str contains 'line of text'").expect($str).toMatch("line of text"))
 
 

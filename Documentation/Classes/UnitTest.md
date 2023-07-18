@@ -1,13 +1,13 @@
 <!-- Type your summary here -->
 ## UnitTest Class
 
-Light-weight unit testing for 4D. 
+Light-weight unit testing for 4D.
 
 ### Install
 
-Simply add the class to a project. 
+Simply add the class to a project.
 
-There is no UI for the class itself. The **ObjectProto** class is required also. 
+There is no UI for the class itself. The **ObjectProto** class is required also.
 
 ### Tests
 
@@ -20,7 +20,7 @@ There are three steps required to set up a test:
 They must be done in order.
 
 ```4D
-// instantiate the class and enter the description 
+// instantiate the class and enter the description
 $test:=cs.UnitTest.new("1 is equal to 1")
 // set the expected value
 $test.expect(1)
@@ -39,15 +39,15 @@ $pass:=$test.pass  //  $pass = True
 ALERT($test.displayline)
 ```
 
-Make a class for each test and evaluate it once. 
+Make a class for each test and evaluate it once.
 
-The `.displayLine` property is an easy way to see the results of a test. 
+The `.displayLine` property is an easy way to see the results of the test.
 
-- ✅   1 is equal to 1  (0 ms)    
+- ✅   1 is equal to 1  (0 ms)
 - ❌   1 is equal to 2  (0 ms)
-- Err 1 is not equal to 2: Incompatible data type - only scalar values and formulas supported.
+- ⚠️ 1 is not equal to 2: Incompatible data type - only scalar values and formulas supported.
 
-These are the three types of display you may see. Each is a text string and may be displayed in an alert. 
+These are the three types of display you may see. Each is a text string and may be displayed in an alert.
 
 Generally you will be creating a lot of tests to be run at one time. A nice way to handle creating a lot of classes is with a constructor variable:
 
@@ -72,7 +72,7 @@ $result+=$test.new("$str contains 'line of text'").expect($str).toMatch("line of
 ALERT($result)
 ```
 
-If you wanted to have the results of each test for deeper analysis you could push them onto a collection instead: 
+If you wanted to have the results of each test for deeper analysis you could push them onto a collection instead:
 
 ```
 $test:=cs.UnitTest  //  make the constructor
@@ -88,7 +88,7 @@ $result.push($test.new("$str contains 'line of text'").expect($str).toMatch("lin
 
 ### Using Formulas for test values
 
-Some matcher functions can take a 4D https://developer.4d.com/docs/API/FunctionClass/ “Formula” as an input. There are several benefits this provides. Chief among them is the ability to call Project methods and evaluate the results. 
+Some matcher functions can take a 4D https://developer.4d.com/docs/API/FunctionClass/ “Formula” as an input. There are several benefits this provides. Chief among them is the ability to call Project methods and evaluate the results.
 
 ### **Properties and Functions**
 
@@ -118,4 +118,3 @@ Some matcher functions can take a 4D https://developer.4d.com/docs/API/Function
 | toBeNull        | None                                         | cs.UnitTest | Checks if the expected value is null.                        |
 | notToBeNull     | None                                         | cs.UnitTest | Checks if the expected value is not null.                    |
 | scalarToContain | `$input: Variant (scalar values)` | cs.UnitTest | If the expected value is a scalar collection checks to see if expected value contains input. |
-
