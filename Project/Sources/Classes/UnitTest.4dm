@@ -14,6 +14,7 @@ Class constructor($description : Text)
 	This._expectValue:=Null
 	This._expectFormula:=Null  //  formula of expected value
 	This._expectValueKind:="undef"
+	This._matcher:=""
 	This._testValue:=Null  //  formula of test value
 	This._testFormula:=Null
 	This._testValueKind:="undef"
@@ -22,6 +23,8 @@ Class constructor($description : Text)
 	This.ms:=0
 	
 	//mark:  --- computed attributes
+Function get description : Text
+	return This._description
 Function get pass : Boolean
 	return This.__not ? Not(This._result) : This._result
 	
@@ -43,6 +46,9 @@ Function get displayline : Text
 		Else 
 			return "❌   "+This._description+"  ("+String(This.ms)+" ms)"
 	End case 
+	
+Function get matcher : Text
+	return This.__not ? "not."+This._matcher : This._matcher
 	
 	//mark:  --- Expect
 Function expect() : cs.UnitTest
@@ -82,7 +88,8 @@ formula: evaluates to _testValue
 	var $params : Collection
 	$params:=Copy parameters
 	
-	If (Not(This._paramCheck("toEqual"; $params)))
+	This._matcher:="toEqual"
+	If (Not(This._paramCheck($params)))
 		return This
 	End if 
 	
@@ -101,7 +108,8 @@ object:   compare properties of $1 to expectedValue object
 	var $params : Collection
 	$params:=Copy parameters
 	
-	If (Not(This._paramCheck("toBe"; $params)))
+	This._matcher:="toBe"
+	If (Not(This._paramCheck($params)))
 		return This
 	End if 
 	
@@ -122,13 +130,16 @@ object:   compare properties of $1 to expectedValue object
 Function toMatch($pattern) : cs.UnitTest
 	// applies regex pattern to expectedValue
 	var $params : Collection
+	var $pos; $len : Integer
 	$params:=Copy parameters
 	
-	If (Not(This._paramCheck("toMatch"; $params)))
+	This._matcher:="toMatch"
+	If (Not(This._paramCheck($params)))
 		return This
 	End if 
 	
-	This._result:=Match regex(This._testFormula; This._expectValue; 1)
+	This._result:=Match regex(This._testFormula; This._expectValue; 1; $pos; $len)
+	This._testValue:=This._result ? Substring(This._expectValue; $pos; $len) : ""
 	return This
 	
 Function toContain($obj) : cs.UnitTest
@@ -144,7 +155,8 @@ otherwise - data type mismatch
 	var $params : Collection
 	$params:=Copy parameters
 	
-	If (Not(This._paramCheck("toContain"; $params)))
+	This._matcher:="toContain"
+	If (Not(This._paramCheck($params)))
 		return This
 	End if 
 	
@@ -161,6 +173,7 @@ Function toBeNull() : cs.UnitTest
 		return This
 	End if 
 	
+	This._matcher:="toBeNull"
 	This._result:=This._expectValue=Null
 	return This
 	
@@ -175,13 +188,19 @@ Function not() : cs.UnitTest
 	
 	//mark:  --- other functions
 Function getExpectedValue : Variant
-	return This._expectedValue
+	return This._expectValue
+	
+Function getExpectedValueStr : Text
+	return JSON Stringify(This._expectValue)
 	
 Function getTestValue : Variant
 	return This._testValue
 	
+Function getTestValueStr : Variant
+	return JSON Stringify(This._testValue)
+	
 	//mark:  --- privates
-Function _paramCheck($matcher : Text; $params : Collection) : Boolean
+Function _paramCheck($params : Collection) : Boolean
 	// error & param checking
 	
 	If (This.isErr)
@@ -189,7 +208,7 @@ Function _paramCheck($matcher : Text; $params : Collection) : Boolean
 	End if 
 	
 	If ($params.length=0) || (Value type($params[0])=Is undefined)
-		This._error:=$matcher+": no parameters"
+		This._error:=This._matcher+": no parameters"
 		return False
 	End if 
 	
@@ -200,14 +219,14 @@ Function _paramCheck($matcher : Text; $params : Collection) : Boolean
 		This._testValueKind:=This._valueKind(This._testValue)
 		
 		If (This._testValueKind#This._expectValueKind)
-			This._error:=$matcher+": expected value and test value are different types"
+			This._error:=This._matcher+": expected value and test value are different types"
 			return False
 		End if 
 		
 		return True
 	End if 
 	
-	If ($matcher="toMatch")
+	If (This._matcher="toMatch")
 		If (This._expectValueKind#"text")
 			This._error:="toMatch(): This test can only be applied to text values"
 			This._result:=False
@@ -230,7 +249,7 @@ Function _paramCheck($matcher : Text; $params : Collection) : Boolean
 	This._testValueKind:=This._valueKind(This._testValue)
 	
 	If (This._testValueKind#This._expectValueKind)
-		This._error:=$matcher+": expected value and test value are different types"
+		This._error:=This._matcher+": expected value and test value are different types"
 		return False
 	End if 
 	
