@@ -11,7 +11,7 @@ The class can be used to create and evaluate a test in a single line or can be p
 
 # Testing in 4D
 
-Unit tests have been challenging to write in 4D. Testing is flossing or eatin broccoli - everyone agrees it’s good for you, most folks say they do it more than they actually do and everyone feels better _after_ having done it. The key to accomplishing these sort of tasks is making them easy to do - that’s what this class does.
+Unit tests have been challenging to write in 4D. Testing is flossing or eating broccoli - everyone agrees it’s good for you, most folks say they do it more than they actually do and everyone feels better _after_ having done it. The key to accomplishing these sort of tasks is making them easy to do - that’s what this class does.
 
 There’s no UI required and you have two options for presenting results: 
 
