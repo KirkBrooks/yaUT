@@ -3,6 +3,8 @@
 
 Light-weight unit testing for 4D.
 
+The class can be used to create and evaluate a test in a single line or can be pushed onto a collection for further examination. 
+
 ### Install
 
 Simply add the class to a project.
