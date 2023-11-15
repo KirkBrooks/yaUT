@@ -11,7 +11,7 @@ But it doesn't have to be shared to get the code
 
 #DECLARE($method : Text) : Integer
 ARRAY TEXT($aPath; 0)
-var $attrib : Object
+var $shared : Boolean
 var $path : Text
 
 $path:=METHOD Get path(Path project method; $method; *)
@@ -20,17 +20,17 @@ If ($path="")
 	return 0  //  method does not exist
 End if 
 
-METHOD GET ATTRIBUTES($path; $attrib)
+$shared:=METHOD Get attribute($method; Attribute shared; *)
 
 Case of 
 	: (Not(isComponent))
 		return 1
 		
-	: (Not($attrib.shared)) && (Not(Is compiled mode))
-		METHOD SET ATTRIBUTE($method; Attribute shared; True)
+	: (Not($shared)) && (Not(Is compiled mode))
+		METHOD SET ATTRIBUTE($method; Attribute shared; True; *)
 		return 1
 		
-	: (Not($attrib.shared))
+	: (Not($shared))
 		return 2
 		
 	Else 

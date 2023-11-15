@@ -9,6 +9,7 @@ $class.expect(<some value>).toEqual(<value or formula>)
 Class extends ObjectProto
 
 Class constructor($description : Text)
+	var lastErrorCol : Collection
 	Super()
 	This._description:=$description
 	This._error:=$description="" ? "Constructor: A description is required" : ""
@@ -22,6 +23,8 @@ Class constructor($description : Text)
 	This._result:=False  //  always boolean
 	This.__not:=False
 	This.ms:=0
+	This._curErrMethod:=""
+	This._lastErrors:=[]
 	
 	//mark:  --- computed attributes
 Function get description : Text
@@ -204,8 +207,9 @@ Function getSummary->$col : Collection
 	// for displaying in a detail listbox
 	var $property : Text
 	$col:=[]
+	
 	For each ($property; ["description"; "pass"; "matcher"; "error"; "isErr"; "_expectValue"; "_expectValueKind"; "_expectFormula"; "_testValue"; "_testValueKind"; "_testFormula"; "ms"])
-		$col.push({key: $property; value: String(This[$property])})
+		$col.push({key: $property; value: (This[$property]#Null ? String(This[$property]) : "")})
 	End for each 
 	
 	//mark:  --- privates
@@ -312,14 +316,19 @@ number, date, text, bool, object, collection, null, undef, other(blob, picture, 
 Function _eval($params : Collection)->$result : Variant
 	//  evaluate a formula. $params[0] must be the formula
 	//  any other collection elements are passed into formula as parameters
-	
 	var $ms : Integer
 	var $formula : 4D.Function
 	
+	This._errIgnore()
 	$ms:=Milliseconds
 	$formula:=$params.shift()  //  shift the first element to the variable
 	$result:=$formula.apply(Null; $params)
 	This.ms:=Milliseconds-$ms
+	This._errRevert()
+	
+	If (error#0)  //  there was a 4D error
+		$result:=This._readLastErr()
+	End if 
 	
 Function _isScalarValue($value) : Boolean
 	If ($value=Null)
@@ -345,9 +354,12 @@ Function _toEqualObject($obj : Object)
 Function _objectContains($a : Object; $b : Object) : Boolean
 	// return True when $a contains the key:value pairs of $b
 	var $key : Text
+	If (Value type($b)=Is null) && (Value type($a)=Is null)
+		return True
+	End if 
 	
 	For each ($key; $b)
-		If (Value type($a[$key])=Is null)
+		If (Value type($a[$key])=Is null) || (Value type($a[$key])=Is undefined)
 			return False
 		End if 
 		
@@ -373,4 +385,19 @@ Function _objectContains($a : Object; $b : Object) : Boolean
 	End for each 
 	
 	return True
+	
+Function _errIgnore
+	This._curErrMethod:=Method called on error
+	This._lastErrors:=[]
+	error:=0  //  4D error indicator
+	ON ERR CALL("Err_ignore")
+	
+Function _errRevert
+	ON ERR CALL(String(This._curErrMethod))
+	
+Function _readLastErr : Text
+	If (lastErrorCol.length>0)
+		return "There was an error: "+String(lastErrorCol[0].errCode)+"; "+lastErrorCol.message
+	End if 
+	
 	

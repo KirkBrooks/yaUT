@@ -5,7 +5,7 @@
 
 var $ui_msg; $objectName : Text
 var $methods_LB; $results_LB; $detail_LB : cs.listbox
-var $updateShowFailing : Boolean
+var $updateShowFailing; $bool : Boolean
 var $obj : Object
 
 If (Form=Null)
@@ -48,6 +48,15 @@ Case of
 					$detail_LB.setSource($results_LB.currentItem.getSummary())
 				End if 
 				
+		End case 
+	: ($objectName="methods_LB")
+		Case of 
+			: (Form event code=On Clicked) && (OptionKey) && ($methods_LB.isSelected)
+				$bool:=Not($methods_LB.currentItem.selected)
+				
+				For each ($obj; $methods_LB.data)
+					$obj.selected:=$bool
+				End for each 
 		End case 
 End case 
 
