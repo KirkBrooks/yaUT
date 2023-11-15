@@ -1,0 +1,283 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onCloseBox",
+		"onSelectionChange"
+	],
+	"windowTitle": "Unit Test Main Window",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 969,
+					"height": 40,
+					"stroke": "transparent",
+					"fill": "#b1c4dd",
+					"sizingX": "grow"
+				},
+				"Text": {
+					"type": "text",
+					"text": "yaUT",
+					"top": -8,
+					"left": 8,
+					"width": 201,
+					"height": 51,
+					"stroke": "#FFFFFF",
+					"fontWeight": "bold",
+					"fontSize": 48
+				}
+			}
+		},
+		{
+			"objects": {
+				"methods_LB": {
+					"type": "listbox",
+					"left": 2,
+					"top": 79,
+					"width": 252,
+					"height": 403,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"headerHeight": "2em",
+					"resizingMode": "legacy",
+					"sizingY": "grow",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideFocusRing": true,
+					"hideExtraBlankRows": true,
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"fill": "transparent",
+					"dataSource": "Form:C1466.methods_LB.data",
+					"currentItemSource": "Form:C1466.methods_LB.currentITem",
+					"currentItemPositionSource": "Form:C1466.methods_LB.position",
+					"selectedItemsSource": "Form:C1466.methods_LB.selectedItems",
+					"columns": [
+						{
+							"header": {
+								"name": "Header2",
+								"text": ""
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"width": 33,
+							"dataSourceTypeHint": "boolean",
+							"truncateMode": "none",
+							"textAlign": "center",
+							"verticalAlign": "middle",
+							"dataSource": "This:C1470.selected"
+						},
+						{
+							"header": {
+								"text": "Test Methods",
+								"name": "Header1",
+								"stroke": "#808080"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"enterable": false,
+							"dataSource": "This:C1470.method"
+						}
+					]
+				},
+				"results_LB": {
+					"type": "listbox",
+					"left": 275,
+					"top": 79,
+					"width": 339,
+					"height": 403,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"headerHeight": "2em",
+					"resizingMode": "legacy",
+					"sizingY": "grow",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "visible",
+					"hideFocusRing": true,
+					"hideExtraBlankRows": true,
+					"sizingX": "grow",
+					"dataSource": "Form:C1466.results_LB.data",
+					"currentItemSource": "Form:C1466.results_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.results_LB.position",
+					"selectedItemsSource": "Form:C1466.results_LB.selectedItems",
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"rowHeightAutoMin": "1em",
+					"rowHeightAutoMax": "1600em",
+					"columns": [
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Results"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"width": 33,
+							"dataSourceTypeHint": "text",
+							"truncateMode": "none",
+							"textAlign": "left",
+							"verticalAlign": "middle",
+							"dataSource": "This:C1470.displayline",
+							"enterable": false,
+							"wordwrap": "normal",
+							"rowHeightAuto": false,
+							"fill": "automatic"
+						}
+					]
+				},
+				"btn_run": {
+					"type": "button",
+					"text": "Run Selected",
+					"top": 45,
+					"left": 275,
+					"width": 98,
+					"height": 29,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel"
+				},
+				"detail_LB": {
+					"type": "listbox",
+					"left": 644,
+					"top": 79,
+					"width": 324,
+					"height": 323,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.detail_LB.data",
+					"currentItemSource": "Form:C1466.detail_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.detail_LB.position",
+					"selectedItemsSource": "Form:C1466.detail_LB.selectedItems",
+					"resizingMode": "legacy",
+					"sizingY": "fixed",
+					"scrollbarHorizontal": "automatic",
+					"scrollbarVertical": "automatic",
+					"borderStyle": "none",
+					"hideExtraBlankRows": true,
+					"horizontalLineStroke": "transparent",
+					"verticalLineStroke": "transparent",
+					"rowHeight": "30px",
+					"fontSize": 14,
+					"sizingX": "grow",
+					"showHeaders": false,
+					"hideFocusRing": true,
+					"columns": [
+						{
+							"header": {
+								"text": "Field",
+								"name": "Header5"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.key",
+							"width": 150,
+							"stroke": "#808080",
+							"verticalAlign": "middle",
+							"textAlign": "right",
+							"enterable": false
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Value"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.value",
+							"textAlign": "left",
+							"verticalAlign": "middle",
+							"enterable": false,
+							"wordwrap": "normal",
+							"rowHeightAuto": true
+						}
+					]
+				},
+				"Splitter": {
+					"type": "splitter",
+					"left": 625,
+					"top": 69,
+					"width": 11,
+					"height": 422,
+					"sizingY": "grow"
+				},
+				"btn_refresh": {
+					"type": "button",
+					"text": "Refresh",
+					"top": 45,
+					"left": 155,
+					"width": 98,
+					"height": 29,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel"
+				},
+				"showFailing": {
+					"type": "checkbox",
+					"text": "Show failing only",
+					"top": 52,
+					"left": 469,
+					"width": 141,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.showFailing"
+				}
+			}
+		}
+	],
+	"geometryStamp": 183,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}
