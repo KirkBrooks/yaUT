@@ -8,7 +8,6 @@ GetTestMethods ()
 #DECLARE()->$col : Collection
 ARRAY TEXT($aPaths; 0)
 var $i : Integer
-var $method : Text
 
 METHOD GET PATHS(Path project method; $aPaths; *)
 SORT ARRAY($aPaths; >)
@@ -16,7 +15,7 @@ $col:=[]
 ARRAY TO COLLECTION($col; $aPaths)
 $col:=$col.filter(Formula($1.value="_ut_@"))
 
-For each ($method; $col; $i)
-	$col[$i]:={method: $method; selected: True}
-End for each 
+For ($i; 0; $col.length-1)
+	$col[$i]:={method: $col[$i]; selected: True}
+End for 
 
