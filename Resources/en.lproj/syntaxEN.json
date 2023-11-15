@@ -6,8 +6,13 @@
 			"Summary": ""
 		},
 		"Get_yaUT_TestMethods": {
-			"Syntax": "**Get_yaUT_TestMethods**()->col : Collection",
+			"Syntax": "**Get_yaUT_TestMethods**( *methodPrefix* : Text )->col : Collection",
 			"Params": [
+				[
+					"methodPrefix",
+					"Text",
+					"->"
+				],
 				[
 					"col",
 					"Collection",

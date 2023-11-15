@@ -267,11 +267,22 @@
 					],
 					"dataSourceTypeHint": "boolean",
 					"dataSource": "Form:C1466.showFailing"
+				},
+				"methodPrefix": {
+					"type": "input",
+					"left": 8,
+					"top": 54,
+					"width": 60,
+					"height": 17,
+					"dataSource": "Form:C1466.methodPrefix",
+					"entryFilter": {
+						"$ref": "/SOURCES/filters.json#/prefix Filter"
+					}
 				}
 			}
 		}
 	],
-	"geometryStamp": 183,
+	"geometryStamp": 191,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

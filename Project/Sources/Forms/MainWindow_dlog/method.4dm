@@ -27,13 +27,15 @@ Case of
 		Form.results_LB:=$results_LB
 		Form.detail_LB:=$detail_LB
 		Form.showFailing:=False
+		Form.methodPrefix:="yaut_"
+		OBJECT SET HELP TIP(*; "methodPrefix"; "Test methods begin with this string.")
 		
 	: ($objectName="btn_run")
 		$results_LB.setSource(Run_yaUT_TestMethods($methods_LB.data))
 		$updateShowFailing:=True  //  update
 		
 	: ($objectName="btn_refresh")
-		$methods_LB.setSource(Get_yaUT_TestMethods)
+		$methods_LB.setSource(Get_yaUT_TestMethods(Form.methodPrefix))
 		
 	: ($objectName="showFailing")
 		$updateShowFailing:=True  //  update
