@@ -13,6 +13,7 @@ var $thisTest : Collection
 var $test : Variant
 var $obj : Object
 var $methodValidation : Integer
+var $err : Text
 
 $results:=[]
 
@@ -28,13 +29,16 @@ For each ($obj; $testMethods)
 	
 	$methodValidation:=Validate_testMethod($obj.method)
 	
-	If ($methodValidation=0) || (($methodValidation=2) & Is compiled mode)
-		//  no method  or we can't update it
+	If ($methodValidation=0)
+		$err:="*** The method '"+$obj.method+"' is not in the database."
+		$results.push({displayline: $err})
 		continue
 	End if 
 	
-	If ($methodValidation=2)  //  update method attribute
-		METHOD SET ATTRIBUTE($obj.method; Attribute shared; True)
+	If ($methodValidation=2)
+		$err:="*** The method '"+$obj.method+"' is not shared and can not be run."
+		$results.push({displayline: $err})
+		continue
 	End if 
 	
 	EXECUTE METHOD($obj.method; $thisTest)

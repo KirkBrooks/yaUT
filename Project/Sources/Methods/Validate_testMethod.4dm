@@ -22,8 +22,17 @@ End if
 
 METHOD GET ATTRIBUTES($path; $attrib)
 
-If (isComponent) && (Not($attrib.shared))
-	return 2
-End if 
-
-return 1
+Case of 
+	: (Not(isComponent))
+		return 1
+		
+	: (Not($attrib.shared)) && (Not(Is compiled mode))
+		METHOD SET ATTRIBUTE($method; Attribute shared; True)
+		return 1
+		
+	: (Not($attrib.shared))
+		return 2
+		
+	Else 
+		return 1
+End case 
