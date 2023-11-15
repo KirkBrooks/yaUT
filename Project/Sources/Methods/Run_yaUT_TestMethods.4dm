@@ -12,6 +12,7 @@ $results is a collection where each element is
 var $thisTest : Collection
 var $test : Variant
 var $obj : Object
+var $methodValidation : Integer
 
 $results:=[]
 
@@ -23,6 +24,17 @@ For each ($obj; $testMethods)
 	
 	If (Not($obj.selected))
 		continue
+	End if 
+	
+	$methodValidation:=Validate_testMethod($obj.method)
+	
+	If ($methodValidation=0) || (($methodValidation=2) & Is compiled mode)
+		//  no method  or we can't update it
+		continue
+	End if 
+	
+	If ($methodValidation=2)  //  update method attribute
+		METHOD SET ATTRIBUTE($obj.method; Attribute shared; True)
 	End if 
 	
 	EXECUTE METHOD($obj.method; $thisTest)
