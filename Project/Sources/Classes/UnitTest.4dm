@@ -39,13 +39,13 @@ Function get displayline : Text
 	//  return line of text suitable for display in a listbox or text field
 	Case of 
 		: (This.isErr)
-			return "⚠️ "+This._description+": "+String(This._error)
+			return "  ⚠️ "+This._description+": "+String(This._error)
 			
 		: (This.pass)
-			return "✅   "+This._description+"  ("+String(This.ms)+" ms)"
+			return "  ✅   "+This._description+"  ("+String(This.ms)+" ms)"
 			
 		Else 
-			return "❌   "+This._description+"  ("+String(This.ms)+" ms)"
+			return "  ❌   "+This._description+"  ("+String(This.ms)+" ms)"
 	End case 
 	
 Function get matcher : Text
@@ -116,7 +116,7 @@ object:   compare properties of $1 to expectedValue object
 	
 	Case of 
 		: (This._isScalarValue(This._expectValue))
-			This._result:=This.compare(This._expectValue; This._testValue; True)  //  strict 
+			This._result:=This.compare(This._expectValue; This._testValue; True)  //  strict
 			return This
 			
 		: (This._expectValueKind="object") || (This._expectValueKind="collection")
@@ -147,7 +147,7 @@ Function toContain($obj) : cs.UnitTest
 /* when expected value is an object:
   - if $1 is an object test expectedValue is an object too
           and expectedValue contains the same properties and values as $1
- when expected value is a collection: 
+ when expected value is a collection:
   - if count parameters = 1 use expectedValue.indexOf
   - if count parameters = 2 use expectedValue.query($1+" = :1"; $2)
 	
@@ -199,6 +199,14 @@ Function getTestValue : Variant
 	
 Function getTestValueStr : Variant
 	return JSON Stringify(This._testValue)
+	
+Function getSummary->$col : Collection
+	// for displaying in a detail listbox
+	var $property : Text
+	$col:=[]
+	For each ($property; ["description"; "pass"; "matcher"; "error"; "isErr"; "_expectValue"; "_expectValueKind"; "_expectFormula"; "_testValue"; "_testValueKind"; "_testFormula"; "ms"])
+		$col.push({key: $property; value: String(This[$property])})
+	End for each 
 	
 	//mark:  --- privates
 Function _paramCheck($params : Collection) : Boolean
@@ -347,7 +355,7 @@ Function _objectContains($a : Object; $b : Object) : Boolean
 			return False
 		End if 
 		
-		If (Value type($a[$key])=Is object) && (Not(This.objCompare($a[$key]; $b[$key])))
+		If (Value type($a[$key])=Is object) && (Not(This.objCompare($a[$key]; $b[$key]).equal))
 			return False
 		End if 
 		
