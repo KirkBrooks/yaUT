@@ -5,12 +5,39 @@
 			"Params": [],
 			"Summary": ""
 		},
+		"Get_yaUT_TestMethods": {
+			"Syntax": "**Get_yaUT_TestMethods**()->col : Collection",
+			"Params": [
+				[
+					"col",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"TestConstructor": {
 			"Syntax": "**TestConstructor**() : Object",
 			"Params": [
 				[
 					"",
 					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"Run_yaUT_TestMethods": {
+			"Syntax": "**Run_yaUT_TestMethods**( *testMethods* : Collection )->results : Collection",
+			"Params": [
+				[
+					"testMethods",
+					"Collection",
+					"->"
+				],
+				[
+					"results",
+					"Collection",
 					"<-"
 				]
 			],

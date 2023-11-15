@@ -23,17 +23,17 @@ Case of
 		CANCEL
 		
 	: (FORM Event.code=On Load)  //  catches all objects
-		Form.methods_LB:=$methods_LB.setSource(GetTestMethods)
+		Form.methods_LB:=$methods_LB.setSource(Get_yaUT_TestMethods)
 		Form.results_LB:=$results_LB
 		Form.detail_LB:=$detail_LB
 		Form.showFailing:=False
 		
 	: ($objectName="btn_run")
-		$results_LB.setSource(RunTestMethods($methods_LB.data))
+		$results_LB.setSource(Run_yaUT_TestMethods($methods_LB.data))
 		$updateShowFailing:=True  //  update
 		
 	: ($objectName="btn_refresh")
-		$methods_LB.setSource(GetTestMethods)
+		$methods_LB.setSource(Get_yaUT_TestMethods)
 		
 	: ($objectName="showFailing")
 		$updateShowFailing:=True  //  update

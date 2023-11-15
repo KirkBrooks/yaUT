@@ -1,7 +1,7 @@
-//%attributes = {}
+//%attributes = {"shared":true}
 /* Purpose: run selected test methods
  ------------------
-RunTestMethods ()
+Run_yaUT_TestMethods ()
  Created by: Kirk as Designer, Created: 11/14/23, 17:26:09
 
 $results is a collection where each element is
