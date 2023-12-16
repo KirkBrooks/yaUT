@@ -9,7 +9,7 @@ $results is a collection where each element is
 */
 
 #DECLARE($testMethods : Collection)->$results : Collection
-var $thisTest : Collection
+var $thisTest : Variant
 var $test : Variant
 var $obj : Object
 var $methodValidation : Integer
@@ -41,7 +41,17 @@ For each ($obj; $testMethods)
 		continue
 	End if 
 	
+	CLEAR VARIABLE($thisTest)
+	error:=0
+	
+	ON ERR CALL("Err_ignore")
 	EXECUTE METHOD($obj.method; $thisTest)
+	ON ERR CALL("")
+	
+	If (Value type($thisTest)#Is collection) || ($thisTest.length=0)
+		$results.push({displayline: "-- No collection returned --"})
+		continue
+	End if 
 	
 	For each ($test; $thisTest)  //  $test will be text or a class
 		If (Value type($test)=Is text)

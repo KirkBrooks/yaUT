@@ -15,12 +15,10 @@ $methodPrefix:=$methodPrefix="" ? "yaut_" : $methodPrefix
 METHOD GET PATHS(Path project method; $aPaths; *)
 SORT ARRAY($aPaths; >)
 $col:=[]
-ARRAY TO COLLECTION($col; $aPaths)
 
-$methodPrefix+="@"
-$col:=$col.filter(Formula($1.value=$methodPrefix))
-
-For ($i; 0; $col.length-1)
-	$col[$i]:={method: $col[$i]; selected: True}
+For ($i; 1; Size of array($aPaths))
+	If ($aPaths{$i}="yaut_@") && ($aPaths{$i}#"yaUT_FullTest")
+		$col.push({method: $aPaths{$i}; selected: True})
+	End if 
 End for 
 
