@@ -26,6 +26,33 @@ Class constructor($description : Text)
 	This._curErrMethod:=""
 	This._lastErrors:=[]
 	
+	//mark:  --- storage
+Function initStorage : cs.UnitTest
+	//  initialize Storage.yaUT as a collection
+	Use (Storage)
+		Storage.yaUT:=New shared collection()
+	End use 
+	return This
+	
+Function insertStorageline($text : Text) : cs.UnitTest
+	//  for inserting a header in storage
+	This._logToStorage($text)
+	return This
+	
+Function clearStorage
+	//  remove Storage.yaUT 
+	Use (Storage)
+		OB REMOVE(Storage; "yaUT")
+	End use 
+	
+Function getStorageDisplayline : Text
+	//  return a text block of displayLine
+	If (Storage.yaUT=Null)
+		return "Unit Test collection is not initialized"
+	End if 
+	
+	return Storage.yaUT.extract("displayline").join("\n")
+	
 	//mark:  --- computed attributes
 Function get description : Text
 	return This._description
@@ -119,16 +146,17 @@ object:   compare properties of $1 to expectedValue object
 	
 	Case of 
 		: (This._isScalarValue(This._expectValue))
-			This._result:=This.compare(This._expectValue; This._testValue; True)  //  strict
+			This._setResult(This.compare(This._expectValue; This._testValue; True))  //  strict
 			return This
 			
 		: (This._expectValueKind="object") || (This._expectValueKind="collection")
-			This._result:=This.is(This._expectValue; This._testValue)
+			This._setResult(This.is(This._expectValue; This._testValue))
 		Else 
 			This._error:="toBe(): Incorrect input data type"
-			This._result:=False
+			This._setResult(False)
 	End case 
 	
+	This._logToStorage()
 	return This
 	
 Function toMatch($pattern) : cs.UnitTest
@@ -142,8 +170,9 @@ Function toMatch($pattern) : cs.UnitTest
 		return This
 	End if 
 	
-	This._result:=Match regex(This._testFormula; This._expectValue; 1; $pos; $len)
+	This._setResult(Match regex(This._testFormula; This._expectValue; 1; $pos; $len))
 	This._testValue:=This._result ? Substring(This._expectValue; $pos; $len) : ""
+	This._logToStorage()
 	return This
 	
 Function toContain($obj) : cs.UnitTest
@@ -165,11 +194,11 @@ otherwise - data type mismatch
 	End if 
 	
 	If (This._expectValueKind#"object")
-		This._result:=False
+		This._setResult(False)
 		return This
 	End if 
 	
-	This._result:=This._objectContains(This._expectValue; This._testValue)
+	This._setResult(This._objectContains(This._expectValue; This._testValue))
 	return This
 	
 Function toBeNull() : cs.UnitTest
@@ -178,7 +207,7 @@ Function toBeNull() : cs.UnitTest
 	End if 
 	
 	This._matcher:="toBeNull"
-	This._result:=This._expectValue=Null
+	This._setResult(This._expectValue=Null)
 	return This
 	
 Function not() : cs.UnitTest
@@ -189,6 +218,14 @@ Function not() : cs.UnitTest
 	
 	This.__not:=True
 	return This
+	
+Function toObject()->$obj : Object
+	//  returns an object of this
+	var $key : Text
+	$obj:={}
+	For each ($key; This)
+		$obj[$key]:=This[$key]
+	End for each 
 	
 	//mark:  --- other functions
 Function getExpectedValue : Variant
@@ -203,7 +240,7 @@ Function getTestValue : Variant
 Function getTestValueStr : Variant
 	return JSON Stringify(This._testValue)
 	
-Function getSummary->$col : Collection
+Function getSummary()->$col : Collection
 	// for displaying in a detail listbox
 	var $property : Text
 	$col:=[]
@@ -213,6 +250,24 @@ Function getSummary->$col : Collection
 	End for each 
 	
 	//mark:  --- privates
+Function _setResult($result : Boolean)
+	This._result:=$result
+	This._logToStorage()
+	
+Function _logToStorage($text : Text)
+	//  pushes this text or this.toObject onto Storage.yaUT if it exists
+	If (Storage.yaUT#Null)
+		Use (Storage.yaUT)
+			
+			If ($text#"")  //  log the text
+				Storage.yaUT.push(OB Copy({displayline: $text}; ck shared; Storage.yaUT))
+			Else   //  log the result
+				Storage.yaUT.push(OB Copy(This.toObject(); ck shared; Storage.yaUT))
+			End if 
+			
+		End use 
+	End if 
+	
 Function _paramCheck($params : Collection) : Boolean
 	// error & param checking
 	
@@ -242,14 +297,14 @@ Function _paramCheck($params : Collection) : Boolean
 	If (This._matcher="toMatch")
 		If (This._expectValueKind#"text")
 			This._error:="toMatch(): This test can only be applied to text values"
-			This._result:=False
+			This._setResult(False)
 			return False
 		End if 
 		
 		//  input must be a regex pattern
 		If (Value type($params[0])#Is text)
 			This._error:="toMatch(): parameter must be text"
-			This._result:=False
+			This._setResult(False)
 			return False
 		End if 
 		
@@ -274,20 +329,20 @@ Function _equalTo()
 	Case of 
 		: (This._testValueKind#This._expectValueKind)
 			This._error:="_equalTo(): Expected value and test value are different data types. "
-			This._result:=False
+			This._setResult(False)
 			
 		: (This._expectValueKind="object")
-			This._result:=This.objCompare(This._expectValue; This._testValue; True).equal
+			This._setResult(This.objCompare(This._expectValue; This._testValue; True).equal)
 			
 		: (This._expectValueKind="collection")
-			This._result:=This.colCompare(This._expectValue; This._testValue; True).equal
+			This._setResult(This.colCompare(This._expectValue; This._testValue; True).equal)
 			
 		: (Not(This._isScalarValue(This._testValue)))
 			This._error:="_equalTo(): Incompatible data type - only object, collection and scalar values supported."
-			This._result:=False
+			This._setResult(False)
 			
 		Else 
-			This._result:=This._expectValue=This._testValue
+			This._setResult(This._expectValue=This._testValue)
 	End case 
 	
 Function _valueKind($var) : Text
@@ -340,16 +395,16 @@ Function _toEqualObject($obj : Object)
 	//  compare $obj to This._expectValue
 	
 	If (This._expectValueKind#"object")
-		This._result:=False
+		This._setResult(False)
 		return 
 	End if 
 	
 	If (JSON Stringify(OB Keys(This._expectValue))#JSON Stringify(OB Keys($obj)))
-		This._result:=False
+		This._setResult(False)
 		return 
 	End if 
 	// if the keys match we only need to check the values do too
-	This._result:=This._objectContains(This._expectValue; $obj)
+	This._setResult(This._objectContains(This._expectValue; $obj))
 	
 Function _objectContains($a : Object; $b : Object) : Boolean
 	// return True when $a contains the key:value pairs of $b

@@ -11,7 +11,7 @@ $results is a collection where each element is
 #DECLARE($testMethods : Collection)->$results : Collection
 var $thisTest : Variant
 var $test : Variant
-var $obj : Object
+var $obj; $yaUT : Object
 var $methodValidation : Integer
 var $err : Text
 
@@ -20,6 +20,8 @@ $results:=[]
 If ($testMethods.length=0)
 	return 
 End if 
+
+$yaUT:=cs.UnitTest.new().initStorage()
 
 For each ($obj; $testMethods)
 	
@@ -30,14 +32,12 @@ For each ($obj; $testMethods)
 	$methodValidation:=Validate_testMethod($obj.method)
 	
 	If ($methodValidation=0)
-		$err:="*** The method '"+$obj.method+"' is not in the database."
-		$results.push({displayline: $err})
+		$yaUT.insertStorageline("*** The method '"+$obj.method+"' is not in the database.")
 		continue
 	End if 
 	
 	If ($methodValidation=2)
-		$err:="*** The method '"+$obj.method+"' is not shared and can not be run."
-		$results.push({displayline: $err})
+		$yaUT.insertStorageline("*** The method '"+$obj.method+"' is not shared and can not be run.")
 		continue
 	End if 
 	
@@ -48,22 +48,6 @@ For each ($obj; $testMethods)
 	EXECUTE METHOD($obj.method; $thisTest)
 	ON ERR CALL("")
 	
-	If (Value type($thisTest)#Is collection) || ($thisTest.length=0)
-		$results.push({displayline: "-- No collection returned --"})
-		continue
-	End if 
-	
-	For each ($test; $thisTest)  //  $test will be text or a class
-		If (Value type($test)=Is text)
-			$results.push({displayline: $test})
-			continue
-		End if 
-		
-		If (Value type($test)=Is object)
-			$results.push($test)
-			continue
-		End if 
-		
-	End for each 
-	
 End for each 
+
+return Storage.yaUT

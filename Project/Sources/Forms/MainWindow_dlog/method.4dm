@@ -7,6 +7,7 @@ var $ui_msg; $objectName : Text
 var $methods_LB; $results_LB; $detail_LB : cs.listbox
 var $updateShowFailing; $bool : Boolean
 var $obj : Object
+var $yaUT : cs.UnitTest
 
 If (Form=Null)
 	return 
@@ -29,10 +30,17 @@ If (FORM Event.code=On Load)  //  catches all objects
 	Form.showFailing:=False
 	Form.methodPrefix:="yaut_"
 	OBJECT SET HELP TIP(*; "methodPrefix"; "Test methods begin with this string.")
+	
+	If (Storage.yaUT#Null)
+		Use (Storage)
+			OB REMOVE(Storage; "yaUT")
+		End use 
+	End if 
 End if 
 
 //mark:  --- form object 
 If ($objectName="btn_run")
+	
 	$results_LB.setSource(Run_yaUT_TestMethods($methods_LB.data))
 	$updateShowFailing:=True  //  update
 End if 
@@ -46,9 +54,10 @@ If ($objectName="showFailing")
 End if 
 
 If ($objectName="results_LB")
+	
 	Case of 
-		: (Form event code=On Selection Change) && ($results_LB.isSelected) && (OB Instance of($results_LB.currentItem; cs.UnitTest))
-			$detail_LB.setSource($results_LB.currentItem.getSummary())
+		: (Form event code=On Selection Change) && ($results_LB.isSelected)
+			$detail_LB.setSource(UnitTest_getSummary($results_LB.currentItem))
 	End case 
 End if 
 
