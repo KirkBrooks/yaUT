@@ -8,14 +8,16 @@ Display results in Browser or 4D Form
 
 */
 
-Class constructor
+Class constructor($ident : Text)
+	This.ident:=$ident  //  optional string for identifying a Full Test
 	This._ms:=0
 	This._error:=""
 	
 	This._timestamp:=Timestamp
-	This._methodPrefix:="yaUT_"
+	This.methodPrefix:="yaUT_"
 	This._testMethods:=[]
 	This._pass:=False
+	This._isRun:=False
 	This._countTests:=0
 	This._countPass:=0
 	This._countFail:=0
@@ -24,6 +26,9 @@ Class constructor
 	//mark:  --- getters
 Function get pass : Boolean
 	return This._pass
+	
+Function get isRun : Boolean
+	return This._isRun
 	
 Function get ms : Integer
 	return This._ms
@@ -46,6 +51,9 @@ Function get countFail : Integer
 Function get countErr : Integer
 	return This._countErr
 	
+Function get logPath : Text
+	return This._logPath#Null ? This._logPath : ""
+	
 	//mark:  --- functions
 Function getTestMethods($methodPrefix : Text) : cs.FullTest
 /*  Creates a list of unit test method. Methods are identified by the 
@@ -56,8 +64,8 @@ The method should return a collection of test classes.
 	var $i : Integer
 	var $col : Collection
 	
-	This._methodPrefix:=$methodPrefix="" ? This._methodPrefix : $methodPrefix
-	$methodPrefix:=This._methodPrefix+"@"
+	This.methodPrefix:=$methodPrefix="" ? This.methodPrefix : $methodPrefix
+	$methodPrefix:=This.methodPrefix+"@"
 	
 	METHOD GET PATHS(Path project method; $aPaths; *)
 	SORT ARRAY($aPaths; >)
@@ -80,6 +88,7 @@ Function run() : cs.FullTest
 	var $testObj : cs.TestMethod
 	
 	This._ms:=Milliseconds*-1
+	This._isRun:=True
 	This._pass:=True
 	This._countTests:=0
 	This._countPass:=0
@@ -87,7 +96,7 @@ Function run() : cs.FullTest
 	This._countErr:=0
 	
 	For each ($testObj; This._testMethods)
-		$testObj.run()
+		$testObj.run()  //  only runs is .selected is true
 		This._pass:=This._pass && ($testObj.pass)
 		This._countTests+=$testObj.countTests
 		This._countPass+=$testObj.countPass
@@ -100,6 +109,48 @@ Function run() : cs.FullTest
 	
 	return This
 	
+Function logResults($file : 4D.File) : cs.FullTest
+	// write the results to $file
+	// default is to use timestamp in Logs folder
+	var $fHandle : 4D.FileHandle
+	var $testObj : cs.TestMethod
+	
+	$file:=$file || This._defaultLogFile()
+	This._logPath:=$file.platformPath
+	
+	$fHandle:=$file.open("write")
+	
+	$fHandle.writeLine("Unit Test Log: "+File(Structure file; fk platform path).path)
+	$fHandle.writeLine("Machine: "+Current machine)
+	$fHandle.writeLine("User: "+Current user)
+	$fHandle.writeLine("Elapsed: "+String(This.ms/1000; "###,###,###,##0.00")+" secs")
+	$fHandle.writeLine("Compiled: "+String(Is compiled mode))
+	$fHandle.writeLine("Mode: "+String(Application type))
+	
+	For each ($testObj; This._testMethods)
+		$fHandle.writeLine("="*40)
+		$fHandle.writeLine("Method:  "+$testObj.name)
+		$testObj.writeToLog($fHandle)
+	End for each 
+	return This
+	
+Function testMethods : Collection
+	return This._testMethods
+	
+Function getFullResults->$results : Collection
+	// return a collection of all results
+	var $testObj : cs.TestMethod
+	
+	$results:=[]
+	For each ($testObj; This._testMethods)
+		$results.combine($testObj.getFullResults())
+	End for each 
+	
+	//mark:  ---  private
+Function _defaultLogFile->$file : 4D.File
+	var $fileName; $text : Text
+	$fileName:=Replace string("yaut_"+String(This._timestamp; ISO date; This._timestamp)+".txt"; ":"; "-")  // can't have colons in the file path
+	$file:=Folder(Folder(fk logs folder).platformPath; fk platform path).file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
 	
 	
 	

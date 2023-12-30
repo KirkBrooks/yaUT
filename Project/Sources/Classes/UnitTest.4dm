@@ -52,10 +52,10 @@ Function get displayline : Text
 			return "  ⚠️ "+This._description+": "+String(This._error)
 			
 		: (This.pass)
-			return "  ✅   "+This._description+"  ("+String(This.ms)+" ms)"
+			return "  ✅   "+This._description
 			
 		Else 
-			return "  ❌   "+This._description+"  ("+String(This.ms)+" ms)"
+			return "  ❌   "+This._description
 	End case 
 	
 Function get matcher : Text

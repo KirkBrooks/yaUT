@@ -24,6 +24,9 @@ Class constructor($methodName : Text)
 Function get name : Text
 	return This._methodName
 	
+Function get label : Text
+	return This._methodName+(Not(This._isValid) ? " ⚠️" : "")
+	
 Function get pass : Boolean
 	return Bool(This._pass)
 	
@@ -36,14 +39,17 @@ Function get error : Text
 Function get displayline : Text
 	//  return line of text suitable for display in a listbox or text field
 	Case of 
+		: (Not(This.isRun))
+			return "   - not run"
+			
 		: (This.isErr)
-			return "⚠️ Method: "+This._methodName+": "+String(This._error)
+			return "⚠️ : "+String(This._error)
 			
 		: (This.pass)
-			return "✅ Method: "+This._methodName+"  ("+String(This.ms)+" ms)"
+			return "✅  # tests: "+String(This.countTests)
 			
 		Else 
-			return "❌ Method: "+This._methodName+"  ("+String(This.ms)+" ms)"
+			return "❌  # pass: "+String(This.countPass)+", # fail: "+String(This.countFail)
 	End case 
 	
 Function get isValid : Boolean
@@ -128,6 +134,26 @@ Function displayAlert
 	$message:=Current method name+"\n\n"
 	$message+=This.getResults().join("\n")
 	ALERT($message)
+	
+Function writeToLog($fHandle : 4D.FileHandle)
+	var $testObj : Object
+	
+	If ($fHandle=Null)
+		return 
+	End if 
+	
+	$fHandle.writeLine(This.displayline)
+	If (This.isErr)
+		$fHandle.writeLine("  Error: "+This.error)
+	End if 
+	$fHandle.writeLine("pass: "+String(This.pass))
+	$fHandle.writeLine("  # tests: "+String(This.countTests))
+	$fHandle.writeLine("  # pass: "+String(This.countPass))
+	$fHandle.writeLine("  # fail: "+String(This.countFail))
+	
+	For each ($testObj; This._results)
+		$fHandle.writeLine("    "+$testObj.displayline)
+	End for each 
 	
 	//mark:  --- private
 Function _validateMethod

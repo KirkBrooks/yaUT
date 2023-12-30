@@ -17,5 +17,5 @@ and display them
 
 var $fullTest : cs.FullTest
 
-$fullTest:=cs.FullTest.new().getTestMethods().run()
+$fullTest:=cs.FullTest.new().getTestMethods().run().logResults()
 

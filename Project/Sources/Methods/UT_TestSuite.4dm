@@ -16,7 +16,7 @@ $class:=$test.new()
 ASSERT($class#Null; "An empty class should instantiate")
 ASSERT(Not($class.pass); "Empty class fails by default")
 ASSERT($class.isErr; "A description is required")
-ASSERT($class.displayline="⚠️@"; "The displayLine should indicate an error")
+ASSERT($class.displayline="@⚠️@"; "The displayLine should indicate an error")
 
 $class.not()
 ASSERT(Not($class.pass); "testing .not() should not run because of existing error")
@@ -29,14 +29,14 @@ ASSERT($class._expectValue=Null)
 ASSERT($class._expectValueKind="undef")
 ASSERT($class.isErr; $class.error)
 ASSERT($class.error#"")
-ASSERT($class.displayline="⚠️@"; "The displayLine should indicate an error")
+ASSERT($class.displayline="@⚠️@"; "The displayLine should indicate an error")
 
 $class:=$test.new("1 = 1").expect(1)
 ASSERT($class._expectValue=1)
 ASSERT($class._expectValueKind="number")
 ASSERT(Not($class.isErr); "Description and expectedValue are both defined.")
 ASSERT($class.error="")
-ASSERT($class.displayline="❌@"; "The displayLine should indicate no pass")  // because there is no matcher
+ASSERT($class.displayline="@❌@"; "The displayLine should indicate no pass")  // because there is no matcher
 
 $class:=$test.new("2 + 2 = 4").expect(Formula(2+2))
 ASSERT($class._expectValue=4)

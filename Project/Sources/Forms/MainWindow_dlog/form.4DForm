@@ -9,11 +9,12 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
-	"bottomMargin": 20,
+	"rightMargin": 0,
+	"bottomMargin": 0,
 	"events": [
 		"onLoad",
 		"onClick",
+		"onDoubleClick",
 		"onCloseBox",
 		"onSelectionChange"
 	],
@@ -32,16 +33,28 @@
 					"fill": "#b1c4dd",
 					"sizingX": "grow"
 				},
+				"statusRect": {
+					"type": "rectangle",
+					"top": 1,
+					"left": 0,
+					"width": 969,
+					"height": 500,
+					"stroke": "#c0c0c0",
+					"fill": "transparent",
+					"sizingX": "grow",
+					"strokeWidth": 4,
+					"sizingY": "grow"
+				},
 				"Text": {
 					"type": "text",
 					"text": "yaUT",
-					"top": -8,
-					"left": 8,
-					"width": 201,
+					"top": 1,
+					"left": 15,
+					"width": 101,
 					"height": 51,
 					"stroke": "#FFFFFF",
 					"fontWeight": "bold",
-					"fontSize": 48
+					"fontSize": 40
 				}
 			}
 		},
@@ -49,10 +62,10 @@
 			"objects": {
 				"methods_LB": {
 					"type": "listbox",
-					"left": 2,
+					"left": 5,
 					"top": 79,
-					"width": 252,
-					"height": 403,
+					"width": 552,
+					"height": 417,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -71,7 +84,7 @@
 					"verticalLineStroke": "transparent",
 					"fill": "transparent",
 					"dataSource": "Form:C1466.methods_LB.data",
-					"currentItemSource": "Form:C1466.methods_LB.currentITem",
+					"currentItemSource": "Form:C1466.methods_LB.currentItem",
 					"currentItemPositionSource": "Form:C1466.methods_LB.position",
 					"selectedItemsSource": "Form:C1466.methods_LB.selectedItems",
 					"columns": [
@@ -93,25 +106,38 @@
 						},
 						{
 							"header": {
-								"text": "Test Methods",
+								"text": "Test Method",
 								"name": "Header1",
 								"stroke": "#808080"
 							},
-							"name": "Column1",
+							"name": "testMethod",
 							"footer": {
 								"name": "Footer1"
 							},
 							"enterable": false,
-							"dataSource": "This:C1470.method"
+							"dataSource": "This:C1470.name",
+							"width": 198
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": ""
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSource": "This:C1470.displayline",
+							"enterable": false
 						}
 					]
 				},
 				"results_LB": {
 					"type": "listbox",
-					"left": 275,
+					"left": 624,
 					"top": 79,
 					"width": 339,
-					"height": 403,
+					"height": 417,
 					"events": [
 						"onClick",
 						"onHeaderClick",
@@ -162,7 +188,7 @@
 					"type": "button",
 					"text": "Run Selected",
 					"top": 45,
-					"left": 275,
+					"left": 355,
 					"width": 98,
 					"height": 29,
 					"events": [
@@ -170,84 +196,11 @@
 					],
 					"style": "bevel"
 				},
-				"detail_LB": {
-					"type": "listbox",
-					"left": 644,
-					"top": 79,
-					"width": 324,
-					"height": 403,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
-					"listboxType": "collection",
-					"dataSource": "Form:C1466.detail_LB.data",
-					"currentItemSource": "Form:C1466.detail_LB.currentItem",
-					"currentItemPositionSource": "Form:C1466.detail_LB.position",
-					"selectedItemsSource": "Form:C1466.detail_LB.selectedItems",
-					"resizingMode": "legacy",
-					"sizingY": "fixed",
-					"scrollbarHorizontal": "automatic",
-					"scrollbarVertical": "automatic",
-					"borderStyle": "none",
-					"hideExtraBlankRows": true,
-					"horizontalLineStroke": "transparent",
-					"verticalLineStroke": "transparent",
-					"rowHeight": "30px",
-					"fontSize": 14,
-					"sizingX": "grow",
-					"showHeaders": false,
-					"hideFocusRing": true,
-					"columns": [
-						{
-							"header": {
-								"text": "Field",
-								"name": "Header5"
-							},
-							"name": "Column6",
-							"footer": {
-								"name": "Footer5"
-							},
-							"dataSource": "This:C1470.key",
-							"width": 150,
-							"stroke": "#808080",
-							"verticalAlign": "middle",
-							"textAlign": "right",
-							"enterable": false
-						},
-						{
-							"header": {
-								"name": "Header6",
-								"text": "Value"
-							},
-							"name": "Column5",
-							"footer": {
-								"name": "Footer6"
-							},
-							"dataSource": "This:C1470.value",
-							"textAlign": "left",
-							"verticalAlign": "middle",
-							"enterable": false,
-							"wordwrap": "normal",
-							"rowHeightAuto": true
-						}
-					]
-				},
-				"Splitter": {
-					"type": "splitter",
-					"left": 625,
-					"top": 69,
-					"width": 11,
-					"height": 422,
-					"sizingY": "grow"
-				},
 				"btn_refresh": {
 					"type": "button",
 					"text": "Refresh",
 					"top": 45,
-					"left": 155,
+					"left": 235,
 					"width": 98,
 					"height": 29,
 					"events": [
@@ -259,7 +212,7 @@
 					"type": "checkbox",
 					"text": "Show failing only",
 					"top": 52,
-					"left": 469,
+					"left": 8,
 					"width": 141,
 					"height": 22,
 					"events": [
@@ -270,19 +223,31 @@
 				},
 				"methodPrefix": {
 					"type": "input",
-					"left": 8,
-					"top": 54,
+					"left": 169,
+					"top": 48,
 					"width": 60,
 					"height": 17,
 					"dataSource": "Form:C1466.methodPrefix",
 					"entryFilter": {
 						"$ref": "/SOURCES/filters.json#/prefix Filter"
 					}
+				},
+				"btn_writeLog": {
+					"type": "button",
+					"text": "Write to Log",
+					"top": 45,
+					"left": 595,
+					"width": 98,
+					"height": 29,
+					"events": [
+						"onClick"
+					],
+					"style": "bevel"
 				}
 			}
 		}
 	],
-	"geometryStamp": 192,
+	"geometryStamp": 430,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
