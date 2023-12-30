@@ -9,4 +9,13 @@ and display them
 
 */
 
+//var $testMethod : cs.TestMethod
+//$testMethod:=cs.TestMethod.new("yaUT_example_xx")
+//$testMethod:=cs.TestMethod.new("yaUT_example_1")
+//$testMethod:=cs.TestMethod.new("yaUT_example_1").run()
+//$testMethod:=cs.TestMethod.new("yaUT_example_1").run().displayAlert()
+
+var $fullTest : cs.FullTest
+
+$fullTest:=cs.FullTest.new().getTestMethods().run()
 

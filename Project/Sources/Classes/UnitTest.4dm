@@ -8,11 +8,13 @@ $class.expect(<some value>).toEqual(<value or formula>)
 */
 Class extends ObjectProto
 
+property _result : Boolean
+
 Class constructor($description : Text)
 	var lastErrorCol : Collection
 	Super()
-	This._description:=$description
 	This._error:=$description="" ? "Constructor: A description is required" : ""
+	This._description:=$description
 	This._expectValue:=Null
 	This._expectFormula:=Null  //  formula of expected value
 	This._expectValueKind:="undef"
@@ -26,10 +28,9 @@ Class constructor($description : Text)
 	This._curErrMethod:=""
 	This._lastErrors:=[]
 	
-Function insertBreakText($text : Text) : cs.UnitTest
-	//  for inserting a header in storage
-	This._logToStorage($text)
-	return This
+Function insertComment($text : Text) : Object
+	//  returns an object with the comment text
+	return {displayline: $text; isComment: True}
 	
 	//mark:  --- computed attributes
 Function get description : Text
@@ -135,7 +136,6 @@ object:   compare properties of $1 to expectedValue object
 			This._setResult(False)
 	End case 
 	
-	This._logToStorage()
 	return This
 	
 Function toMatch($pattern) : cs.UnitTest
@@ -151,7 +151,6 @@ Function toMatch($pattern) : cs.UnitTest
 	
 	This._setResult(Match regex(This._testFormula; This._expectValue; 1; $pos; $len))
 	This._testValue:=This._result ? Substring(This._expectValue; $pos; $len) : ""
-	This._logToStorage()
 	return This
 	
 Function toContain($obj) : cs.UnitTest
@@ -231,16 +230,6 @@ Function getSummary()->$col : Collection
 	//mark:  --- privates
 Function _setResult($result : Boolean)
 	This._result:=$result
-	This._logToStorage()
-	
-Function _logToStorage($text : Text)
-	//  pushes this text or this.toObject onto Storage.yaUT if it exists
-	
-	If ($text#"")  //  log the text
-		yaUT__pushResult({displayline: $text})
-	Else   //  log the result
-		yaUT__pushResult(This.toObject())
-	End if 
 	
 Function _paramCheck($params : Collection) : Boolean
 	// error & param checking
@@ -314,7 +303,6 @@ Function _equalTo()
 		: (Not(This._isScalarValue(This._testValue)))
 			This._error:="_equalTo(): Incompatible data type - only object, collection and scalar values supported."
 			This._setResult(False)
-			
 		Else 
 			This._setResult(This._expectValue=This._testValue)
 	End case 
