@@ -20,8 +20,8 @@ $results:=[]
 If ($testMethods.length=0)
 	return 
 End if 
-
-$yaUT:=cs.UnitTest.new().initStorage()
+yaUT__initStorage
+$yaUT:=cs.UnitTest.new()
 
 For each ($obj; $testMethods)
 	
@@ -50,4 +50,4 @@ For each ($obj; $testMethods)
 	
 End for each 
 
-return Storage.yaUT
+return Storage.yaUT.results

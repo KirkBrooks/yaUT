@@ -26,36 +26,15 @@ Class constructor($description : Text)
 	This._curErrMethod:=""
 	This._lastErrors:=[]
 	
-	//mark:  --- storage
-Function initStorage : cs.UnitTest
-	//  initialize Storage.yaUT as a collection
-	Use (Storage)
-		Storage.yaUT:=New shared collection()
-	End use 
-	return This
-	
-Function insertStorageline($text : Text) : cs.UnitTest
+Function insertBreakText($text : Text) : cs.UnitTest
 	//  for inserting a header in storage
 	This._logToStorage($text)
 	return This
 	
-Function clearStorage
-	//  remove Storage.yaUT 
-	Use (Storage)
-		OB REMOVE(Storage; "yaUT")
-	End use 
-	
-Function getStorageDisplayline : Text
-	//  return a text block of displayLine
-	If (Storage.yaUT=Null)
-		return "Unit Test collection is not initialized"
-	End if 
-	
-	return Storage.yaUT.extract("displayline").join("\n")
-	
 	//mark:  --- computed attributes
 Function get description : Text
 	return This._description
+	
 Function get pass : Boolean
 	return This.__not ? Not(This._result) : This._result
 	
@@ -256,16 +235,11 @@ Function _setResult($result : Boolean)
 	
 Function _logToStorage($text : Text)
 	//  pushes this text or this.toObject onto Storage.yaUT if it exists
-	If (Storage.yaUT#Null)
-		Use (Storage.yaUT)
-			
-			If ($text#"")  //  log the text
-				Storage.yaUT.push(OB Copy({displayline: $text}; ck shared; Storage.yaUT))
-			Else   //  log the result
-				Storage.yaUT.push(OB Copy(This.toObject(); ck shared; Storage.yaUT))
-			End if 
-			
-		End use 
+	
+	If ($text#"")  //  log the text
+		yaUT__pushResult({displayline: $text})
+	Else   //  log the result
+		yaUT__pushResult(This.toObject())
 	End if 
 	
 Function _paramCheck($params : Collection) : Boolean
@@ -454,5 +428,4 @@ Function _readLastErr : Text
 	If (lastErrorCol.length>0)
 		return "There was an error: "+String(lastErrorCol[0].errCode)+"; "+lastErrorCol.message
 	End if 
-	
 	

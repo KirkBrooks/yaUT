@@ -17,7 +17,7 @@ SORT ARRAY($aPaths; >)
 $col:=[]
 
 For ($i; 1; Size of array($aPaths))
-	If ($aPaths{$i}="yaut_@") && ($aPaths{$i}#"yaUT_FullTest")
+	If ($aPaths{$i}#"yaUT__@") && ($aPaths{$i}="yaut_@") && ($aPaths{$i}#"yaUT_FullTest")
 		$col.push({method: $aPaths{$i}; selected: True})
 	End if 
 End for 
