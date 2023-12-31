@@ -136,13 +136,21 @@ Function displayAlert
 	$message+=This.getResults().join("\n")
 	ALERT($message)
 	
-Function writeToLog($fHandle : 4D.FileHandle)
+Function writeToLog($filePath : Text)
+	// path is POSIX
+	// append these results to the file
 	var $testObj : Object
+	var $fhandle : 4D.FileHandle
+	var $file : 4D.File
 	
-	If ($fHandle=Null)
+	If ($filePath="")
 		return 
 	End if 
 	
+	$file:=File($filePath)
+	$fHandle:=$file.open("append")
+	$fHandle.writeLine("="*40)
+	$fHandle.writeLine("Method:  "+This.name)
 	$fHandle.writeLine(This.displayline)
 	If (This.isErr)
 		$fHandle.writeLine("  Error: "+This.error)

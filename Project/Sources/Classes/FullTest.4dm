@@ -13,7 +13,7 @@ Class constructor($ident : Text)
 	This._ms:=0
 	This._error:=""
 	
-	This._timestamp:=Timestamp
+	This._timestamp:=String(Current date; ISO date; Current time)
 	This.methodPrefix:="yaUT_"
 	This._testMethods:=[]
 	This._pass:=False
@@ -118,7 +118,7 @@ Function logResults($file : 4D.File) : cs.FullTest
 	$file:=$file || This._defaultLogFile()
 	This._logPath:=$file.platformPath
 	
-	$fHandle:=$file.open("write")
+	$fHandle:=$file.open("append")
 	
 	$fHandle.writeLine("Unit Test Log: "+File(Structure file; fk platform path).path)
 	$fHandle.writeLine("Machine: "+Current machine)
@@ -126,12 +126,12 @@ Function logResults($file : 4D.File) : cs.FullTest
 	$fHandle.writeLine("Elapsed: "+String(This.ms/1000; "###,###,###,##0.00")+" secs")
 	$fHandle.writeLine("Compiled: "+String(Is compiled mode))
 	$fHandle.writeLine("Mode: "+String(Application type))
+	$fHandle:=Null
 	
 	For each ($testObj; This._testMethods)
-		$fHandle.writeLine("="*40)
-		$fHandle.writeLine("Method:  "+$testObj.name)
-		$testObj.writeToLog($fHandle)
+		$testObj.writeToLog($file.path)
 	End for each 
+	
 	return This
 	
 Function testMethods : Collection
@@ -163,10 +163,10 @@ Function deSelectMethod($methodName : Text) : cs.FullTest
 	return This
 	
 	//mark:  ---  private
-Function _defaultLogFile->$file : 4D.File
+Function _defaultLogFile : 4D.File
 	var $fileName; $text : Text
-	$fileName:=Replace string("yaut_"+String(This._timestamp; ISO date; This._timestamp)+".txt"; ":"; "-")  // can't have colons in the file path
-	$file:=Folder(Folder(fk logs folder).platformPath; fk platform path).file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
+	$fileName:="yaut_"+Replace string(This._timestamp; ":"; "-")+".txt"  // can't have colons in the file path
+	return Folder(Folder(fk logs folder; *).platformPath; fk platform path).file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
 	
 Function _setMethodSelect($methodName : Text; $bool : Boolean)
 	// ok to include @

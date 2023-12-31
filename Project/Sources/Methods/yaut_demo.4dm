@@ -6,6 +6,9 @@ var $test : Object
 var $str : Text
 var $showResult : Boolean
 
+$str:=String(Current date; ISO date; Current time)
+
+
 $test:=cs.UnitTest  //  make the constructor
 $col:=[]
 

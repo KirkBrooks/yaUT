@@ -195,11 +195,11 @@
 			"Summary": ""
 		},
 		"writeToLog()": {
-			"Syntax": "**.writeToLog**( *fHandle* : 4D.FileHandle )",
+			"Syntax": "**.writeToLog**( *filePath* : Text )",
 			"Params": [
 				[
-					"fHandle",
-					"4D.FileHandle",
+					"filePath",
+					"Text",
 					"->"
 				]
 			],
