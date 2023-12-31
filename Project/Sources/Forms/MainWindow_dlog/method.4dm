@@ -63,14 +63,6 @@ If ($objectName="showFailing")
 	$updateShowFailing:=True  //  update
 End if 
 
-If ($objectName="results_LB")
-	
-	Case of 
-		: (Form event code=On Selection Change) && ($results_LB.isSelected)
-			$detail_LB.setSource($results_LB.currentItem.getResults())
-	End case 
-End if 
-
 If ($objectName="methods_LB")
 	Case of 
 		: (Form event code=On Clicked) && (OptionKey) && ($methods_LB.isSelected)

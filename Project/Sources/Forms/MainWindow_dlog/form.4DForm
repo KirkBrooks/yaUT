@@ -134,16 +134,11 @@
 				},
 				"results_LB": {
 					"type": "listbox",
-					"left": 624,
+					"left": 595,
 					"top": 79,
-					"width": 339,
+					"width": 366,
 					"height": 417,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
+					"events": [],
 					"listboxType": "collection",
 					"headerHeight": "2em",
 					"resizingMode": "legacy",
@@ -161,6 +156,7 @@
 					"verticalLineStroke": "transparent",
 					"rowHeightAutoMin": "1em",
 					"rowHeightAutoMax": "1600em",
+					"sortable": false,
 					"columns": [
 						{
 							"header": {
@@ -247,7 +243,7 @@
 			}
 		}
 	],
-	"geometryStamp": 430,
+	"geometryStamp": 467,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

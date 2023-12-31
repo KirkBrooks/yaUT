@@ -78,6 +78,7 @@ Function run : cs.TestMethod
 	End if 
 	
 	If (Not(This.isValid))
+		This._error:="This is not a valid method"
 		return This
 	End if 
 	
@@ -167,7 +168,7 @@ But it doesn't have to be shared to get the code
 	var $path : Text
 	ARRAY TEXT($aMethods; 0)
 	
-	METHOD GET PATHS(Path project method; $aMethods)
+	METHOD GET PATHS(Path project method; $aMethods; *)
 	
 	If (Find in array($aMethods; This.name)=-1)
 		This._error:="*** The method '"+This.name+"' is not in the database."
