@@ -12,7 +12,7 @@ var $window : Integer
 
 If (Process number("ut_mainDialog")#Current process)
 	// if the worker hasn't been started do it now
-	CALL WORKER("ut_mainDialog"; "Show_UnitTestForm")
+	CALL WORKER("ut_mainDialog"; Current method name)
 	
 Else 
 	//mark:  --- this part runs in the worker

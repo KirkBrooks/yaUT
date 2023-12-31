@@ -20,11 +20,11 @@ $str:="This is a line of text"
 $testCol.push($test.new("$str contains 'line of text'").expect($str).toMatch("l[\\w ]+text"))
 $testCol.push($test.new("$str contains 'line of text'").expect($str).toMatch(123))
 
-Show_UnitTestForm($testCol)
+yaUT__MAIN_FORM($testCol)
 
 
-/*  Basic   
-// instantiate the class and enter the description 
+/*  Basic
+// instantiate the class and enter the description
 $test:=cs.UnitTest.new("1 is equal to 1")
 // set the expected value
 $test.expect(1)

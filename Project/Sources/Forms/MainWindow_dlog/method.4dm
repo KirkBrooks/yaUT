@@ -67,7 +67,7 @@ If ($objectName="results_LB")
 	
 	Case of 
 		: (Form event code=On Selection Change) && ($results_LB.isSelected)
-			$detail_LB.setSource(UnitTest_getSummary($results_LB.currentItem))
+			$detail_LB.setSource($results_LB.currentItem.getResults())
 	End case 
 End if 
 

@@ -4,20 +4,20 @@
 
 Light-weight unit testing for 4D.
 
-The class can be used to create and evaluate a test in a single line or can be pushed onto a collection for further examination. 
+The class can be used to create and evaluate a test in a single line or can be pushed onto a collection for further examination.
 
-### Install
+### Install & Dependencies
 
 Simply add the class to a project.
 
-There is no UI for the class itself. The **ObjectProto** class is required also.
+The **_ObjectProto** class is also required.
 
-### Tests
+### The simplest test
 
 There are three steps required to set up a test:
 
-1) Instantiate the class with the description of what the test does
-2) Enter the expected result of the test
+1) Instantiate the class with the description of what it does
+2) Enter the expected result
 3) Choose a ‘matcher’ function to evaluate an input and set the result
 
 They must be done in order and the recommended pattern is to declare a constructor first because generally you’ll be making a lot of tests and having the constructor makes it easier and more readable.
@@ -30,7 +30,7 @@ $tests.push($test.new("1 is equal to 1").expect(1).toEqual(1))
 $tests.push($test.new("1 is equal to 1")not().expect(1).toEqual(2))
 ```
 
-`UnitTest` has a property: displayLine that summarizes each test into a single line. 
+`UnitTest` has a property: displayLine that summarizes each test into a single line.
 
 ```
 $test:=cs.UnitTest   // constructor
@@ -49,11 +49,11 @@ The `.displayLine` property is an easy way to see the results of the test.
 
 These are the three types of display you may see. Each is a text string and may be displayed in an alert.
 
-If you wanted to have the results of each test for deeper analysis push them onto a collection and hand it off to a form. 
+If you wanted to have the results of each test for deeper analysis push them onto a collection and hand it off to a form.
 
 ### Using Formulas for test values
 
-`expect()` and most matcher functions can take a [4D Formula][https://developer.4d.com/docs/API/FunctionClass/]  as an input as long as the formula evaluates to an object, collection, number, boolean, date or text. There are several benefits chief among them is the ability to call Project methods and evaluate the results. 
+`expect()` and most matcher functions can take a [4D Formula][https://developer.4d.com/docs/API/FunctionClass/]  as an input as long as the formula evaluates to an object, collection, number, boolean, date or text. There are several benefits chief among them is the ability to call Project methods and evaluate the results.
 
 ```
 $test:=cs.UnitTest   // constructor
@@ -69,7 +69,11 @@ ALERT($tests)
 return $a + $b
 ```
 
-Line 4 is a formula built on the fly that takes two arguments. Line 5 is a formula that calls a project method and passes the two parameters. 
+Line 4 is a formula built on the fly that takes two arguments. Line 5 is a formula that calls a project method and passes the two parameters.
+
+### Test Methods
+
+The real poser of unit test comes in grouping them together. Take a look at the **TestMethod**  class documentation to see how you can put together test methods made up of serveral individual tests. The look at **FullTest** class to see how you can have 4D run all your methods for you.
 
 
 
@@ -101,4 +105,4 @@ Line 4 is a formula built on the fly that takes two arguments. Line 5 is a formu
 | getTestValue | None | Variant | Returns the test value |
 | getTestValueStr | None | Text | Stringified test value |
 
-​	
+​

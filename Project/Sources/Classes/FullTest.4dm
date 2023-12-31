@@ -146,11 +146,31 @@ Function getFullResults->$results : Collection
 		$results.combine($testObj.getFullResults())
 	End for each 
 	
+Function selectAll : cs.FullTest
+	This._setMethodSelect("@"; True)
+	return This
+	
+Function deSelectAll : cs.FullTest
+	This._setMethodSelect("@"; False)
+	return This
+	
+Function selectMethod($methodName : Text) : cs.FullTest
+	This._setMethodSelect($methodName; True)
+	return This
+	
+Function deSelectMethod($methodName : Text) : cs.FullTest
+	This._setMethodSelect($methodName; False)
+	return This
+	
 	//mark:  ---  private
 Function _defaultLogFile->$file : 4D.File
 	var $fileName; $text : Text
 	$fileName:=Replace string("yaut_"+String(This._timestamp; ISO date; This._timestamp)+".txt"; ":"; "-")  // can't have colons in the file path
 	$file:=Folder(Folder(fk logs folder).platformPath; fk platform path).file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
 	
-	
-	
+Function _setMethodSelect($methodName : Text; $bool : Boolean)
+	// ok to include @
+	var $testObj : Object
+	For each ($testObj; This._testMethods.query("name = :1"; $methodName))
+		$testObj.selected:=$bool
+	End for each 
