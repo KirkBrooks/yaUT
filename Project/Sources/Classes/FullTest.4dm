@@ -96,7 +96,7 @@ Function run() : cs.FullTest
 	This._countErr:=0
 	
 	For each ($testObj; This._testMethods)
-		$testObj.run()  //  only runs is .selected is true
+		$testObj.run()  //  only runs if .selected is true
 		This._pass:=This._pass && ($testObj.pass)
 		This._countTests+=$testObj.countTests
 		This._countPass+=$testObj.countPass
@@ -164,9 +164,10 @@ Function deSelectMethod($methodName : Text) : cs.FullTest
 	
 	//mark:  ---  private
 Function _defaultLogFile : 4D.File
+	//  default is in Logs/yaut/<file>
 	var $fileName; $text : Text
 	$fileName:="yaut_"+Replace string(This._timestamp; ":"; "-")+".txt"  // can't have colons in the file path
-	return Folder(Folder(fk logs folder; *).platformPath; fk platform path).file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
+	return Folder(Folder(fk logs folder; *).platformPath; fk platform path).folder("yaut").file($fileName)  //  Folder(Folder ...  trick to convert the path to system path
 	
 Function _setMethodSelect($methodName : Text; $bool : Boolean)
 	// ok to include @

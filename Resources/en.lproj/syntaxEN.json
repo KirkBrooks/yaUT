@@ -1,5 +1,21 @@
 {
 	"_method_": {
+		"yaUT_FullTest": {
+			"Syntax": "**yaUT_FullTest**( *logFile* : 4D.File ) : Boolean",
+			"Params": [
+				[
+					"logFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"yaUT__MAIN_FORM": {
 			"Syntax": "**yaUT__MAIN_FORM**()",
 			"Params": [],

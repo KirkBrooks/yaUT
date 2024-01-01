@@ -98,7 +98,7 @@ Function run : cs.TestMethod
 	This._ms+=Milliseconds
 	
 	If ($thisTest=Null)
-		This._error:="No results were returned by this method."
+		This._error:="No results were returned by this method. Check method is shared."
 		If (error#0)
 			This._error+="\nThere was a 4D error: ["+String(error)+"] "+error method
 		End if 
