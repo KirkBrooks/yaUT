@@ -15,7 +15,7 @@ var $test : Object
 var $str : Text
 
 $testCol:=[Substring(Current method name; 5)]  //  first line is always the method name
-$test:=yaUTtest()  //  make the constructor
+$test:=cs.UnitTest  //  make the constructor
 //mark:  --- create the individal tests
 $testCol.push($test.new("1 is equal to 1").expect(1).toEqual(1))
 $testCol.push($test.new("1 is not equal to 5").expect(1).not().toEqual(5))

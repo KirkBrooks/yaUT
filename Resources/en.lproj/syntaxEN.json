@@ -21,15 +21,9 @@
 			"Params": [],
 			"Summary": ""
 		},
-		"yaUTtest": {
-			"Syntax": "**yaUTtest**() : Object",
-			"Params": [
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
+		"yaUT__readMe": {
+			"Syntax": "**yaUT__readMe**()",
+			"Params": [],
 			"Summary": ""
 		}
 	},
