@@ -2,7 +2,7 @@
 <!DOCTYPE macros SYSTEM "http://www.4d.com/dtd/2007/macros.dtd">
 <macros>
     <macro name="( *** yaUT Macros ***" in_menu="true"></macro>
-    <macro name="newtest" in_menu="true" type_ahead="true" version="2">
+    <macro name="yaUTnewtest" in_menu="true" type_ahead="true" version="2">
         <text>
             #DECLARE->$testsRun : Collection  // return a collection of tests
             var $test : Object
