@@ -1,0 +1,7 @@
+Setting the Version for the Component
+
+The source of truth for the version is the version method.
+This method is updated by the `_build` method.
+
+Version string is:
+        <major>.<minor>.<patch>-<build>
