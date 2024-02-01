@@ -6,6 +6,7 @@ DerivedData/
 
 # Libraries
 Libraries/
+_extras/
 
 # User preferences
 userPreferences.*/

@@ -1,5 +1,5 @@
-//%attributes = {}
+//%attributes = {"shared":true}
 #DECLARE : Text
-// 2024-01-02T20:05:30.750Z
+// 2024-01-31T23:15:36.545Z
 // user: Designer
-return "0.3.0 00033"
+return "0.3.0 00034"
