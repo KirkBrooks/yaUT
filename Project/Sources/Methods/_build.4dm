@@ -16,7 +16,7 @@ var $buildApp : 4D.File
 var $version : Text
 
 If (UT_TestSuite=0)
-	$version:=cs.VersionMinder.new().setBuild().version  // increment the build number
+	$version:=cs._VersionMinder.new().setBuild().version  // increment the build number
 	
 	$target:=Folder(Structure file; fk platform path).parent.parent
 	

@@ -28,19 +28,19 @@ Function get Build : Integer
 	return This._build
 	
 	//mark:  --- functions
-Function setMajor($value : Integer) : cs.VersionMinder
+Function setMajor($value : Integer) : cs._VersionMinder
 	This._updateValue("_major"; Count parameters=1 ? $value : This._major+1)
 	return This
 	
-Function setMinor($value : Integer) : cs.VersionMinder
+Function setMinor($value : Integer) : cs._VersionMinder
 	This._updateValue("_minor"; Count parameters=1 ? $value : This._minor+1)
 	return This
 	
-Function setPatch($value : Integer) : cs.VersionMinder
+Function setPatch($value : Integer) : cs._VersionMinder
 	This._updateValue("_patch"; Count parameters=1 ? $value : This._patch+1)
 	return This
 	
-Function setBuild($value : Integer) : cs.VersionMinder
+Function setBuild($value : Integer) : cs._VersionMinder
 	This._updateValue("_build"; Count parameters=1 ? $value : This._build+1)
 	return This
 	

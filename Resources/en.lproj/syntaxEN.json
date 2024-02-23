@@ -21,6 +21,17 @@
 			"Params": [],
 			"Summary": ""
 		},
+		"thisVersion": {
+			"Syntax": "**thisVersion**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
 		"yaUT__readMe": {
 			"Syntax": "**yaUT__readMe**()",
 			"Params": [],
@@ -28,32 +39,6 @@
 		}
 	},
 	"cs.yaUT": {
-		"listbox": {
-			"new()": {
-				"Syntax": "**.new**( *name* : Text )",
-				"Params": [
-					[
-						"name",
-						"Text",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
-		"FullTest": {
-			"new()": {
-				"Syntax": "**.new**( *ident* : Text )",
-				"Params": [
-					[
-						"ident",
-						"Text",
-						"->"
-					]
-				],
-				"Summary": ""
-			}
-		},
 		"TestMethod": {
 			"new()": {
 				"Syntax": "**.new**( *methodName* : Text )",
@@ -80,6 +65,19 @@
 				"Summary": ""
 			}
 		},
+		"_listbox": {
+			"new()": {
+				"Syntax": "**.new**( *name* : Text )",
+				"Params": [
+					[
+						"name",
+						"Text",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
 		"_ObjectProto": {
 			"new()": {
 				"Syntax": "**.new**()",
@@ -93,621 +91,19 @@
 				"Params": [],
 				"Summary": ""
 			}
-		}
-	},
-	"listbox": {
-		"max()": {
-			"Syntax": "**.max**( *key* : Text ) : Real",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
+		},
+		"FullTest": {
+			"new()": {
+				"Syntax": "**.new**( *ident* : Text )",
+				"Params": [
+					[
+						"ident",
+						"Text",
+						"->"
+					]
 				],
-				[
-					"",
-					"Real",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isFormObject()": {
-			"Syntax": "**.get isFormObject**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"setData()": {
-			"Syntax": "**.setData**() : cs.yaUT.listbox",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"lastIndexOf()": {
-			"Syntax": "**.lastIndexOf**( *key* : Text; *findValue* : Variant; *startFrom* : Integer ) : Integer",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"findValue",
-					"Variant",
-					"->"
-				],
-				[
-					"startFrom",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isEntitySelection()": {
-			"Syntax": "**.get isEntitySelection**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"findRow()": {
-			"Syntax": "**.findRow**( *what* : Variant ) : Integer",
-			"Params": [
-				[
-					"what",
-					"Variant",
-					"->"
-				],
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"sum()": {
-			"Syntax": "**.sum**( *key* : Text ) : Real",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"Real",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"indexOf()": {
-			"Syntax": "**.indexOf**( *what* : Variant ) : Integer",
-			"Params": [
-				[
-					"what",
-					"Variant",
-					"->"
-				],
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"insert()": {
-			"Syntax": "**.insert**( *index* : Integer; *element* : Variant ) : Object",
-			"Params": [
-				[
-					"index",
-					"Integer",
-					"->"
-				],
-				[
-					"element",
-					"Variant",
-					"->"
-				],
-				[
-					"",
-					"Object",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"deselect()": {
-			"Syntax": "**.deselect**()",
-			"Params": [],
-			"Summary": ""
-		},
-		"get_item()": {
-			"Syntax": "**.get_item**()->value : Variant",
-			"Params": [
-				[
-					"value",
-					"Variant",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"distinct()": {
-			"Syntax": "**.distinct**( *key* : Text ) : Collection",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"Collection",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"updateEntitySelection()": {
-			"Syntax": "**.updateEntitySelection**() : cs.yaUT.listbox",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"average()": {
-			"Syntax": "**.average**( *key* : Text ) : Real",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"Real",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"reset()": {
-			"Syntax": "**.reset**() : cs.yaUT.listbox",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"min()": {
-			"Syntax": "**.min**( *key* : Text ) : Real",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"Real",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"redraw()": {
-			"Syntax": "**.redraw**() : cs.yaUT.listbox",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isReady()": {
-			"Syntax": "**.get isReady**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get_shortDesc()": {
-			"Syntax": "**.get_shortDesc**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get error()": {
-			"Syntax": "**.get error**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"extract()": {
-			"Syntax": "**.extract**( *key* : Text ) : Collection",
-			"Params": [
-				[
-					"key",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"Collection",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isCollection()": {
-			"Syntax": "**.get isCollection**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get index()": {
-			"Syntax": "**.get index**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get dataLength()": {
-			"Syntax": "**.get dataLength**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"restore()": {
-			"Syntax": "**.restore**( *name* : Text ) : cs.yaUT.listbox",
-			"Params": [
-				[
-					"name",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isSelected()": {
-			"Syntax": "**.get isSelected**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"selectRow()": {
-			"Syntax": "**.selectRow**( *criteria* : Variant; *value* : Variant )",
-			"Params": [
-				[
-					"criteria",
-					"Variant",
-					"->"
-				],
-				[
-					"value",
-					"Variant",
-					"->"
-				]
-			],
-			"Summary": ""
-		},
-		"setSource()": {
-			"Syntax": "**.setSource**( *source* : Variant ) : cs.yaUT.listbox",
-			"Params": [
-				[
-					"source",
-					"Variant",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.listbox",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
-	"FullTest": {
-		"deSelectMethod()": {
-			"Syntax": "**.deSelectMethod**( *methodName* : Text ) : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"methodName",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"deSelectAll()": {
-			"Syntax": "**.deSelectAll**() : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"selectAll()": {
-			"Syntax": "**.selectAll**() : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"getFullResults()": {
-			"Syntax": "**.getFullResults**()->results : Collection",
-			"Params": [
-				[
-					"results",
-					"Collection",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"testMethods()": {
-			"Syntax": "**.testMethods**() : Collection",
-			"Params": [
-				[
-					"",
-					"Collection",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"logResults()": {
-			"Syntax": "**.logResults**( *file* : 4D.File ) : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"file",
-					"4D.File",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isRun()": {
-			"Syntax": "**.get isRun**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"getTestMethods()": {
-			"Syntax": "**.getTestMethods**( *methodPrefix* : Text ) : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"methodPrefix",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get ms()": {
-			"Syntax": "**.get ms**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get logPath()": {
-			"Syntax": "**.get logPath**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get countPass()": {
-			"Syntax": "**.get countPass**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get isErr()": {
-			"Syntax": "**.get isErr**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"selectMethod()": {
-			"Syntax": "**.selectMethod**( *methodName* : Text ) : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"methodName",
-					"Text",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get error()": {
-			"Syntax": "**.get error**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get countErr()": {
-			"Syntax": "**.get countErr**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get countTests()": {
-			"Syntax": "**.get countTests**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get countFail()": {
-			"Syntax": "**.get countFail**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"run()": {
-			"Syntax": "**.run**() : cs.yaUT.FullTest",
-			"Params": [
-				[
-					"",
-					"cs.yaUT.FullTest",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get pass()": {
-			"Syntax": "**.get pass**() : Boolean",
-			"Params": [
-				[
-					"",
-					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
+				"Summary": ""
+			}
 		}
 	},
 	"TestMethod": {
@@ -1131,6 +527,390 @@
 		},
 		"_inheritedFrom_": "_ObjectProto"
 	},
+	"_listbox": {
+		"max()": {
+			"Syntax": "**.max**( *key* : Text ) : Real",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Real",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isFormObject()": {
+			"Syntax": "**.get isFormObject**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setData()": {
+			"Syntax": "**.setData**() : cs.yaUT.listbox",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"lastIndexOf()": {
+			"Syntax": "**.lastIndexOf**( *key* : Text; *findValue* : Variant; *startFrom* : Integer ) : Integer",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"findValue",
+					"Variant",
+					"->"
+				],
+				[
+					"startFrom",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isEntitySelection()": {
+			"Syntax": "**.get isEntitySelection**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findRow()": {
+			"Syntax": "**.findRow**( *what* : Variant ) : Integer",
+			"Params": [
+				[
+					"what",
+					"Variant",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"sum()": {
+			"Syntax": "**.sum**( *key* : Text ) : Real",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Real",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"indexOf()": {
+			"Syntax": "**.indexOf**( *what* : Variant ) : Integer",
+			"Params": [
+				[
+					"what",
+					"Variant",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"insert()": {
+			"Syntax": "**.insert**( *index* : Integer; *element* : Variant ) : Object",
+			"Params": [
+				[
+					"index",
+					"Integer",
+					"->"
+				],
+				[
+					"element",
+					"Variant",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"deselect()": {
+			"Syntax": "**.deselect**()",
+			"Params": [],
+			"Summary": ""
+		},
+		"get_item()": {
+			"Syntax": "**.get_item**()->value : Variant",
+			"Params": [
+				[
+					"value",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"distinct()": {
+			"Syntax": "**.distinct**( *key* : Text ) : Collection",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateEntitySelection()": {
+			"Syntax": "**.updateEntitySelection**() : cs.yaUT.listbox",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"average()": {
+			"Syntax": "**.average**( *key* : Text ) : Real",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Real",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"reset()": {
+			"Syntax": "**.reset**() : cs.yaUT.listbox",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"min()": {
+			"Syntax": "**.min**( *key* : Text ) : Real",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Real",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"redraw()": {
+			"Syntax": "**.redraw**() : cs.yaUT.listbox",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isReady()": {
+			"Syntax": "**.get isReady**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get_shortDesc()": {
+			"Syntax": "**.get_shortDesc**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get error()": {
+			"Syntax": "**.get error**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"extract()": {
+			"Syntax": "**.extract**( *key* : Text ) : Collection",
+			"Params": [
+				[
+					"key",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isCollection()": {
+			"Syntax": "**.get isCollection**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get index()": {
+			"Syntax": "**.get index**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get dataLength()": {
+			"Syntax": "**.get dataLength**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"restore()": {
+			"Syntax": "**.restore**( *name* : Text ) : cs.yaUT.listbox",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isSelected()": {
+			"Syntax": "**.get isSelected**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"selectRow()": {
+			"Syntax": "**.selectRow**( *criteria* : Variant; *value* : Variant )",
+			"Params": [
+				[
+					"criteria",
+					"Variant",
+					"->"
+				],
+				[
+					"value",
+					"Variant",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"setSource()": {
+			"Syntax": "**.setSource**( *source* : Variant ) : cs.yaUT.listbox",
+			"Params": [
+				[
+					"source",
+					"Variant",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.listbox",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
 	"_ObjectProto": {
 		"compare()": {
 			"Syntax": "**.compare**( *value_a* : Variant; *value_b* : Variant; *useExact* : Boolean ) : Boolean",
@@ -1527,6 +1307,237 @@
 				[
 					"",
 					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"FullTest": {
+		"deSelectMethod()": {
+			"Syntax": "**.deSelectMethod**( *methodName* : Text ) : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"methodName",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"deSelectAll()": {
+			"Syntax": "**.deSelectAll**() : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"selectAll()": {
+			"Syntax": "**.selectAll**() : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getFullResults()": {
+			"Syntax": "**.getFullResults**()->results : Collection",
+			"Params": [
+				[
+					"results",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"testMethods()": {
+			"Syntax": "**.testMethods**() : Collection",
+			"Params": [
+				[
+					"",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"logResults()": {
+			"Syntax": "**.logResults**( *file* : 4D.File ) : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"file",
+					"4D.File",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isRun()": {
+			"Syntax": "**.get isRun**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getTestMethods()": {
+			"Syntax": "**.getTestMethods**( *methodPrefix* : Text ) : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"methodPrefix",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get ms()": {
+			"Syntax": "**.get ms**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get logPath()": {
+			"Syntax": "**.get logPath**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get countPass()": {
+			"Syntax": "**.get countPass**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get isErr()": {
+			"Syntax": "**.get isErr**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"selectMethod()": {
+			"Syntax": "**.selectMethod**( *methodName* : Text ) : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"methodName",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get error()": {
+			"Syntax": "**.get error**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get countErr()": {
+			"Syntax": "**.get countErr**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get countTests()": {
+			"Syntax": "**.get countTests**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get countFail()": {
+			"Syntax": "**.get countFail**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"run()": {
+			"Syntax": "**.run**() : cs.yaUT.FullTest",
+			"Params": [
+				[
+					"",
+					"cs.yaUT.FullTest",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get pass()": {
+			"Syntax": "**.get pass**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
 					"<-"
 				]
 			],
