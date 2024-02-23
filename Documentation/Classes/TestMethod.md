@@ -18,7 +18,7 @@ $testsRun:=[]  //  collection of tests to run
 //mark:  --- create unit tests
 ```
 
-Note: on line 4 you will use `$test:=cs.yaUT.UnitTest` if you **yaUT** is a component. 
+Note: on line 4 you will use `$test:=cs.yaUT.UnitTest` if **yaUT** is a component. 
 
 From this point on you just add your specific unit tests: 
 

@@ -1,13 +1,13 @@
 <!-- Type your summary here -->
 ## Yet Another Unit Test
 
-This component gives you several levels of unit testing within your 4D app ranging from a simple class you can use to create unit tests on the fly while you work up to a full test suite that can be run in headless mode as part of a build action. 
+This component gives you several levels of unit testing within your 4D app ranging from a simple class you can use to create unit tests on the fly while you work up to a full test suite that can be run in headless mode as part of a build action.
 
-The reccommended strategy is to write unit test methods. If you prefix the method name with **yaUT_** you can run them from the yaUT Main Form as well as from the **yaUT_FullTest** method. 
+The reccommended strategy is to write unit test methods. If you prefix the method name with **yaUT_** you can run them from the yaUT Main Form as well as from the **yaUT_FullTest** method.
 
 ### Writing test methods
 
-The included macro will configure a method to work with `TestMethod` and `FullTest`. 
+The included macro will configure a method to work with `TestMethod` and `FullTest`.
 
 <img src="Screenshot 2024-01-01 at 1.13.20 PM.png" alt="Screenshot 2024-01-01 at 1.13.20 PM" style="zoom:67%;" />
 
@@ -30,7 +30,7 @@ $testsRun:=[]  //  collection of tests
 //$testsRun.push($test.new().insertComment("This is my comment "))
 ```
 
-The key points are for your methods to work with **yaUT** they must: 
+The key points are for your methods to work with **yaUT** they must:
 
 - Begin with **yaUT_**
 - return a collection of test classes
@@ -42,25 +42,16 @@ A nice feature of putting the tests in the collection is you can easily view the
 
 ### The UnitTest class
 
-Available as `cs.yaUT.UnitClass` this is the basis for all testing. See the documentation for the class for details. 
+Available as `cs.yaUT.UnitClass` this is the basis for all testing. See the documentation for the class for details.
 
 ### TestMethod Class
 
-Available as `cs.yaUT.TestMethod` this class is primarily used by the Full Test. You might find it useful in some cases though. See the class doc for details on setting it up. The main reason to use it is to log the results of running just this method. However, everything you can do manually you can also do using the Main Form. 
+Available as `cs.yaUT.TestMethod` this class is primarily used by the Full Test. You might find it useful in some cases though. See the class doc for details on setting it up. The main reason to use it is to log the results of running just this method. However, everything you can do manually you can also do using the Main Form.
 
 ### yaUT_FullTest
 
-This method runs all the test methods in your app, logs the results and returns a boolean for the overall results. See the method doc for details. You can use this to automate running your unit tests. 
+This method runs all the test methods in your app, logs the results and returns a boolean for the overall results. See the method doc for details. You can use this to automate running your unit tests.
 
 ### yaUT_MAIN_FORM
 
-Opens the dialog for working with all your unit tests. 
-
-
-
-
-
-
-
-
-
+Opens the dialog for working with all your unit tests.
