@@ -65,6 +65,13 @@
 				"Summary": ""
 			}
 		},
+		"_VersionMinder": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
 		"_listbox": {
 			"new()": {
 				"Syntax": "**.new**( *name* : Text )",
@@ -79,13 +86,6 @@
 			}
 		},
 		"_ObjectProto": {
-			"new()": {
-				"Syntax": "**.new**()",
-				"Params": [],
-				"Summary": ""
-			}
-		},
-		"VersionMinder": {
 			"new()": {
 				"Syntax": "**.new**()",
 				"Params": [],
@@ -526,6 +526,127 @@
 			"Summary": ""
 		},
 		"_inheritedFrom_": "_ObjectProto"
+	},
+	"_VersionMinder": {
+		"setBuild()": {
+			"Syntax": "**.setBuild**( *value* : Integer ) : cs.yaUT._VersionMinder",
+			"Params": [
+				[
+					"value",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT._VersionMinder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setPatch()": {
+			"Syntax": "**.setPatch**( *value* : Integer ) : cs.yaUT._VersionMinder",
+			"Params": [
+				[
+					"value",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT._VersionMinder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setMajor()": {
+			"Syntax": "**.setMajor**( *value* : Integer ) : cs.yaUT._VersionMinder",
+			"Params": [
+				[
+					"value",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT._VersionMinder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setMinor()": {
+			"Syntax": "**.setMinor**( *value* : Integer ) : cs.yaUT._VersionMinder",
+			"Params": [
+				[
+					"value",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.yaUT._VersionMinder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get Build()": {
+			"Syntax": "**.get Build**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get Patch()": {
+			"Syntax": "**.get Patch**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get Minor()": {
+			"Syntax": "**.get Minor**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get Major()": {
+			"Syntax": "**.get Major**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get version()": {
+			"Syntax": "**.get version**() : Text",
+			"Params": [
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
 	},
 	"_listbox": {
 		"max()": {
@@ -1186,127 +1307,6 @@
 				[
 					"",
 					"Boolean",
-					"<-"
-				]
-			],
-			"Summary": ""
-		}
-	},
-	"VersionMinder": {
-		"setBuild()": {
-			"Syntax": "**.setBuild**( *value* : Integer ) : cs.yaUT.VersionMinder",
-			"Params": [
-				[
-					"value",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.VersionMinder",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"setPatch()": {
-			"Syntax": "**.setPatch**( *value* : Integer ) : cs.yaUT.VersionMinder",
-			"Params": [
-				[
-					"value",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.VersionMinder",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"setMajor()": {
-			"Syntax": "**.setMajor**( *value* : Integer ) : cs.yaUT.VersionMinder",
-			"Params": [
-				[
-					"value",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.VersionMinder",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"setMinor()": {
-			"Syntax": "**.setMinor**( *value* : Integer ) : cs.yaUT.VersionMinder",
-			"Params": [
-				[
-					"value",
-					"Integer",
-					"->"
-				],
-				[
-					"",
-					"cs.yaUT.VersionMinder",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get Build()": {
-			"Syntax": "**.get Build**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get Patch()": {
-			"Syntax": "**.get Patch**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get Minor()": {
-			"Syntax": "**.get Minor**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get Major()": {
-			"Syntax": "**.get Major**() : Integer",
-			"Params": [
-				[
-					"",
-					"Integer",
-					"<-"
-				]
-			],
-			"Summary": ""
-		},
-		"get version()": {
-			"Syntax": "**.get version**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
 					"<-"
 				]
 			],

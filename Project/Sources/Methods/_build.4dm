@@ -23,6 +23,7 @@ If (UT_TestSuite=0)
 	Progress SET TITLE($progress_id; "Building..."; -1; "Compiling...")
 	// --------------------------------------------------------
 	
+	//mark:  --- set version and build number
 	$version:=cs._VersionMinder.new().setBuild().version  // increment the build number
 	
 	$target:=Folder(Structure file; fk platform path).parent.parent
@@ -41,7 +42,7 @@ If (UT_TestSuite=0)
 	
 	Progress SET TITLE($progress_id; "Building..."; -1; "Cleaning up...")
 	
-	//  now move the Macros file into the component
+	//mark:  ---   now move the Macros file into the component
 	$macros:=$target.folder("Macros v2")
 	$target:=$target.parent.folder("YAUT_Build").folder("Components").folder("yaUT.4dbase")
 	
