@@ -9,4 +9,6 @@ This branch, ComponentVersion,
 should replace the current Master. 
 
 */
-
+var $url : Text
+$url:="https://github.com/KirkBrooks/yaUT/"
+OPEN URL($url)
