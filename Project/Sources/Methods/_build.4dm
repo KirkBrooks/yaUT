@@ -16,6 +16,13 @@ var $buildApp : 4D.File
 var $version : Text
 
 If (UT_TestSuite=0)
+	
+	// --------------------------------------------------------
+	var $progress_id : Integer
+	$progress_id:=Progress New
+	Progress SET TITLE($progress_id; "Building..."; -1; "Compiling...")
+	// --------------------------------------------------------
+	
 	$version:=cs._VersionMinder.new().setBuild().version  // increment the build number
 	
 	$target:=Folder(Structure file; fk platform path).parent.parent
@@ -28,7 +35,11 @@ If (UT_TestSuite=0)
 		TRACE
 	End if 
 	
+	Progress SET TITLE($progress_id; "Building..."; -1; "Build Application")
+	
 	BUILD APPLICATION($buildApp.platformPath)
+	
+	Progress SET TITLE($progress_id; "Building..."; -1; "Cleaning up...")
 	
 	//  now move the Macros file into the component
 	$macros:=$target.folder("Macros v2")
@@ -36,7 +47,14 @@ If (UT_TestSuite=0)
 	
 	$macros.copyTo($target)
 	
-	ALERT("Build version "+$version+" Done")
+	// --------------------------------------------------------
+	Progress QUIT($progress_id)
+	// --------------------------------------------------------
+	CONFIRM("Build version "+$version+" Done!"; "Show on Disk")
+	
+	If (Bool(OK))
+		SHOW ON DISK($target.platformPath)
+	End if 
 	
 Else 
 	ALERT("Build canceled.")
