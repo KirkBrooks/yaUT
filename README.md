@@ -7,26 +7,26 @@
 
 Light-weight unit testing for 4D.
 
-The class can be used to create and evaluate a test in a single line or can be pushed onto a collection for further examination. The syntax is inspired by JEST. 
+The class can be used to create and evaluate a test in a single line or can be pushed onto a collection for further examination. The syntax is inspired by JEST.
 
 # Testing in 4D
 
 Unit tests have been challenging to write in 4D. Testing is flossing or eating broccoli - everyone agrees it’s good for you, most folks say they do it more than they actually do and everyone feels better _after_ having done it. The key to accomplishing these sort of tasks is making them easy to do - that’s what this class does.
 
-There’s no UI required and you have two options for presenting results: 
+There’s no UI required and you have two options for presenting results:
 
 - append result description to a text variable and present in an **ALERT** or other form
 - accumulate results in a collection and present in a form
 
-Being able to display results in an **ALERT** makes it very easy and fast to setup unit test methods without a lot of overhead. On the other hand there is a lot of information available if you capture each one in a collection. 
+Being able to display results in an **ALERT** makes it very easy and fast to setup unit test methods without a lot of overhead. On the other hand there is a lot of information available if you capture each one in a collection.
 
 It’s nice to have choices.
 
-A big benefit of yaUT is the ability to run project methods with or without parameters. This is a big benefit working with old projects where you may want to evaluate the responses of existing code. The thing about unit testing is the basic form of the tests is pretty much the same across language but the specifics of how you run that test tend to be specific to the language. JEST, for example, has a number of features specific to JSON. JEST is also a mature, rich testing framework. I encourage you to extend this repo, fork it and improve it. 
+A big benefit of yaUT is the ability to run project methods with or without parameters. This is a big benefit working with old projects where you may want to evaluate the responses of existing code. The thing about unit testing is the basic form of the tests is pretty much the same across language but the specifics of how you run that test tend to be specific to the language. JEST, for example, has a number of features specific to JSON. JEST is also a mature, rich testing framework. I encourage you to extend this repo, fork it and improve it.
 
 ### Install
 
-Simply add two classes to a project: **UnitTest** and **ObjectProto**. 
+Simply add two classes to a project: **UnitTest** and **_ObjectProto**.
 
 ### Tests
 

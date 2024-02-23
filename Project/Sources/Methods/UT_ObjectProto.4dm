@@ -1,14 +1,14 @@
 //%attributes = {}
-/* Purpose: 
+/* Purpose:
  ------------------
-UT_ObjectProto ()
+UT__ObjectProto ()
  Created by: Kirk as Designer, Created: 05/27/23, 14:54:34
 */
 
-var $class : cs.ObjectProto
+var $class : cs._ObjectProto
 var $obj; $properties : Object
 
-$class:=cs.ObjectProto.new()
+$class:=cs._ObjectProto.new()
 
 //  StrIsInteger
 ASSERT($class._strIsInteger("1234"); "1234 is a string of intergers!")
@@ -50,7 +50,3 @@ $properties:=New object("a"; 687; "b"; New object("text"; "new text"; "number"; 
 $class.defineProperties($obj; $properties)
 ASSERT($obj.a=687)
 ASSERT($obj.b.text="new text")
-
-
-
-

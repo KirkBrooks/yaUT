@@ -6,6 +6,7 @@ DerivedData/
 
 # Libraries
 Libraries/
+_extras/
 
 # User preferences
 userPreferences.*/
@@ -19,3 +20,4 @@ ehthumbs.db
 Thumbs.db
 Project/Sources/Methods/Compiler_Methods.4dm
 Project/Sources/folders.json
+YAUT_Build alias
