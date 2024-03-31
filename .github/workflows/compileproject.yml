@@ -1,0 +1,61 @@
+name: Compile Project
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - development
+      - main
+      - release/**
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+            
+jobs:
+  CompileAndBuild:
+    name: Compile to 4DZ
+    runs-on: macOS-latest
+    permissions: write-all    
+    steps:
+      - uses: actions/checkout@v4.1.2
+
+      - name: Restore Cache for tool4d app
+        id: restore-tool4d-cache
+        uses: actions/cache@v4.0.2
+        env:
+          cache-name: tool4d-cache
+        with:
+          path:  ./tool4d.app
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - if: ${{ steps.restore-tool4d-cache.outputs.cache-hit != 'true' }}
+        name: Download latest tool4d release and expand
+        continue-on-error: true
+        timeout-minutes: 15
+        run: |
+          curl https://resources-download.4d.com/release/20.x/20.3/latest/mac/tool4d_mac_x86.tar.xz -o tool4d.tar.xz -sL
+          tar xzf tool4d.tar.xz
+        
+      - name: Compile and Build 4DZ Package for ${{ github.ref }}
+        run: |
+          ./tool4d.app/Contents/MacOS/tool4d  --project=${{ github.workspace }}/Project/Contacts.4DProject --user-param="compileproject" --skip-onstartup --dataless --startup-method=GHPipeline_EntryPoint_P 
+
+      - uses: actions/upload-artifact@v4.3.1
+        name: Upload Artifacts
+        with:
+          name: Compile Results
+          path: |
+            Compiled Database/
+            Project/Contacts_ci-compileproject_results.json
+
+          
+      - name: "Pass or Fail"
+        run: |
+          [[ $(jq .command.success Project/Contacts_ci-compileproject_results.json) == true ]] || { exit 1; }
+
+          
+
