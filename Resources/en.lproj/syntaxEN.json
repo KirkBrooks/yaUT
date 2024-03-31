@@ -16,20 +16,14 @@
 			],
 			"Summary": ""
 		},
-		"yaUT__MAIN_FORM": {
-			"Syntax": "**yaUT__MAIN_FORM**()",
+		"yaUT_about": {
+			"Syntax": "**yaUT_about**()",
 			"Params": [],
 			"Summary": ""
 		},
-		"thisVersion": {
-			"Syntax": "**thisVersion**() : Text",
-			"Params": [
-				[
-					"",
-					"Text",
-					"<-"
-				]
-			],
+		"yaUT__MAIN_FORM": {
+			"Syntax": "**yaUT__MAIN_FORM**()",
+			"Params": [],
 			"Summary": ""
 		},
 		"yaUT__readMe": {

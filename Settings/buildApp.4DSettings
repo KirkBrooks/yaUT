@@ -51,7 +51,7 @@
     </Licenses>
     <SignApplication>
       <MacSignature>True</MacSignature>
-      <MacCertificate>Kirk Brooks</MacCertificate>
+      <MacCertificate>Developer ID Application: John Brooks (B7S2A2GVTG)</MacCertificate>
       <AdHocSign>True</AdHocSign>
     </SignApplication>
   </BuildApp>
