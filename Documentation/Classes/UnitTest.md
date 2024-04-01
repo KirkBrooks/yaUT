@@ -65,7 +65,7 @@ Line 4 is a formula built on the fly that takes two arguments. Line 5 is a formu
 
 ### Test Methods
 
-The real poser of unit test comes in grouping them together. Take a look at the **TestMethod**  class documentation to see how you can put together test methods made up of serveral individual tests. The look at **FullTest** class to see how you can have 4D run all your methods for you.
+The real power of unit test comes in grouping them together. Take a look at the **TestMethod**  class documentation to see how you can put together test methods made up of serveral individual tests. Then look at **FullTest** class to see how you can have 4D run all your methods for you.
 
 
 
@@ -87,11 +87,11 @@ The real poser of unit test comes in grouping them together. Take a look at the 
 | expect          | `$valueIn: Variant`                          | cs.UnitTest | The expected value or a Formula that evaluates to the expected value. |
 |        **Matchers**                                                                   ||||
 | toEqual         | `$input: Variant`                            | cs.UnitTest | Checks if input is equal to an expected value.<br />Input may be a **Formula** that evaluates to the expected value.<br />Otherwise it is a scalar value and must be the same data kind as expected value. |
-| toBe            | `$input:Variant`                             | cs.UnitTest | Checks if an input is the same as the expected value depending on its type.<br />Input may be a **Formula** that evaluates to the expected value.<br />If dealing with an object or collection checks to see if this is they are the same _reference_ - that is, the same object and not simply the same values. Use `.toEqual()` or `.toContain()` to check values. |
+| toBe            | `$input:Variant`                             | cs.UnitTest | Checks if an input is the same as the expected value depending on its type.<br />Input may be a **Formula** that evaluates to the expected value.<br />If dealing with an object or collection checks to see if they are the same _reference_ - that is, the same object and not simply the same values. Use `.toEqual()` or `.toContain()` to check values. |
 | toMatch         | `$pattern: Text`                             | cs.UnitTest | Checks if a regular expression pattern matches the expected value.<br />Expected value must be text. |
 | toContain       | `$input`                                  | cs.UnitTest | If the expected value is an object or entity checks to see if it contains  all the values in the input object.<br />Input may be a **Formula** that evaluates to an object or entity. |
 | toBeNull        | None                                         | cs.UnitTest | Checks if the expected value is null.                        |
-| not | None | cs.UnitTest | Reverses the reslut of the matcher. Basically syntatic sugar. |
+| not | None | cs.UnitTest | Reverses the result of the matcher. Basically syntatic sugar. |
 | **Other Functions** |  |  |  |
 | getExpectedValue | None | Variant | Returns the expected value |
 | getExpectedValueStr | None | Text | Stringified expected value |

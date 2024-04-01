@@ -6,7 +6,7 @@
         <text>
             #DECLARE->$testsRun : Collection  // return a collection of tests
             var $test : Object
-
+            // todo: set 'Shared with components and host' to TRUE
             $test:=cs.yaUT.UnitTest  //  test constructor
             $testsRun:=[]  //  collection of tests
 
