@@ -10,18 +10,18 @@ var $obj : Object
 var $yaUT : cs.UnitTest
 
 If (Form=Null)
-	return
-End if
+	return 
+End if 
 
 If (FORM Event.code=On Close Box)
 	CANCEL
-	return
-End if
+	return 
+End if 
 
 $objectName:=String(FORM Event.objectName)
-$methods_LB:=Form.methods_LB=Null ? cs._listbox.new("methods_LB") : Form.methods_LB
-$results_LB:=Form.results_LB=Null ? cs._listbox.new("results_LB") : Form.results_LB
-$detail_LB:=Form.detail_LB=Null ? cs._listbox.new("detail_LB") : Form.detail_LB
+$methods_LB:=Form.methods_LB || cs._listbox.new("methods_LB")
+$results_LB:=Form.results_LB || cs._listbox.new("results_LB")
+$detail_LB:=Form.detail_LB || cs._listbox.new("detail_LB")
 
 If (FORM Event.code=On Load)  //  catches all objects
 	Form.FullTest:=cs.FullTest.new().getTestMethods()
@@ -30,66 +30,70 @@ If (FORM Event.code=On Load)  //  catches all objects
 	Form.detail_LB:=$detail_LB
 	Form.showFailing:=False
 	Form.methodPrefix:="yaut_"
+	
 	OBJECT SET HELP TIP(*; "methodPrefix"; "Test methods begin with this string.")
-
-End if
+	
+	If (Not(Is compiled mode))
+		OBJECT SET HELP TIP(*; "methods_LB"; "Double click to open the test method.")
+	End if 
+End if 
 
 //mark:  --- form object
 If ($objectName="btn_run")
 	Form.FullTest.run()
 	$methods_LB.redraw()
 	$updateShowFailing:=True  //  update
-End if
+End if 
 
 If ($objectName="btn_refresh")
 	Form.methods_LB:=$methods_LB.setSource(Form.FullTest.getTestMethods(Form.methodPrefix).testMethods())
-End if
+End if 
 
 If ($objectName="btn_writeLog")
-	Case of
+	Case of 
 		: (Not(Form.FullTest.isRun))
 			ALERT("Nothing to log yet.")
-		Else
+		Else 
 			Form.FullTest.logResults()
 			CONFIRM("Show on disk?")
 			If (Bool(ok))
 				SHOW ON DISK(Form.FullTest.logPath)
-			End if
-	End case
+			End if 
+	End case 
 	Form.methods_LB:=$methods_LB.setSource(Form.FullTest.getTestMethods(Form.methodPrefix).testMethods())
-End if
+End if 
 
 If ($objectName="showFailing")
 	$updateShowFailing:=True  //  update
-End if
+End if 
 
 If ($objectName="methods_LB")
-	Case of
+	Case of 
 		: (Form event code=On Clicked) && (OptionKey) && ($methods_LB.isSelected)
 			$bool:=Not($methods_LB.currentItem.selected)
-
+			
 			For each ($obj; $methods_LB.data)
 				$obj.selected:=$bool
-			End for each
-
+			End for each 
+			
 		: (Form event code=On Selection Change) && ($methods_LB.isSelected)
 			$results_LB.setSource($methods_LB.currentItem.getFullResults())
-
+			
 		: (Form event code=On Double Clicked) && ($methods_LB.isSelected)
 			METHOD OPEN PATH($methods_LB.currentItem.name; *)
-
-
-	End case
-End if
+			
+			
+	End case 
+End if 
 
 //mark:  --- update state and formats
 If (Not(Form.FullTest.isRun))
 	OBJECT SET VISIBLE(*; "statusRect"; False)
-Else
+Else 
 	OBJECT SET VISIBLE(*; "statusRect"; True)
 	OBJECT SET RGB COLORS(*; "statusRect"; Form.FullTest.pass ? "green" : "red"; "transparent")
-
-End if
+	
+End if 
 
 If ($updateShowFailing) && (Form.showFailing)
 	// show the text and failing tests
@@ -97,10 +101,10 @@ If ($updateShowFailing) && (Form.showFailing)
 	For each ($obj; $results_LB.source)
 		If (Not(Bool($obj.pass)))
 			$results_LB.data.push($obj)
-		End if
-	End for each
-End if
+		End if 
+	End for each 
+End if 
 
 If ($updateShowFailing) && (Not(Form.showFailing))
 	$results_LB.data:=$results_LB.source
-End if
+End if 
