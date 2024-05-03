@@ -16,6 +16,7 @@
             //$testsRun.push($test.new("1 is not null").expect(1).not().toBeNull())
             // insert a comment line
             //$testsRun.push($test.new().insertComment("This is my comment "))
+            //ALERT($testsRun.extract("displayline").join("\n"))  // this will display the tests in an alert window
         </text>
     </macro>
 </macros>
