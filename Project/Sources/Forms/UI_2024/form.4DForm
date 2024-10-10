@@ -1,0 +1,292 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 0,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onLosingFocus",
+		"onDataChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"backgroundRect": {
+					"type": "rectangle",
+					"top": 40,
+					"left": 0,
+					"width": 969,
+					"height": 540,
+					"stroke": "#FFFFFF",
+					"fill": "#FFFFFF",
+					"sizingX": "grow",
+					"strokeWidth": 4,
+					"sizingY": "grow"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 969,
+					"height": 40,
+					"stroke": "transparent",
+					"fill": "#1e90ff",
+					"sizingX": "grow"
+				},
+				"Text": {
+					"type": "text",
+					"text": "yaUT",
+					"top": -6,
+					"left": 15,
+					"width": 101,
+					"height": 41,
+					"stroke": "#F0F6FD",
+					"fontWeight": "bold",
+					"fontSize": 36
+				}
+			}
+		},
+		{
+			"objects": {
+				"Text1": {
+					"type": "text",
+					"text": "Unit Tests",
+					"top": 54,
+					"left": 6,
+					"width": 103,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080"
+				},
+				"tests_LB": {
+					"type": "listbox",
+					"left": 6,
+					"top": 102,
+					"width": 319,
+					"height": 400,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.tests_LB.data",
+					"currentItemSource": "Form:C1466.tests_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.tests_LB.position",
+					"selectedItemsSource": "Form:C1466.tests_LB.selectedItems",
+					"headerHeight": "22px",
+					"sizingY": "grow",
+					"focusable": false,
+					"singleClickEdit": true,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideExtraBlankRows": true,
+					"columns": [
+						{
+							"header": {
+								"text": "",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"width": 40,
+							"dataSource": "This:C1470.checked",
+							"dataSourceTypeHint": "boolean",
+							"textAlign": "center",
+							"verticalAlign": "middle",
+							"truncateMode": "none",
+							"minWidth": 40,
+							"maxWidth": 40
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Method"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.method",
+							"enterable": false,
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Tests"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.numberTests",
+							"dataSourceTypeHint": "number",
+							"resizable": false,
+							"enterable": false,
+							"width": 60,
+							"minWidth": 60,
+							"maxWidth": 60,
+							"textAlign": "right"
+						}
+					]
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Test Groups",
+					"top": 51,
+					"left": 354,
+					"width": 103,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080"
+				},
+				"groups_LB": {
+					"type": "listbox",
+					"left": 345,
+					"top": 102,
+					"width": 319,
+					"height": 400,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.groups_LB.data",
+					"currentItemSource": "Form:C1466.groups_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.groups_LB.position",
+					"selectedItemsSource": "Form:C1466.groups_LB.selectedItems",
+					"headerHeight": "22px",
+					"sizingY": "grow",
+					"focusable": false,
+					"singleClickEdit": true,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideExtraBlankRows": true,
+					"columns": [
+						{
+							"header": {
+								"text": "",
+								"name": "Header4"
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer4"
+							},
+							"width": 40,
+							"dataSource": "This:C1470.checked",
+							"dataSourceTypeHint": "boolean",
+							"textAlign": "center",
+							"verticalAlign": "middle",
+							"truncateMode": "none",
+							"minWidth": 40,
+							"maxWidth": 40
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "Method"
+							},
+							"name": "Column5",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSource": "This:C1470.method",
+							"enterable": false,
+							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header6",
+								"text": "Tests"
+							},
+							"name": "Column6",
+							"footer": {
+								"name": "Footer6"
+							},
+							"dataSource": "This:C1470.numberTests",
+							"dataSourceTypeHint": "number",
+							"resizable": false,
+							"enterable": false,
+							"width": 60,
+							"minWidth": 60,
+							"maxWidth": 60,
+							"textAlign": "right"
+						}
+					]
+				},
+				"testPicker": {
+					"type": "subform",
+					"top": 70,
+					"left": 6,
+					"width": 205,
+					"height": 30,
+					"dataSource": "Form:C1466.testPicker",
+					"dataSourceTypeHint": "text",
+					"detailForm": "SearchPicker",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/testPicker.4dm",
+					"events": [
+						"onLoad",
+						"onLosingFocus",
+						"onDataChange"
+					],
+					"hideFocusRing": false,
+					"scrollbarHorizontal": "hidden"
+				},
+				"gropuPicker": {
+					"type": "subform",
+					"top": 70,
+					"left": 346,
+					"width": 205,
+					"height": 30,
+					"dataSource": "Form:C1466.testPicker",
+					"dataSourceTypeHint": "text",
+					"detailForm": "SearchPicker",
+					"deletableInList": false,
+					"doubleClickInRowAction": "editSubrecord",
+					"doubleClickInEmptyAreaAction": "addSubrecord",
+					"selectionMode": "multiple",
+					"printFrame": "variable",
+					"method": "ObjectMethods/gropuPicker.4dm",
+					"events": [
+						"onLoad",
+						"onLosingFocus",
+						"onDataChange"
+					],
+					"hideFocusRing": false,
+					"scrollbarHorizontal": "hidden"
+				}
+			}
+		}
+	],
+	"geometryStamp": 149,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

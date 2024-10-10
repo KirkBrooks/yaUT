@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "043ca6bd169576a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "32df648db55c9319",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3e2d778e56c88a62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Methods/yaUT__MAIN_FORM.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "89371ba0b66b50e4",
+    "type": "split",
+    "children": [
+      {
+        "id": "9a76322f44d1209b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c51cb79e18a39e14",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c2048d1396804f44",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6b5e23a9a456aaba",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d32946ecb7b22ba6",
+    "type": "split",
+    "children": [
+      {
+        "id": "31a7558a107dad42",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "088d114087398bde",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Methods/yaUT__MAIN_FORM.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "71d321b39f841e67",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Methods/yaUT__MAIN_FORM.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "672b16125fd1ea35",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "a2da0378a8e4e7e1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Methods/yaUT__MAIN_FORM.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "3e2d778e56c88a62",
+  "lastOpenFiles": [
+    "Methods/Screenshot 2024-01-01 at 1.21.40 PM.png",
+    "Methods/Screenshot 2024-01-01 at 1.13.20 PM.png",
+    "Classes/UnitTest.md",
+    "Classes/TestMethod.md",
+    "Classes/FullTest.md",
+    "Methods/yaUT__readMe.md",
+    "Methods/yaUT__MAIN_FORM.md"
+  ]
+}
