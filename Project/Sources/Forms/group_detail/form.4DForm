@@ -1,0 +1,201 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onLosingFocus",
+		"onGettingFocus",
+		"onDrop",
+		"onDataChange",
+		"onSelectionChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Text1": {
+					"type": "text",
+					"text": "Group Name :",
+					"top": 6,
+					"left": 6,
+					"width": 103,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"textAlign": "right"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Description :",
+					"top": 30,
+					"left": 6,
+					"width": 103,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"textAlign": "right"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Tags :",
+					"top": 71,
+					"left": 6,
+					"width": 103,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"textAlign": "right"
+				},
+				"tests_LB": {
+					"type": "listbox",
+					"left": 6,
+					"top": 102,
+					"width": 234,
+					"height": 161,
+					"events": [],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.tests_LB.data",
+					"currentItemSource": "Form:C1466.tests_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.tests_LB.position",
+					"selectedItemsSource": "Form:C1466.tests_LB.selectedItems",
+					"headerHeight": "22px",
+					"sizingY": "grow",
+					"focusable": true,
+					"singleClickEdit": false,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideExtraBlankRows": true,
+					"resizingMode": "legacy",
+					"dropping": "custom",
+					"hideFocusRing": true,
+					"columns": [
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Test Methods"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.method",
+							"enterable": false,
+							"width": 200
+						}
+					]
+				},
+				"groups_LB": {
+					"type": "listbox",
+					"left": 266,
+					"top": 102,
+					"width": 234,
+					"height": 161,
+					"events": [],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.groups_LB.data",
+					"currentItemSource": "Form:C1466.groups_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.groups_LB.position",
+					"selectedItemsSource": "Form:C1466.groups_LB.selectedItems",
+					"headerHeight": "22px",
+					"sizingY": "grow",
+					"focusable": false,
+					"singleClickEdit": false,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideExtraBlankRows": true,
+					"resizingMode": "legacy",
+					"dropping": "custom",
+					"columns": [
+						{
+							"header": {
+								"name": "Header1",
+								"text": "Groups"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.value",
+							"enterable": false,
+							"width": 200
+						}
+					]
+				},
+				"name": {
+					"type": "input",
+					"left": 122,
+					"top": 6,
+					"width": 390,
+					"height": 17,
+					"dataSource": "Form:C1466.group.name"
+				},
+				"description": {
+					"type": "input",
+					"left": 122,
+					"top": 30,
+					"width": 390,
+					"height": 33,
+					"dataSource": "Form:C1466.group.description"
+				},
+				"tags": {
+					"type": "input",
+					"left": 122,
+					"top": 71,
+					"width": 390,
+					"height": 17,
+					"dataSource": "Form:C1466.group.tags"
+				},
+				"btn_deleteItem": {
+					"type": "button",
+					"text": "❌",
+					"top": 126,
+					"left": 243,
+					"width": 20,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"visibility": "hidden"
+				},
+				"btn_deleteGroup": {
+					"type": "button",
+					"text": "Delete Group",
+					"top": 269,
+					"left": 386,
+					"width": 126,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"sizingY": "move",
+					"focusable": false
+				}
+			}
+		}
+	],
+	"geometryStamp": 109,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

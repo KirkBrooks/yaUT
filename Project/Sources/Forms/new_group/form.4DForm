@@ -1,0 +1,139 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 3,
+	"bottomMargin": 3,
+	"events": [
+		"onLoad",
+		"onLosingFocus",
+		"onDataChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"name": {
+					"type": "input",
+					"left": 3,
+					"top": 5,
+					"width": 330,
+					"height": 17,
+					"dataSource": "Form:C1466.name",
+					"placeholder": "  Enter new group name"
+				},
+				"description": {
+					"type": "input",
+					"left": 3,
+					"top": 29,
+					"width": 390,
+					"height": 33,
+					"dataSource": "Form:C1466.description",
+					"placeholder": "  description"
+				},
+				"btn_cancel": {
+					"type": "button",
+					"text": "❌",
+					"top": 5,
+					"left": 369,
+					"width": 22,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"visibility": "visible",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Esc]",
+					"action": "cancel"
+				},
+				"btn_accept": {
+					"type": "button",
+					"text": "✓",
+					"top": 1,
+					"left": 339,
+					"width": 22,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"dataSource": "",
+					"fontSize": 24,
+					"stroke": "#008000",
+					"fontWeight": "bold",
+					"action": "accept",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"tags": {
+					"type": "input",
+					"left": 2,
+					"top": 69,
+					"width": 390,
+					"height": 17,
+					"dataSource": "Form:C1466.tags",
+					"placeholder": "  tags - comma delimited"
+				},
+				"trap_enter": {
+					"type": "button",
+					"text": "",
+					"top": 21,
+					"left": 359,
+					"width": 2,
+					"height": 2,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"dataSource": "",
+					"fontSize": 24,
+					"stroke": "#008000",
+					"fontWeight": "bold",
+					"action": "",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Enter]"
+				}
+			},
+			"entryOrder": [
+				"name",
+				"description",
+				"tags",
+				"btn_accept",
+				"btn_cancel",
+				"trap_enter"
+			]
+		}
+	],
+	"geometryStamp": 85,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm"
+}

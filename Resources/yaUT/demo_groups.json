@@ -1,0 +1,127 @@
+{
+	"version": "2.2",
+	"lastUpdated": "2024-10-14T09:30:00Z",
+	"testMethods": {
+		"yaUT_TestUserRegistration": {
+			"name": "yaUT_TestUserRegistration",
+			"description": "Verifies that a new user can successfully register",
+			"kind": "functional",
+			"defaultPriority": 1
+		},
+		"yaUT_TestUserLogin": {
+			"name": "yaUT_TestUserLogin",
+			"description": "Checks that a registered user can log in",
+			"kind": "functional",
+			"defaultPriority": 1
+		},
+		"yaUT_TestPasswordReset": {
+			"name": "yaUT_TestPasswordReset",
+			"description": "Ensures the password reset process works as expected",
+			"kind": "functional",
+			"defaultPriority": 2
+		},
+		"yaUT_TestOrderCreationStorage": {
+			"name": "yaUT_TestOrderCreationStorage",
+			"description": "Verifies that when an order is created, it's correctly stored in the database",
+			"kind": "integration",
+			"defaultPriority": 1
+		},
+		"yaUT_TestOrderUpdateInventory": {
+			"name": "yaUT_TestOrderUpdateInventory",
+			"description": "Checks that updating an order correctly syncs with the inventory system",
+			"kind": "integration",
+			"defaultPriority": 2
+		},
+		"yaUT_TestOrderCancellation": {
+			"name": "yaUT_TestOrderCancellation",
+			"description": "Ensures that order cancellation is reflected across all relevant systems",
+			"kind": "integration",
+			"defaultPriority": 2
+		},
+		"yaUT_TestUserInitiatesPayment": {
+			"name": "yaUT_TestUserInitiatesPayment",
+			"description": "Functional test verifying the user can initiate a payment",
+			"kind": "functional",
+			"defaultPriority": 1
+		},
+		"yaUT_TestPaymentGatewayIntegration": {
+			"name": "yaUT_TestPaymentGatewayIntegration",
+			"description": "Integration test checking the interaction with the payment gateway",
+			"kind": "integration",
+			"defaultPriority": 1
+		},
+		"yaUT_TestSuccessfulPaymentWorkflow": {
+			"name": "yaUT_TestSuccessfulPaymentWorkflow",
+			"description": "End-to-end test of a successful payment, combining functional and integration aspects",
+			"kind": "mixed",
+			"defaultPriority": 1
+		}
+	},
+	"testGroups": {
+		"UserManagementTests": {
+			"name": "UserManagementTests",
+			"description": "Tests for user management features",
+			"tags": [
+				"user",
+				"functional"
+			],
+			"tests": [
+				{
+					"method": "yaUT_TestOrderCancellation",
+					"priority": 2
+				},
+				{
+					"method": "yaUT_TestPasswordReset"
+				},
+				{
+					"method": "yaUT_TestUserInitiatesPayment",
+					"priority": 1
+				},
+				{
+					"method": "yaUT_TestUserLogin",
+					"priority": 1
+				}
+			],
+			"includeGroups": [
+				"CriticalPathTests"
+			]
+		},
+		"OrderProcessingTests": {
+			"name": "OrderProcessingTests",
+			"description": "Tests for order processing system",
+			"tags": [
+				"order",
+				"integration"
+			],
+			"tests": [
+				{
+					"method": "yaUT_TestOrderCreationStorage"
+				},
+				{
+					"method": "yaUT_TestOrderUpdateInventory"
+				},
+				{
+					"method": "yaUT_TestOrderCancellation"
+				}
+			]
+		},
+		"CriticalPathTests": {
+			"name": "CriticalPathTests",
+			"description": "Critical tests covering core functionality",
+			"tags": [
+				"critical",
+				"smoke"
+			],
+			"tests": [
+				{
+					"method": "yaUT_TestUserLogin",
+					"priority": 1
+				},
+				{
+					"method": "yaUT_TestSuccessfulPaymentWorkflow",
+					"priority": 1
+				}
+			]
+		}
+	}
+}

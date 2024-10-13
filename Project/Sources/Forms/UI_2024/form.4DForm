@@ -14,8 +14,12 @@
 	"events": [
 		"onLoad",
 		"onClick",
+		"onDoubleClick",
 		"onLosingFocus",
-		"onDataChange"
+		"onDataChange",
+		"onSelectionChange",
+		"onAfterEdit",
+		"onBeginDragOver"
 	],
 	"windowTitle": "window title",
 	"destination": "detailScreen",
@@ -26,7 +30,7 @@
 					"type": "rectangle",
 					"top": 40,
 					"left": 0,
-					"width": 969,
+					"width": 1075,
 					"height": 540,
 					"stroke": "#FFFFFF",
 					"fill": "#FFFFFF",
@@ -38,7 +42,7 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 969,
+					"width": 1075,
 					"height": 40,
 					"stroke": "transparent",
 					"fill": "#1e90ff",
@@ -54,6 +58,17 @@
 					"stroke": "#F0F6FD",
 					"fontWeight": "bold",
 					"fontSize": 36
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Test Configuration Dashboard",
+					"top": 6,
+					"left": 209,
+					"width": 521,
+					"height": 28,
+					"stroke": "#F0F6FD",
+					"fontWeight": "bold",
+					"fontSize": 24
 				}
 			}
 		},
@@ -62,7 +77,7 @@
 				"Text1": {
 					"type": "text",
 					"text": "Unit Tests",
-					"top": 54,
+					"top": 43,
 					"left": 6,
 					"width": 103,
 					"height": 16,
@@ -73,13 +88,10 @@
 					"type": "listbox",
 					"left": 6,
 					"top": 102,
-					"width": 319,
+					"width": 239,
 					"height": 400,
 					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
+						"onHeaderClick"
 					],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.tests_LB.data",
@@ -89,67 +101,34 @@
 					"headerHeight": "22px",
 					"sizingY": "grow",
 					"focusable": false,
-					"singleClickEdit": true,
+					"singleClickEdit": false,
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"hideExtraBlankRows": true,
+					"resizingMode": "legacy",
+					"dragging": "custom",
+					"method": "ObjectMethods/tests_LB.4dm",
 					"columns": [
 						{
 							"header": {
-								"text": "",
-								"name": "Header1"
-							},
-							"name": "Column1",
-							"footer": {
-								"name": "Footer1"
-							},
-							"width": 40,
-							"dataSource": "This:C1470.checked",
-							"dataSourceTypeHint": "boolean",
-							"textAlign": "center",
-							"verticalAlign": "middle",
-							"truncateMode": "none",
-							"minWidth": 40,
-							"maxWidth": 40
-						},
-						{
-							"header": {
 								"name": "Header2",
-								"text": "Method"
+								"text": "Test Method"
 							},
 							"name": "Column2",
 							"footer": {
 								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.method",
+							"dataSource": "This:C1470.value",
 							"enterable": false,
 							"width": 200
-						},
-						{
-							"header": {
-								"name": "Header3",
-								"text": "Tests"
-							},
-							"name": "Column3",
-							"footer": {
-								"name": "Footer3"
-							},
-							"dataSource": "This:C1470.numberTests",
-							"dataSourceTypeHint": "number",
-							"resizable": false,
-							"enterable": false,
-							"width": 60,
-							"minWidth": 60,
-							"maxWidth": 60,
-							"textAlign": "right"
 						}
 					]
 				},
 				"Text2": {
 					"type": "text",
 					"text": "Test Groups",
-					"top": 51,
-					"left": 354,
+					"top": 43,
+					"left": 823,
 					"width": 103,
 					"height": 16,
 					"fontWeight": "bold",
@@ -157,16 +136,11 @@
 				},
 				"groups_LB": {
 					"type": "listbox",
-					"left": 345,
+					"left": 814,
 					"top": 102,
-					"width": 319,
+					"width": 233,
 					"height": 400,
-					"events": [
-						"onClick",
-						"onHeaderClick",
-						"onDataChange",
-						"onSelectionChange"
-					],
+					"events": [],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.groups_LB.data",
 					"currentItemSource": "Form:C1466.groups_LB.currentItem",
@@ -175,112 +149,101 @@
 					"headerHeight": "22px",
 					"sizingY": "grow",
 					"focusable": false,
-					"singleClickEdit": true,
+					"singleClickEdit": false,
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"hideExtraBlankRows": true,
+					"resizingMode": "legacy",
+					"dragging": "custom",
 					"columns": [
 						{
 							"header": {
-								"text": "",
-								"name": "Header4"
-							},
-							"name": "Column4",
-							"footer": {
-								"name": "Footer4"
-							},
-							"width": 40,
-							"dataSource": "This:C1470.checked",
-							"dataSourceTypeHint": "boolean",
-							"textAlign": "center",
-							"verticalAlign": "middle",
-							"truncateMode": "none",
-							"minWidth": 40,
-							"maxWidth": 40
-						},
-						{
-							"header": {
 								"name": "Header5",
-								"text": "Method"
+								"text": "Group"
 							},
 							"name": "Column5",
 							"footer": {
 								"name": "Footer5"
 							},
-							"dataSource": "This:C1470.method",
+							"dataSource": "This:C1470.value",
 							"enterable": false,
 							"width": 200
-						},
-						{
-							"header": {
-								"name": "Header6",
-								"text": "Tests"
-							},
-							"name": "Column6",
-							"footer": {
-								"name": "Footer6"
-							},
-							"dataSource": "This:C1470.numberTests",
-							"dataSourceTypeHint": "number",
-							"resizable": false,
-							"enterable": false,
-							"width": 60,
-							"minWidth": 60,
-							"maxWidth": 60,
-							"textAlign": "right"
 						}
 					]
 				},
-				"testPicker": {
+				"groupSubform": {
 					"type": "subform",
-					"top": 70,
-					"left": 6,
-					"width": 205,
-					"height": 30,
-					"dataSource": "Form:C1466.testPicker",
-					"dataSourceTypeHint": "text",
-					"detailForm": "SearchPicker",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/testPicker.4dm",
-					"events": [
-						"onLoad",
-						"onLosingFocus",
-						"onDataChange"
-					],
-					"hideFocusRing": false,
-					"scrollbarHorizontal": "hidden"
+					"left": 258,
+					"top": 50,
+					"width": 532,
+					"height": 305,
+					"detailForm": "group_empty",
+					"borderStyle": "sunken",
+					"dataSource": "Form:C1466.groupSubform"
 				},
-				"gropuPicker": {
-					"type": "subform",
-					"top": 70,
-					"left": 346,
-					"width": 205,
-					"height": 30,
-					"dataSource": "Form:C1466.testPicker",
-					"dataSourceTypeHint": "text",
-					"detailForm": "SearchPicker",
-					"deletableInList": false,
-					"doubleClickInRowAction": "editSubrecord",
-					"doubleClickInEmptyAreaAction": "addSubrecord",
-					"selectionMode": "multiple",
-					"printFrame": "variable",
-					"method": "ObjectMethods/gropuPicker.4dm",
+				"btn_addGroup": {
+					"type": "button",
+					"text": "➕",
+					"top": 67,
+					"left": 1015,
+					"width": 32,
+					"height": 21,
 					"events": [
-						"onLoad",
-						"onLosingFocus",
-						"onDataChange"
+						"onClick"
 					],
-					"hideFocusRing": false,
-					"scrollbarHorizontal": "hidden"
+					"style": "roundedBevel",
+					"focusable": false
+				},
+				"Static Picture1": {
+					"type": "picture",
+					"top": 61,
+					"left": 814,
+					"width": 202,
+					"height": 33,
+					"picture": "Images/Static Picture1.png"
+				},
+				"Static Picture2": {
+					"type": "picture",
+					"top": 61,
+					"left": 6,
+					"width": 202,
+					"height": 33,
+					"picture": "Images/Static Picture1.png"
+				},
+				"test_searchStr": {
+					"type": "input",
+					"left": 42,
+					"top": 69,
+					"width": 151,
+					"height": 17,
+					"borderStyle": "none",
+					"placeholder": "test method name"
+				},
+				"group_searchStr": {
+					"type": "input",
+					"left": 849,
+					"top": 69,
+					"width": 151,
+					"height": 17,
+					"borderStyle": "none",
+					"placeholder": "group name"
+				},
+				"btn_updateTests": {
+					"type": "button",
+					"text": "🔄 ",
+					"top": 67,
+					"left": 213,
+					"width": 32,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "roundedBevel"
 				}
 			}
 		}
 	],
-	"geometryStamp": 149,
+	"geometryStamp": 509,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
@@ -288,5 +251,6 @@
 			"View 1": {}
 		}
 	},
-	"method": "method.4dm"
+	"method": "method.4dm",
+	"memorizeGeometry": true
 }

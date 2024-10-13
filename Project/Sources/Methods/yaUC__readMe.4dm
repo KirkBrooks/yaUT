@@ -29,9 +29,13 @@ return $testsRun
 
 */
 
-var $class : cs.yaUC_Method
+var $class : cs.Groups
 
-yaUTFolders("checkFolders")
-$class:=cs.yaUC_Method.new("myGroup")
+$class:=cs.Groups.new()
+
+
+//yaUTFolders("checkFolders")
+
+
 
 
