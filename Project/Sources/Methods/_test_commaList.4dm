@@ -6,13 +6,14 @@ _test_commaList ()
 */
 
 var $class : cs.CommaList
+var $ok : Boolean
+
 
 $class:=cs.CommaList.new(["application/json"; "text/html"; "c"])
 
 $class.addItem("application/stuff")
 
 //$item:=$class.chooseByMenu()
-var $ok : Boolean
 
 $ok:=$class.hasItem("a@")
 $ok:=$class.hasItem("c")

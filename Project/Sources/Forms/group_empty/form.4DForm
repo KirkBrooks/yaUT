@@ -38,7 +38,7 @@
 			"objects": {
 				"Text": {
 					"type": "text",
-					"text": "Double click on a Test Group",
+					"text": "Double click on a Test Group for details",
 					"top": 13,
 					"left": 10,
 					"width": 505,

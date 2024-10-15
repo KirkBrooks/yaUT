@@ -9,7 +9,7 @@
 	"windowMinHeight": 0,
 	"windowMaxWidth": 32767,
 	"windowMaxHeight": 32767,
-	"rightMargin": 20,
+	"rightMargin": 0,
 	"bottomMargin": 20,
 	"events": [
 		"onLoad",
@@ -93,10 +93,49 @@
 			}
 		},
 		{
-			"objects": {}
+			"objects": {
+				"btn_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 6,
+					"left": 455,
+					"width": 98,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "roundedBevel"
+				},
+				"btn_writeLog": {
+					"type": "button",
+					"text": "Write to Log",
+					"top": 6,
+					"left": 695,
+					"width": 98,
+					"height": 25,
+					"events": [
+						"onClick"
+					],
+					"style": "roundedBevel"
+				},
+				"showFailing": {
+					"type": "checkbox",
+					"text": "Show failing only",
+					"top": 7,
+					"left": 294,
+					"width": 141,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"dataSourceTypeHint": "boolean",
+					"dataSource": "Form:C1466.showFailing",
+					"stroke": "#FFFFFF"
+				}
+			}
 		}
 	],
-	"geometryStamp": 11,
+	"geometryStamp": 28,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

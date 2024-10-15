@@ -89,7 +89,7 @@
 					"left": 6,
 					"top": 102,
 					"width": 239,
-					"height": 400,
+					"height": 466,
 					"events": [
 						"onHeaderClick"
 					],
@@ -139,7 +139,7 @@
 					"left": 814,
 					"top": 102,
 					"width": 233,
-					"height": 400,
+					"height": 466,
 					"events": [],
 					"listboxType": "collection",
 					"dataSource": "Form:C1466.groups_LB.data",
@@ -239,11 +239,32 @@
 						"onClick"
 					],
 					"style": "roundedBevel"
+				},
+				"Rectangle1": {
+					"type": "rectangle",
+					"top": 365,
+					"left": 258,
+					"width": 532,
+					"height": 40,
+					"stroke": "transparent",
+					"fill": "#1e90ff",
+					"sizingX": "grow"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Test Runner",
+					"top": 371,
+					"left": 273,
+					"width": 381,
+					"height": 28,
+					"stroke": "#F0F6FD",
+					"fontWeight": "bold",
+					"fontSize": 24
 				}
 			}
 		}
 	],
-	"geometryStamp": 509,
+	"geometryStamp": 557,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

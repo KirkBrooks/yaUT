@@ -1,7 +1,7 @@
 {
 	"version": "2.2",
 	"lastUpdated": "2024-10-14T09:30:00Z",
-	"testMethods": {
+	"testMethods": {	
 		"yaUT_TestUserRegistration": {
 			"name": "yaUT_TestUserRegistration",
 			"description": "Verifies that a new user can successfully register",
