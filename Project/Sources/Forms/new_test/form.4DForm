@@ -1,0 +1,186 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 3,
+	"bottomMargin": 3,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onLosingFocus",
+		"onDataChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"name": {
+					"type": "input",
+					"left": 3,
+					"top": 5,
+					"width": 330,
+					"height": 17,
+					"dataSource": "Form:C1466.name",
+					"placeholder": "  Enter test method name  'yaUT_' will be prepended",
+					"entryFilter": "&\"a-z;A-Z;0-9;_\""
+				},
+				"description": {
+					"type": "input",
+					"left": 3,
+					"top": 55,
+					"width": 390,
+					"height": 133,
+					"dataSource": "Form:C1466.description",
+					"placeholder": " - the purpose of the test,  appears in comments on method"
+				},
+				"btn_cancel": {
+					"type": "button",
+					"text": "❌",
+					"top": 5,
+					"left": 369,
+					"width": 22,
+					"height": 16,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"visibility": "visible",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Esc]",
+					"action": "cancel"
+				},
+				"btn_accept": {
+					"type": "button",
+					"text": "✓",
+					"top": 1,
+					"left": 339,
+					"width": 22,
+					"height": 22,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"dataSource": "",
+					"fontSize": 24,
+					"stroke": "#008000",
+					"fontWeight": "bold",
+					"action": "accept",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": ""
+				},
+				"kind": {
+					"type": "input",
+					"left": 83,
+					"top": 30,
+					"width": 130,
+					"height": 17,
+					"dataSource": "Form:C1466.kind",
+					"placeholder": "",
+					"enterable": false,
+					"focusable": false
+				},
+				"trap_enter": {
+					"type": "button",
+					"text": "",
+					"top": 21,
+					"left": 359,
+					"width": 2,
+					"height": 2,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "none",
+					"dataSource": "",
+					"fontSize": 24,
+					"stroke": "#008000",
+					"fontWeight": "bold",
+					"action": "",
+					"shortcutAccel": false,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "[Enter]"
+				},
+				"btn_priority": {
+					"type": "button",
+					"text": "Priority :",
+					"top": 27,
+					"left": 231,
+					"width": 59,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"stroke": "#696969"
+				},
+				"tags1": {
+					"type": "input",
+					"left": 303,
+					"top": 30,
+					"width": 28,
+					"height": 17,
+					"dataSource": "Form:C1466.priority",
+					"placeholder": "",
+					"dataSourceTypeHint": "integer",
+					"enterable": false,
+					"focusable": false,
+					"textAlign": "center"
+				},
+				"btn_kind": {
+					"type": "button",
+					"text": "Kind :",
+					"top": 27,
+					"left": 11,
+					"width": 59,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"style": "custom",
+					"popupPlacement": "linked",
+					"stroke": "#696969"
+				}
+			},
+			"entryOrder": [
+				"name",
+				"btn_kind",
+				"btn_priority",
+				"description",
+				"btn_accept",
+				"btn_cancel",
+				"trap_enter"
+			]
+		}
+	],
+	"geometryStamp": 229,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"method": "method.4dm",
+	"memorizeGeometry": true
+}

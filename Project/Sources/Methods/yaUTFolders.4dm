@@ -8,14 +8,16 @@ Organize yaUT methods into a folder hierarchy:
 
 yaUT
 | yaUT methods
-|- <method>
+|-- <kind>
+|--- <method>
 
 
 To use this: 
 start by calling 
   yaUTFolders("checkFolders") //  makes sure the folder hierarchy is in place
 
-
+To get an understanding of how the method works look 
+at folders.json
 */
 #DECLARE($action : Text; $options : Object) : Variant
 var $file : 4D.File
@@ -26,6 +28,7 @@ var $col : Collection
 ARRAY TEXT($aMethods; 0)
 
 Case of 
+	: ($action="moveToKindFolders")
 	: ($action="moveTestMethods")
 		$obj:=yaUTFolders("getFolderJson")
 		

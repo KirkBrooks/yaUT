@@ -1,0 +1,53 @@
+{"testTypes": [
+    {
+      "kind": "Unit",
+      "description": "Tests individual components or functions in isolation to ensure they work correctly.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "Integration",
+      "description": "Verifies that different components or systems work together properly.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "Functional",
+      "description": "Evaluates the system's compliance with specified functional requirements and behaviors.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "System",
+      "description": "Tests the entire system as a whole to ensure it meets all specified requirements.",
+      "defaultPriority": "Medium"
+    },
+    {
+      "kind": "Acceptance",
+      "description": "Determines if the system satisfies acceptance criteria and is ready for delivery.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "Performance",
+      "description": "Assesses the system's speed, responsiveness, and stability under various load conditions.",
+      "defaultPriority": "Medium"
+    },
+    {
+      "kind": "Smoke",
+      "description": "Quick, surface-level tests to ensure basic functionality before more thorough testing.",
+      "defaultPriority": "Critical"
+    },
+    {
+      "kind": "Regression",
+      "description": "Verifies that recent changes haven't adversely affected existing functionality.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "Security",
+      "description": "Identifies vulnerabilities and ensures the system is protected against potential threats.",
+      "defaultPriority": "High"
+    },
+    {
+      "kind": "Usability",
+      "description": "Evaluates the user-friendliness and overall user experience of the system.",
+      "defaultPriority": "Medium"
+    }
+  ]
+}

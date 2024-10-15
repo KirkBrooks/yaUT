@@ -29,10 +29,11 @@ return $testsRun
 
 */
 
-var $class : cs.Groups
+var $class : cs.GroupsJson
 
-$class:=cs.Groups.new()
+$class:=cs.GroupsJson.new()
 
+$obj:=$class.getTest("yaUT_newmethod")
 
 //yaUTFolders("checkFolders")
 

@@ -10,7 +10,7 @@ Form elements all reference content. Write content on changes.
 
 var $name; $objectName; $text; $method : Text
 var $tests_LB; $groups_LB : cs.listbox
-var $x; $y : Integer
+var $x; $y; $l; $t; $r; $b : Integer
 var $file : 4D.File
 var $obj : Object
 
@@ -69,7 +69,8 @@ If ($objectName="group_searchStr") && (Form event code=On After Edit)
 End if 
 
 If ($objectName="btn_addGroup")
-	$x:=1047-396
+	OBJECT GET COORDINATES(*; $objectName; $l; $t; $r; $b)
+	$x:=$r-396
 	$y:=98
 	CONVERT COORDINATES($x; $y; XY Current form; XY Screen)
 	$obj:=Group_enterNew($x; $y)
@@ -85,6 +86,14 @@ If ($objectName="btn_addGroup")
 			
 		End if 
 	End if 
+End if 
+
+If ($objectName="btn_addTest")
+	
+	$x:=5
+	$y:=98
+	CONVERT COORDINATES($x; $y; XY Current form; XY Screen)
+	$obj:=Group_enterNew($x; $y)
 End if 
 
 If ($objectName="groups_LB")

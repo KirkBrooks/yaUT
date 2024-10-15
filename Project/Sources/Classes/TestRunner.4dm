@@ -21,18 +21,13 @@ When kind=group:
 
 */
 property list : Collection  //  list of tests and groups
-property _jsonDoc : cs.JsonDocument
+property _groupJson : cs.GroupsJson
 property _content : Object
 
 Class constructor
 	This.list:=[]
-	If (isComponent)
-		This._jsonDoc:=cs.JsonDocument.new(Folder(fk resources folder).folder("yaUT").file("demo_groups.json").path)
-	Else 
-		This._jsonDoc:=cs.JsonDocument.new(Folder(fk resources folder; *).folder("yaUT").file("groups.json").path)
-	End if 
+	This._groupJson:=cs.GroupsJson.new()
 	
-	This._content:=This._jsonDoc.getObject()
 	
 	//mark:  --- managing the list
 Function addListItem($name : Text; $kind : Text) : cs.TestRunner

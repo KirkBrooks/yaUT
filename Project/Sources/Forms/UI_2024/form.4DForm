@@ -155,6 +155,8 @@
 					"hideExtraBlankRows": true,
 					"resizingMode": "legacy",
 					"dragging": "custom",
+					"class": "textTheme",
+					"horizontalLineStroke": "transparent",
 					"columns": [
 						{
 							"header": {
@@ -205,14 +207,14 @@
 				"Static Picture2": {
 					"type": "picture",
 					"top": 61,
-					"left": 6,
+					"left": 0,
 					"width": 202,
 					"height": 33,
 					"picture": "Images/Static Picture1.png"
 				},
 				"test_searchStr": {
 					"type": "input",
-					"left": 42,
+					"left": 36,
 					"top": 69,
 					"width": 151,
 					"height": 17,
@@ -231,14 +233,14 @@
 				"btn_updateTests": {
 					"type": "button",
 					"text": "🔄 ",
-					"top": 67,
-					"left": 213,
+					"top": 102,
+					"left": 212,
 					"width": 32,
 					"height": 21,
 					"events": [
 						"onClick"
 					],
-					"style": "roundedBevel"
+					"style": "custom"
 				},
 				"Rectangle1": {
 					"type": "rectangle",
@@ -260,11 +262,24 @@
 					"stroke": "#F0F6FD",
 					"fontWeight": "bold",
 					"fontSize": 24
+				},
+				"btn_addTest": {
+					"type": "button",
+					"text": "➕",
+					"top": 67,
+					"left": 201,
+					"width": 32,
+					"height": 21,
+					"events": [
+						"onClick"
+					],
+					"style": "roundedBevel",
+					"focusable": false
 				}
 			}
 		}
 	],
-	"geometryStamp": 557,
+	"geometryStamp": 644,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

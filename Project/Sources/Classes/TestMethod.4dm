@@ -1,7 +1,7 @@
 /*  TestMethod class
  Created by: Kirk as Designer, Created: 12/30/23, 08:34:43
  ------------------
-Facade class for a unit test. 
+Facade class for a unit test method. 
 $methodName is a unit test method in the database
 
 */
@@ -164,6 +164,14 @@ Function writeToLog($filePath : Text)
 		$fHandle.writeLine("    "+$testObj.displayline)
 	End for each 
 	
+	//mark:  --- method file and group object
+/*  these functions sync the method and group.json test method
+if the method does not exist it is created
+if it does exist it's added to the groups.json
+*/
+	
+	
+	
 	//mark:  --- private
 Function _validateMethod
 /* validate the method name exists
@@ -176,9 +184,9 @@ But it doesn't have to be shared to get the code
 	var $path : Text
 	ARRAY TEXT($aMethods; 0)
 	
-	METHOD GET PATHS(Path project method; $aMethods; *)
+	METHOD GET NAMES($aMethods; This._methodName; *)
 	
-	If (Find in array($aMethods; This.name)=-1)
+	If (Size of array($aMethods)=0)
 		This._error:="*** The method '"+This.name+"' is not in the database."
 		This._isValid:=False
 		return 
