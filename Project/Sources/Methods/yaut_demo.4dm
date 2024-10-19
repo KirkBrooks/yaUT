@@ -15,5 +15,3 @@ $col.push($test.new().insertBreakText("This is a break line"))
 $str:="This is a line of text"
 $col.push($test.new("$str contains 'line of text'").expect($str).toMatch("l[\\w ]+text"))
 $col.push($test.new("$str contains 'line of text'").expect($str).toMatch(123))
-
-

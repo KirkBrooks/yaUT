@@ -13,29 +13,27 @@ var $tests_LB; $groups_LB : cs.listbox
 var $x; $y; $l; $t; $r; $b : Integer
 var $file : 4D.File
 var $obj : Object
+var $groups : cs.GroupsJson
 
 If (Form=Null)
 	return 
 End if 
 
+
 $objectName:=String(FORM Event.objectName)
 $tests_LB:=Form.tests_LB || cs.listbox.new("tests_LB")
 $groups_LB:=Form.groups_LB || cs.listbox.new("groups_LB")
+$groups:=groupJsonDoc
 
 //mark:  --- form actions
 If (FORM Event.code=On Load)  //  catches all objects
-	$file:=Folder(fk resources folder; *).folder("yaUT").file("demo_groups.json")
-	Form._jsonDoc:=cs.JsonDocument.new($file.path)
-	Form.content:=Form._jsonDoc.getObject()
-	
-	$tests_LB.setSource(OB Keys(Form.content.testMethods))
-	$groups_LB.setSource(OB Keys(Form.content.testGroups))
+	$tests_LB.setSource(OB Keys($groups.testMethods))
+	$groups_LB.setSource(OB Keys($groups.testGroups))
 	
 	Form.tests_LB:=$tests_LB
 	Form.groups_LB:=$groups_LB
 	
-	
-	Form.groupSubform:={_jsonDoc: Form._jsonDoc; content: Form.content; group: Null}
+	Form.groupSubform:={group: Null}
 End if 
 
 
@@ -93,7 +91,11 @@ If ($objectName="btn_addTest")
 	$x:=5
 	$y:=98
 	CONVERT COORDINATES($x; $y; XY Current form; XY Screen)
-	$obj:=Group_enterNew($x; $y)
+	$obj:=Test_enterNew($x; $y)
+	
+	If ($obj.accepted)
+		$groups.putTest($obj)
+	End if 
 End if 
 
 If ($objectName="groups_LB")
@@ -106,7 +108,7 @@ If ($objectName="groups_LB")
 			
 		: (Form event code=On Double Clicked) && ($groups_LB.isSelected)
 			$name:=$groups_LB.get_item()
-			Form.groupSubform.group:=Form.content.testGroups[$name]
+			Form.groupSubform.group:=$groups.testGroups[$name]
 			
 			OBJECT SET SUBFORM(*; "groupSubform"; "group_detail")  // this causes the On load event to fire on the subform
 			

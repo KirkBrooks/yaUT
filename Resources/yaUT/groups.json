@@ -1,5 +1,6 @@
 {
-	"version": 1,
+	"version": "2.2",
 	"lastUpdated": "2024-10-12T23:56:31.379Z",
-	"testGroups": []
+	"testMethods": {},
+	"testGroups": {}
 }

@@ -8,7 +8,6 @@ _test_commaList ()
 var $class : cs.CommaList
 var $ok : Boolean
 
-
 $class:=cs.CommaList.new(["application/json"; "text/html"; "c"])
 
 $class.addItem("application/stuff")

@@ -3,6 +3,7 @@
  ------------------
 */
 var $objectName : Text
+var $obj : Object
 
 If (Form=Null)
 	return 
@@ -43,6 +44,14 @@ If ($objectName="name")
 	If (Form.name#"yaUT_@")
 		Form.name:="yaUT_"+Form.name
 	End if 
+	
+	$obj:=cs.GroupsJson.new().testMethods
+	
+	If ($obj[Form.name]#Null)
+		ALERT("There is already a test with that name.")
+		Form.name:=""
+	End if 
+	
 End if 
 
 

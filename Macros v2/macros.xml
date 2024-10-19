@@ -20,4 +20,22 @@
             //mark:  --- Unit Tests
         </text>
     </macro>
+
+    <macro name="yaUT_newMethod" in_menu="true" type_ahead="true" version="2">
+        <text><method>Macro_newTestMethod("<method_name/>")</method></text>
+    </macro>
+
+    <macro name="yaUT_save" in_menu="true" method_event="on_save" version="2">
+        <text><method>Macro_methodSave("<method_name/>")</method></text>
+    </macro>
+
+    <macro name="yaUT_kind" in_menu="true" type_ahead="true" version="2">
+        <text><method>Macro_insertKind()</method></text>
+    </macro>
+
+    <macro name="yaUT_priority" in_menu="true" type_ahead="true" version="2">
+        <text><method>Macro_insertPriority()</method></text>
+    </macro>
+
+
 </macros>

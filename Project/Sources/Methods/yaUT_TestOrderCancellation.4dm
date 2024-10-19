@@ -12,6 +12,7 @@ var $test : Object
 //  make the constructor
 $test:=cs.UnitTest
 
+
 $testsRun:=[]  // init the collection
 //mark:  --- example tests
 // $testsRun.push($test.new().insertBreakText("*  "+Current method name))

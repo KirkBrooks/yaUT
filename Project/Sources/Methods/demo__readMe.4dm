@@ -10,6 +10,18 @@ var $tests : Collection
 var $jsonDoc : cs.JsonDocument
 var $content; $options : Object
 
+
+
+$class:=cs.GroupsJson.new()
+
+$class.putTest("myNewestTest")
+
+
+
+
+
+
+
 //mark:  --- demo method code
 $tests:=[]
 $tests.push("$testsRun.push($test.new().insertBreakText(\"*  \"+Current method name))")

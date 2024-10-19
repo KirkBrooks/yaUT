@@ -55,6 +55,20 @@
 			"description": "End-to-end test of a successful payment, combining functional and integration aspects",
 			"kind": "mixed",
 			"defaultPriority": 1
+		},
+		"yaUT_myNewestTest": {
+			"name": "yaUT_myNewestTest",
+			"defaultPriority": 2,
+			"description": "",
+			"kind": "smoke"
+		},
+		"yaUT_anotherGreatTest": {
+			"name": "yaUT_anotherGreatTest",
+			"description": "kasdf\rasdf\r\rasdf\r asdf\rasdf asdfa asdfa asdfasdf",
+			"kind": "unit",
+			"defaultPriority": 1,
+			"priority": 2,
+			"accepted": true
 		}
 	},
 	"testGroups": {
