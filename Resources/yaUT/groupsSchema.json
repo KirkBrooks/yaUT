@@ -1,0 +1,105 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "pattern": "^\\d+\\.\\d+$"
+      },
+      "lastUpdated": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "testMethods": {
+        "type": "object",
+        "patternProperties": {
+          "^[A-Za-z][A-Za-z0-9_]{0,30}$": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_]{0,30}$",
+                "maxLength": 31
+              },
+              "description": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string",
+                "enum": ["functional", "integration", "mixed", "smoke", "unit"]
+              },
+              "defaultPriority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "accepted": {
+                "type": "boolean"
+              }
+            },
+            "required": ["name", "defaultPriority"],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "testGroups": {
+        "type": "object",
+        "patternProperties": {
+          "^[A-Za-z][A-Za-z0-9_]*$": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tests": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,30}$",
+                      "maxLength": 31
+                    },
+                    "priority": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 5
+                    }
+                  },
+                  "required": ["method"],
+                  "additionalProperties": false
+                }
+              },
+              "includeGroups": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["name", "description", "tags", "tests"],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": ["version", "lastUpdated", "testMethods", "testGroups"],
+    "additionalProperties": false
+  }

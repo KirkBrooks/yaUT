@@ -10,7 +10,11 @@ $class.expect(<some value>).toEqual(<value or formula>)
 */
 Class extends _ObjectProto
 
-property _result : Boolean
+property _result; __not : Boolean
+property _error : Text
+property _description : Text
+property _expectValueKind : Text
+property _lastErrors : Collection
 
 Class constructor($description : Text)
 	var lastErrorCol : Collection
@@ -87,6 +91,24 @@ Function expect() : cs.UnitTest
 	
 	This._expectValue:=$params[0]  //  any other params are ignored
 	This._expectValueKind:=This._valueKind($params[0])
+	return This
+	
+Function expectUndefined() : cs.UnitTest
+	If (This.isErr)
+		return This
+	End if 
+	
+	var $params : Collection
+	$params:=Copy parameters
+	
+	If (Count parameters=0) || (Value type($params[0])=Is undefined)
+		This._expectValue:=True
+		This._expectValueKind:="bool"
+	Else 
+		This._expectValue:=False
+		This._expectValueKind:="bool"
+	End if 
+	
 	return This
 	
 	//mark:  --- matchers

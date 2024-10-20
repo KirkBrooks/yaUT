@@ -1,6 +1,7 @@
 {
 	"version": "2.2",
 	"lastUpdated": "2024-10-14T09:30:00Z",
+	"validated": true,
 	"testMethods": {
 		"yaUT_TestUserRegistration": {
 			"name": "yaUT_TestUserRegistration",
@@ -69,6 +70,12 @@
 			"defaultPriority": 1,
 			"priority": 2,
 			"accepted": true
+		},
+		"yaUT_testMethod": {
+			"name": "yaUT_testMethod",
+			"defaultPriority": 2,
+			"description": "",
+			"kind": "smoke"
 		}
 	},
 	"testGroups": {

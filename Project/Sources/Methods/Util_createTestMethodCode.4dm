@@ -59,4 +59,4 @@ End if
 
 //mark:  --- create method
 $code:=$codeCol.join("\n")
-SET TEXT TO PASTEBOARD($code)
+// SET TEXT TO PASTEBOARD($code)

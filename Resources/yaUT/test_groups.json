@@ -1,0 +1,29 @@
+{
+	"version": "0.0",
+	"lastUpdated": "2024-10-20T18:01:04.713Z",
+	"testMethods": {
+		"yaUT_testMethod": {
+			"name": "yaUT_testMethod",
+			"defaultPriority": 2,
+			"description": "",
+			"kind": "smoke"
+		}
+	},
+	"testGroups": {
+		"group_A": {
+			"name": "group_B",
+			"description": "xxxx",
+			"tags": [],
+			"tests": [],
+			"includeGroups": [],
+			"defaultPriority": 4
+		},
+		"group_B": {
+			"name": "group_B",
+			"description": "xxxx",
+			"tags": [],
+			"tests": [],
+			"includeGroups": []
+		}
+	}
+}
