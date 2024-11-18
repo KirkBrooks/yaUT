@@ -101,4 +101,4 @@ $testsRun.push($test.new("groupCount = 2").expect($groupsJson.groupCount).toEqua
 
 
 //mark:  --- done
-// ALERT(Current method name+": unit test complete\n\n"+($errors=0 ? "PASS" : "FAIL"))
+ALERT(Current method name+": unit test complete\n\n"+($errors=0 ? "PASS" : "FAIL"))

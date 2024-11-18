@@ -30,10 +30,8 @@ If (FORM Event.code=On Load)  //  catches all objects
 	SET WINDOW TITLE("JSON configuration = "+$content.fileName; Current form window)
 	
 	Form.content:=$content
-	$tests_LB.setSource(OB Keys($content.testMethods))
-	
-	//todo: $content.testGroups needs to be a collection...  
-	$groups_LB.setSource($content.testGroups)
+	$tests_LB.setSource(OB Keys($content.testMethods))  // $content.testMethods is an object
+	$groups_LB.setSource($content.testGroups)  // $content.testGroups is a collection
 	
 	Form.tests_LB:=$tests_LB
 	Form.groups_LB:=$groups_LB
