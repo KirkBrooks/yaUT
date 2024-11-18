@@ -14,6 +14,7 @@ $codeCol.push("//%attributes = {\"shared\":true}")
 $codeCol.push("// "+$methodName)
 //mark:  --- comment section
 $codeCol.push("// created at: "+Timestamp+"  by: "+Current user)
+// these can be added anywhere in existing code but must be on their own line
 $codeCol.push("// Kind: "+String($options.kind))
 $codeCol.push("// Priority: "+String($options.priority))
 $codeCol.push("/* Description:")
@@ -41,6 +42,12 @@ $codeCol.push("")
 $codeCol.push("//mark:  --- unit tests")
 
 //mark:  --- append tests
+/*  the idea here is to be able to include
+a collection of tests inserted into the code. 
+This will allow us to build test code dynamically and run it 
+using process tags
+*/
+
 If ($options.tests#Null)
 	
 	For each ($test; $options.tests)

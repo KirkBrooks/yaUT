@@ -1,0 +1,248 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 0,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onClick",
+		"onSelectionChange"
+	],
+	"windowTitle": "window title",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"backgroundRect": {
+					"type": "rectangle",
+					"top": 40,
+					"left": 0,
+					"width": 895,
+					"height": 540,
+					"stroke": "#FFFFFF",
+					"fill": "#FFFFFF",
+					"sizingX": "grow",
+					"strokeWidth": 4,
+					"sizingY": "grow"
+				},
+				"Rectangle": {
+					"type": "rectangle",
+					"top": 0,
+					"left": 0,
+					"width": 895,
+					"height": 40,
+					"stroke": "transparent",
+					"fill": "#ff6347",
+					"sizingX": "grow"
+				},
+				"Text": {
+					"type": "text",
+					"text": "yaUT",
+					"top": -6,
+					"left": 15,
+					"width": 101,
+					"height": 41,
+					"stroke": "#F0F6FD",
+					"fontWeight": "bold",
+					"fontSize": 36
+				},
+				"Text3": {
+					"type": "text",
+					"text": "JSON Configuration Editor",
+					"top": 6,
+					"left": 209,
+					"width": 521,
+					"height": 28,
+					"stroke": "#F0F6FD",
+					"fontWeight": "bold",
+					"fontSize": 24
+				}
+			}
+		},
+		{
+			"objects": {
+				"file_path": {
+					"type": "input",
+					"left": 73,
+					"top": 50,
+					"width": 658,
+					"height": 17,
+					"dataSource": "Form:C1466.file.file.path",
+					"enterable": false,
+					"focusable": false
+				},
+				"Text2": {
+					"type": "text",
+					"text": "File :",
+					"top": 50,
+					"left": 8,
+					"width": 63,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080"
+				},
+				"errors_LB": {
+					"type": "listbox",
+					"left": 14,
+					"top": 91,
+					"width": 487,
+					"height": 278,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.errors_LB.data",
+					"currentItemSource": "Form:C1466.errors_LB.currentItem",
+					"currentItemPositionSource": "Form:C1466.errors_LB.position",
+					"selectedItemsSource": "Form:C1466.errors_LB.selectedItems",
+					"hideExtraBlankRows": true,
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"hideFocusRing": true,
+					"resizingMode": "legacy",
+					"columns": [
+						{
+							"header": {
+								"text": "Code",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"width": 39,
+							"dataSource": "This:C1470.code",
+							"dataSourceTypeHint": "number",
+							"enterable": false,
+							"textAlign": "center"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Message"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.message",
+							"enterable": false,
+							"width": 289
+						}
+					]
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Code :",
+					"top": 90,
+					"left": 508,
+					"width": 93,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"class": "form_label"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Message :",
+					"top": 116,
+					"left": 508,
+					"width": 93,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"class": "form_label"
+				},
+				"Text5": {
+					"type": "text",
+					"text": "jsonPath :",
+					"top": 234,
+					"left": 508,
+					"width": 93,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"class": "form_label"
+				},
+				"Text6": {
+					"type": "text",
+					"text": "schemaPath :",
+					"top": 312,
+					"left": 508,
+					"width": 93,
+					"height": 16,
+					"fontWeight": "bold",
+					"stroke": "#808080",
+					"class": "form_label"
+				},
+				"file_path1": {
+					"type": "input",
+					"left": 610,
+					"top": 91,
+					"width": 38,
+					"height": 17,
+					"dataSource": "Form:C1466.errors_LB.currentItem.code",
+					"enterable": false,
+					"focusable": false,
+					"dataSourceTypeHint": "integer"
+				},
+				"file_path2": {
+					"type": "input",
+					"left": 610,
+					"top": 116,
+					"width": 260,
+					"height": 109,
+					"dataSource": "Form:C1466.errors_LB.currentItem.message",
+					"enterable": false,
+					"focusable": false,
+					"dataSourceTypeHint": "text",
+					"scrollbarVertical": "automatic"
+				},
+				"file_path3": {
+					"type": "input",
+					"left": 610,
+					"top": 234,
+					"width": 260,
+					"height": 69,
+					"dataSource": "Form:C1466.errors_LB.currentItem.jsonPath",
+					"enterable": false,
+					"focusable": false,
+					"dataSourceTypeHint": "text",
+					"scrollbarVertical": "automatic"
+				},
+				"file_path4": {
+					"type": "input",
+					"left": 610,
+					"top": 312,
+					"width": 260,
+					"height": 69,
+					"dataSource": "Form:C1466.errors_LB.currentItem.schemaPaths",
+					"enterable": false,
+					"focusable": false,
+					"dataSourceTypeHint": "text",
+					"scrollbarVertical": "automatic"
+				}
+			}
+		}
+	],
+	"method": "method.4dm",
+	"geometryStamp": 286,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

@@ -13,7 +13,7 @@ var $tests_LB; $groups_LB : cs.listbox
 var $x; $y; $l; $t; $r; $b : Integer
 var $file : 4D.File
 var $obj : Object
-var $groups : cs.GroupsJson
+var $content : cs.GroupsJson
 
 If (Form=Null)
 	return 
@@ -23,12 +23,17 @@ End if
 $objectName:=String(FORM Event.objectName)
 $tests_LB:=Form.tests_LB || cs.listbox.new("tests_LB")
 $groups_LB:=Form.groups_LB || cs.listbox.new("groups_LB")
-$groups:=groupJsonDoc
+$content:=Form.content || cs.GroupsJson.new()
 
 //mark:  --- form actions
 If (FORM Event.code=On Load)  //  catches all objects
-	$tests_LB.setSource(OB Keys($groups.testMethods))
-	$groups_LB.setSource(OB Keys($groups.testGroups))
+	SET WINDOW TITLE("JSON configuration = "+$content.fileName; Current form window)
+	
+	Form.content:=$content
+	$tests_LB.setSource(OB Keys($content.testMethods))
+	
+	//todo: $content.testGroups needs to be a collection...  
+	$groups_LB.setSource($content.testGroups)
 	
 	Form.tests_LB:=$tests_LB
 	Form.groups_LB:=$groups_LB
@@ -76,13 +81,9 @@ If ($objectName="btn_addGroup")
 	If ($obj.accepted)
 		OB REMOVE($obj; "accepted")
 		
-		// is this a unique group name?
-		If (Form.content.testGroups[$obj.name]=Null)
-			Form.content.testGroups[$obj.name]:=$obj
-			Form._jsonDoc.writeObject(Form.content)  //  update the json file
-			$groups_LB.setSource(OB Keys(Form.content.testGroups))
-			
-		End if 
+		$content.putGroup($obj)
+		$groups_LB.setSource($content.testGroups)
+		
 	End if 
 End if 
 
@@ -94,7 +95,7 @@ If ($objectName="btn_addTest")
 	$obj:=Test_enterNew($x; $y)
 	
 	If ($obj.accepted)
-		$groups.putTest($obj)
+		$content.putTest($obj)
 	End if 
 End if 
 
@@ -102,13 +103,13 @@ If ($objectName="groups_LB")
 	
 	Case of 
 		: (Form event code=On Begin Drag Over) && ($groups_LB.isSelected)
-			$text:=$groups_LB.get_item()
+			$text:=$groups_LB.currentItem.name
 			$obj:={kind: "testGroup"; name: $text; properties: Form.content.testGroups[$text]}
 			SET TEXT TO PASTEBOARD(JSON Stringify($obj))
 			
 		: (Form event code=On Double Clicked) && ($groups_LB.isSelected)
-			$name:=$groups_LB.get_item()
-			Form.groupSubform.group:=$groups.testGroups[$name]
+			$name:=$groups_LB.currentItem.name
+			Form.groupSubform.group:=$content.testGroups[$name]
 			
 			OBJECT SET SUBFORM(*; "groupSubform"; "group_detail")  // this causes the On load event to fire on the subform
 			

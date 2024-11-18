@@ -143,6 +143,20 @@
 					"priority": 1
 				}
 			]
+		},
+		"MyGroup": {
+			"name": "MyGroup",
+			"description": "",
+			"tags": "",
+			"tests": [],
+			"includeGroups": []
+		},
+		"Group 2": {
+			"name": "Group 2",
+			"description": "",
+			"tags": "",
+			"tests": [],
+			"includeGroups": []
 		}
 	}
 }

@@ -2,27 +2,46 @@
  Created by: Kirk Brooks as Designer, Created: 10/15/24, 10:16:22
  ------------------
 Subclass of JsonDocument
-Singleton class for managing the groups.json file and data
+API for editing the groups.json file and data. 
+
+What we do here is:
+- manage editing the groups definitions
+- sync the testMethods in the JSON with actual 4D test methods
+- verify the resulting JSON validates 
+
+$methodObj is element of This.content.testMethods. 
+It is defined in the json file and should have a 4D method
+
+ex: "yaUT_TestUserRegistration": {
+      "name": "yaUT_TestUserRegistration",
+      "description": "Verifies that a new user can successfully register",  //  syncs with 4D method comments
+      "kind": "functional",  
+      "defaultPriority": 1
+     }
 
 Hierarchy 
  - $methodObj exists & $code=""  // create the method with $methodObj comments
- - $methodObj null & $code=""  // create the method AND $methodObj: $method comments
- - $methodObj null & $code#""  // create $methodObj comments from $code
- - $methodObj exists & $code#""  // 
+ - $methodObj null & $code=""    // create the method AND $methodObj: $method comments
+ - $methodObj null & $code#""    // create $methodObj w/ comments from $code
+ - $methodObj exists & $code#""  // sync comments - if editing $methodObj udpate code; if editing 4D method update $methodObj commenets
+
 */
 property content : Object
-property jsonPath : Text
+property jsonPath; fileName : Text
 property _schema; _validation : Object
 
 Class constructor($path : Text)
+	This.fileName:="undefined"
+	
 	Case of 
-		: ($path#"")  //  use this one
+		: ($path#"")  //  use this one if defined
 			This.jsonPath:=$path
-		: (isComponent)
+		: (isComponent)  // always use the one on the Host when a component
 			This.jsonPath:=Folder(fk resources folder; *).folder("yaUT").file("groups.json").path
-		Else 
+		Else   // development
 			This.jsonPath:=Folder(fk resources folder).folder("yaUT").file("demo_groups.json").path
 	End case 
+	
 	This.getJsonContent()
 	
 	
@@ -35,28 +54,34 @@ Function get validJson : Boolean
 	End if 
 	
 Function get testMethods : Object
-	return This.validJson ? This.content.testMethods : {}
+	return This.content.testMethods
 	
 Function get testGroups : Object
-	return This.validJson ? This.content.testGroups : {}
+	return This.content.testGroups
 	
 Function get methodCount : Integer
-	return This.validJson ? OB Keys(This.testMethods).length : -1
+	return OB Keys(This.testMethods).length
 	
 Function get groupCount : Integer
-	return This.validJson ? OB Keys(This.testGroups).length : -1
+	return OB Keys(This.testGroups).length
+	
 	
 	//mark:  --- Functions
 Function saveContent : cs.GroupsJson
 	var $class : cs.JsonDocument
-	//todo:  add JSON validation to this.content  
-	
 	$class:=cs.JsonDocument.new(This.jsonPath)
 	$class.content:=This.content
 	$class.writeObject()
 	return This
 	
-Function 
+Function getJsonContent
+	// get the content from the jsonPath document
+	var $class : cs.JsonDocument
+	$class:=cs.JsonDocument.new(This.jsonPath)
+	This.content:=$class.content
+	This.fileName:=$class.fullName
+	This._validateJson()
+	
 	//  TESTS
 Function testObject($methodName : Text) : Object
 	//  basic object for testMethods
@@ -141,11 +166,13 @@ Function putGroup($group : Variant) : cs.GroupsJson
 	End if 
 	
 	If (Value type($group)=Is text) && (This.testGroups[$group]=Null)
+		// $group is group name
 		$groupObj:=This.groupObject($group)
 		This.testGroups[$group]:=$groupObj
 		This.saveContent()
 		return This
 	End if 
+	
 	
 Function getGroupTests($groupName : Text) : Collection
 	return This._getGroupCol("includeGroups")
@@ -175,12 +202,13 @@ Function get4Dmethods : cs.GroupsJson
 	ARRAY TEXT($aNames; 0)
 	METHOD GET NAMES($aNames; "yaUT_@")
 	
-Function getJsonContent
-	// get the content from the jsonPath document
-	var $class : cs.JsonDocument
-	$class:=cs.JsonDocument.new(This.jsonPath)
-	This.content:=$class.content
-	This._validateJson()
+	
+	
+Function updateTestComments($methodObj : Object) : cs.GroupsJson
+	//  the method must follow conventions, see:  Util_createTestMethodCode
+	// $methodObj: {name: ""; description: ""; defaultPriority: 0; kind: ""}  
+	
+	
 	
 	//mark:  --- private
 Function _setTestGroup($groupName : Text; $groupObj : Object)
@@ -189,7 +217,7 @@ Function _setTestGroup($groupName : Text; $groupObj : Object)
 	End use 
 	
 Function _UpdateObj($a : Object; $b : Object)
-	// update $a values to $b
+	// update $a values to match $b
 	var $key : Text
 	
 	For each ($key; $a)

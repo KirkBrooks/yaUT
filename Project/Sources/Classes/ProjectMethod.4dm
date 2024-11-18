@@ -1,7 +1,7 @@
 /*  ProjectMethod class
  Created by: Kirk Brooks as Designer, Created: 10/19/24, 10:22:49
  ------------------
-Class for working with a project method file
+API class for working with a project method file
 Uses a combination of file operations and 4D method manipulations
 
 Writing method code is done on the file level. 
