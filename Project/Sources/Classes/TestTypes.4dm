@@ -9,6 +9,8 @@ property isOK : Boolean
 
 Class constructor
 	var $file : 4D.File
+	var $obj : Object
+	
 	This.isOK:=False
 	
 	$file:=Folder(fk resources folder).file("defaults.json")
@@ -35,7 +37,7 @@ Function get kindList : Collection
 	
 	//mark:  --- 
 Function chooseByMenu : Text
-	var $menu; $menu_result_t : Text
+	var $menu; $menu_result_t; $str : Text
 	var $obj : Object
 	
 	If (This.isOK=False)

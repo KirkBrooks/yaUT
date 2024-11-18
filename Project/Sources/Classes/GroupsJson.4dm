@@ -135,7 +135,7 @@ Function putTest($method : Variant) : cs.GroupsJson
 	End if 
 	// create the method stub is there's nothing there alerady
 	If ($code="")
-		Util_createTestMethod($methodName; $methodObj)
+		Util_createTestMethod($methodObj)
 	End if 
 	
 	return This
@@ -150,6 +150,7 @@ Function getGroup($groupName : Text) : Object
 Function putGroup($group : Variant) : cs.GroupsJson
 	//  groups don't have 4D code
 	var $groupObj : Object
+	var $groupName : Text
 	
 	If (Value type($group)=Is object)
 		//  create or update
@@ -193,7 +194,7 @@ Function putGroupIncludes($groupName : Text; $includeGroups : Collection) : cs.G
 Function getTestCode($methodName : Text)->$code : Text
 	return cs.ProjectMethod.new($methodName).getCode()
 	
-Function putTestCode($methodName : Text; $code : Text)
+Function putTestCode($methodName : Text; $code : Text) : cs.ProjectMethod
 	return cs.ProjectMethod.new($methodName).setCode($code)
 	
 Function get4Dmethods : cs.GroupsJson

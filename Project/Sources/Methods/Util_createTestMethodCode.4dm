@@ -5,20 +5,20 @@ Util_createTestMethodCode ()
  Created by: Kirk Brooks as Designer, Created: 10/15/24, 18:12:27
 */
 
-#DECLARE($methodName : Text; $options : Object)->$code : Text
+#DECLARE($methodObj : Object)->$code : Text
 var $codeCol : Collection
 var $test : Object
 
 $codeCol:=[]
 $codeCol.push("//%attributes = {\"shared\":true}")
-$codeCol.push("// "+$methodName)
+$codeCol.push("// "+$methodObj.name)
 //mark:  --- comment section
 $codeCol.push("// created at: "+Timestamp+"  by: "+Current user)
 // these can be added anywhere in existing code but must be on their own line
-$codeCol.push("// Kind: "+String($options.kind))
-$codeCol.push("// Priority: "+String($options.priority))
+$codeCol.push("// Kind: "+String($methodObj.kind))
+$codeCol.push("// Priority: "+String($methodObj.defaultPriority))
 $codeCol.push("/* Description:")
-$codeCol.push(String($options.description))
+$codeCol.push(String($methodObj.description))
 $codeCol.push("*/")
 
 //mark:  --- declaration
@@ -48,9 +48,9 @@ This will allow us to build test code dynamically and run it
 using process tags
 */
 
-If ($options.tests#Null)
+If ($methodObj.tests#Null)
 	
-	For each ($test; $options.tests)
+	For each ($test; $methodObj.tests)
 		If (String($test.section)#"")
 			$codeCol.push("\n//mark:-  "+$test.section)
 		End if 

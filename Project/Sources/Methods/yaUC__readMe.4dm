@@ -30,6 +30,7 @@ return $testsRun
 */
 
 var $class : cs.GroupsJson
+var $obj : Object
 
 $class:=cs.GroupsJson.new()
 

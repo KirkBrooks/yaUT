@@ -7,9 +7,9 @@ UT_TestSuite_2 ()
 
 #DECLARE->$testsRun : Collection
 var $class : cs.UnitTest
-var $test; $testObj; $testGroup : Object
+var $test; $testObj; $testGroup; $methodObj; $obj; $groupObj : Object
 var $a; $b : Variant
-var $testJsonPath : Text
+var $methodName; $groupName; $testJsonPath : Text
 var $jsonDoc : cs.JsonDocument
 
 $test:=cs.UnitTest

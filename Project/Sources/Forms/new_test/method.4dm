@@ -36,10 +36,6 @@ If ($objectName="btn_priority") && (Form event code=On Clicked)
 End if 
 
 If ($objectName="name")
-	// entry filter=  &"a-z;A-Z;0-9;_"
-	If (Form.name="")
-		continue
-	End if 
 	
 	If (Form.name#"yaUT_@")
 		Form.name:="yaUT_"+Form.name

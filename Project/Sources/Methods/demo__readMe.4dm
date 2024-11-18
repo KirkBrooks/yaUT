@@ -5,13 +5,13 @@ demo__readMe ()
  Created by: Kirk Brooks as Designer, Created: 10/14/24, 11:38:16
 */
 
-var $method; $code : Text
+var $methodName; $code : Text
 var $tests : Collection
 var $jsonDoc : cs.JsonDocument
 var $content; $options : Object
 
 
-
+var $class : cs.GroupsJson
 $class:=cs.GroupsJson.new()
 
 $class.putTest("myNewestTest")
@@ -39,18 +39,19 @@ $jsonDoc:=cs.JsonDocument.new(Folder(fk resources folder).folder("yaUT").file("d
 $content:=$jsonDoc.getObject()
 
 ON ERR CALL("ERR_ignore")
-For each ($method; $content.testMethods)
+For each ($methodName; $content.testMethods)
 	
-	METHOD GET CODE($method; $code)
+	METHOD GET CODE($methodName; $code)
 	
 	If ($code="")
+		$options.name:=$methodName
 		$options:={description: "This is a demo method for development testing\n\n"}
 		$options.priority:=1
 		$options.kind:="demo"
 		$options.tests:=[]
 		$options.tests.push({section: "This is what a section header looks like"; code: $tests})
 		
-		Util_createTestMethod($method; $options)
+		Util_createTestMethod($options)
 	End if 
 	
 End for each 

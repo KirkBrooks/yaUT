@@ -7,6 +7,6 @@ Macro_newTestMethod ()
 #DECLARE($methodName : Text)
 var $code : Text
 
-$code:=Util_createTestMethodCode($methodName)
+$code:=Util_createTestMethodCode({name: $methodName})
 
 SET MACRO PARAMETER(Full method text; $code)

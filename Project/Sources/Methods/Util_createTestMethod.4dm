@@ -6,7 +6,8 @@ This will create a basic stem
 Util_createTestMethod ()
  Created by: Kirk Brooks as Designer, Created: 10/14/24, 16:22:27
 
-$options: {
+$methodObject: {
+  name: 
   description: 
   kind: 
   defaultPriority: 
@@ -19,17 +20,21 @@ $options: {
 
 */
 
-#DECLARE($methodName : Text; $options : Object) : Boolean
+#DECLARE($methodObj : Object) : Boolean
 ARRAY TEXT($aNames; 0)
 var $test : Object
-var $code : Text
+var $code; $methodName : Text
 
-If ($methodName="")
+
+If ($methodObj=Null) || (String($methodObj.name)="")
 	return False
 End if 
 
+$methodName:=String($methodObj.name)
+
 If ($methodName#"yaUT_@")
 	$methodName:=Substring("yaUT_"+$methodName; 1; 31)
+	$methodObj.name:=$methodName
 End if 
 
 METHOD GET NAMES($aNames; $methodName)
@@ -37,7 +42,7 @@ If (Size of array($aNames)>0)
 	return True  //  because the method exists
 End if 
 
-$code:=Util_createTestMethodCode($methodName; $options)
+$code:=Util_createTestMethodCode($methodObj)
 
 METHOD SET CODE($methodName; $code; *)
 yaUTFolders("moveTestMethods")

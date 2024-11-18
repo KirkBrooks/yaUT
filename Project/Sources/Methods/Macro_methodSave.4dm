@@ -13,8 +13,10 @@ with groups.json.
 
 */
 #DECLARE($methodName : Text)
-var $code : Text
+var $description; $code; $line : Text
 var $codeCol : Collection
+var $methodObj : Object
+var $inDesc : Boolean
 
 If (Not(Match regex("yaUT_(?!_)\\w+"; $methodName; 1)))
 	return 
@@ -24,7 +26,7 @@ GET MACRO PARAMETER(Full method text; $code)
 
 $codeCol:=Split string($code; "\n")
 
-$obj:={name: $methodName}
+$methodObj:={name: $methodName}
 $inDesc:=False
 $description:=""
 
@@ -32,17 +34,17 @@ For each ($line; $codeCol)
 	
 	Case of 
 		: ($inDesc) && ($line="*/")  //  end of comment
-			$obj.description:=$description
+			$methodObj.description:=$description
 			$inDesc:=False
 			
 		: ($line="/* Description@")  // start of description
 			$inDesc:=True
 			
 		: ($line="// Kind:@")
-			$obj.kind:=Substring($line; 9)
+			$methodObj.kind:=Substring($line; 9)
 			
 		: ($line="// Priority:@")
-			$obj.defaultPriority:=Num($Line)
+			$methodObj.defaultPriority:=Num($Line)
 			
 		: ($line="#DECLARE@")
 			continue
