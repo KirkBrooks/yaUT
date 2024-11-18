@@ -35,9 +35,80 @@ DEFS
   }
 */
 
-Class constructor
+property content : Object
+property jsonPath; fileName : Text
+property _schema; _validation : Object
+property _groups; _tests : Collection  // collections of the classes for each object
+
+Class constructor($path : Text)
+	This.fileName:="undefined"
 	
+	Case of 
+		: ($path#"")  //  use this one if defined
+			This.jsonPath:=$path
+		: (isComponent)  // always use the one on the Host when a component
+			This.jsonPath:=Folder(fk resources folder; *).folder("yaUT").file("groups.json").path
+		Else   // development
+			This.jsonPath:=Folder(fk resources folder).folder("yaUT").file("demo_groups.json").path
+	End case 
+	
+	This.getJsonContent()
+	
+	//mark:  --- JSON content
+Function saveContent : cs.GroupsJson
+	var $class : cs.JsonDocument
+	$class:=cs.JsonDocument.new(This.jsonPath)
+	$class.content:=This.content
+	$class.writeObject()
+	return This
+	
+Function _updateContent
+	// update content with _groups and _tests
+	
+Function getJsonContent
+	// get the content from the jsonPath document
+	var $class : cs.JsonDocument
+	$class:=cs.JsonDocument.new(This.jsonPath)
+	This.content:=$class.content
+	This.fileName:=$class.fullName
+	This._populateGroups()
+	This._populateTests()
+	This._validateJson()
 	
 	//mark:  --- GROUPS
-Function addGroup($groupObj : Object) : cs.Groups_API
-	// 
+Function _populateGroups
+	//  updates this._groups with current this.content
+	var $groupName : Text
+	This._groups:=[]
+	For each ($groupName; This.content.testGroups)  // tesstGroups is an OBJECT
+		This._groups.push(cs.GroupObj.new(This.content.testGroups[$groupName]; This.content))
+	End for each 
+	
+	//mark:  --- TESTS
+Function _populateTests
+	var $methodName : Text
+	This._tests:=[]
+	For each ($methodName; This.content.testMethods)  // testMethods is an OBJECT
+		This._tests.push(cs.TestMethodObj.new(This.content.testMethods[$methodName]; This.content))
+	End for each 
+	
+	//mark:  --- private
+Function _validateJson
+	var $file : 4D.File
+	
+	If (This.content=Null)
+		This._validation:={success: False; errors: [{message: "No content"}]}
+		return 
+	End if 
+	
+	If (This._schema=Null)
+		$file:=Folder(fk resources folder).folder("yaUT").file("groupsSchema.json")
+		If ($file.exists)
+			This._schema:=JSON Parse($file.getText())
+		Else 
+			This._schema:={}
+		End if 
+	End if 
+	
+	This._validation:=JSON Validate(This.content; This._schema)
+	

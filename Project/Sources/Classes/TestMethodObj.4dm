@@ -2,15 +2,20 @@
  Created by: Kirk Brooks as Designer, Created: 11/18/24, 11:07:15
  ------------------
 Class for managing a methodObj. 
-This doesn't read or write from the content
 
+  methodObj: {
+   "name": <4D method name>,
+   "description": "",
+   "kind": "",
+   "defaultPriority": 1-5  //  use this property for JSON file objects
 */
 property name : Text
 property description : Text
 property kind : Text
 property defaultPriority : Integer
+property _content : Object
 
-Class constructor($method : Variant)  //  name or methodObj
+Class constructor($method : Variant; $content : Object)  //  name or methodObj
 	Case of 
 		: (Value type($method)=Is text)
 			This.name:=$method
@@ -26,8 +31,24 @@ Class constructor($method : Variant)  //  name or methodObj
 			
 		Else 
 			ALERT(Current method name+":  bad input")
-			
 	End case 
 	
+	This._content:=$content || {}
+	If (This._content.testMethods=Null)
+		This._content.testMethods:={}
+	End if 
+	
 	//mark:  --- Functions
+Function updateContent
+	// content.testMethods is an object
+	This._content.testMethods[This.name]:={\
+		name: This.name; \
+		description: This.description; \
+		defaultPriority: This.defaultPriority; \
+		kind: This.kind}
+	
+Function setPriorityMenu
+	// popup menu to set priority
+	This.defaultPriority:=Pop up menu("1;2;3;4;5")
+	This.updateContent()
 	

@@ -4,20 +4,22 @@
 Class for managing a groupObj. 
 This doesn't read or write from the content
 
-  methodObj: {
-   "name": <4D method name>,
+  groupObj:  {
+   "name": <groupName>,   //  required and must be unique
    "description": "",
-   "kind": "",
-   "defaultPriority": 1-5  //  use this property for JSON file objects
-  }
+   "tags": ["",""],
+   "tests": [ {name: <method name>; priority: 1-5}, ...],
+   "includeGroups": [<groupName>]  //  
+   }
 */
 property name : Text
 property description : Text
 property tags : Collection
 property tests : Collection
 property includeGroups : Collection
+property _content : Object
 
-Class constructor($group : Variant)  //  name or groupObj
+Class constructor($group : Variant; $content : Object)  //  name or groupObj
 	Case of 
 		: (Value type($group)=Is text)
 			This.name:=$group
@@ -37,6 +39,20 @@ Class constructor($group : Variant)  //  name or groupObj
 			ALERT(Current method name+":  bad input")
 	End case 
 	
+	This._content:=$content || {}
+	If (This._content.testGroups=Null)
+		This._content.testGroups:={}
+	End if 
+	
+Function updateContent
+	// content.testGroups is an object
+	This._content.testGroups[This.name]:={\
+		name: This.name; \
+		description: This.description; \
+		tags: This.tags; \
+		tags: This.tests; \
+		tags: This.includeGroups}
+	
 	//mark:  --- Tests
 Function getTestNames : Collection
 	return This.tests.extract("name")
@@ -46,6 +62,7 @@ Function addTest($name : Text; $priority : Integer)
 		return 
 	End if 
 	This.tests.push({name: $name; priority: $priority || 1})
+	This.updateContent()
 	
 Function removeTest($name : Text)
 	var $i : Integer
@@ -54,26 +71,31 @@ Function removeTest($name : Text)
 		return 
 	End if 
 	This.tests.remove($i)
+	This.updateContent()
 	
 	//mark:  --- Tags
 Function addTag($tag : Text)
 	If (This.tags.indexOf($tag)=-1)
 		This.tags.push($tag)
+		This.updateContent()
 	End if 
 	
 Function removeTag($tag : Text)
 	If (This.tags.indexOf($tag)>-1)
 		This.tags.remove(This.tags.indexOf($tag))
+		This.updateContent()
 	End if 
 	
 	//mark:  --- Groups
 Function addIncludedGroup($groupName : Text)
 	If (This.includeGroups.indexOf($groupName)=-1)
 		This.includeGroups.push($groupName)
+		This.updateContent()
 	End if 
 	
 Function removeIncludedGroup($groupName : Text)
 	If (This.includeGroups.indexOf($groupName)>-1)
 		This.includeGroups.push(This.includeGroups.indexOf($groupName))
+		This.updateContent()
 	End if 
 	
