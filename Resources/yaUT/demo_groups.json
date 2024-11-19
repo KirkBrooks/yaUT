@@ -71,11 +71,35 @@
 			"priority": 2,
 			"accepted": true
 		},
-		"yaUT_testMethod": {
+		"yaUT_testname": {
 			"name": "yaUT_testMethod",
 			"defaultPriority": 2,
 			"description": "",
 			"kind": "smoke"
+		},
+		"yaUT_testMethod": {
+			"name": "yaUT_testMethod",
+			"description": "",
+			"defaultPriority": 2,
+			"kind": "smoke"
+		},
+		"yaUT_newNewTest": {
+			"name": "yaUT_newNewTest",
+			"description": "",
+			"defaultPriority": 1,
+			"kind": ""
+		},
+		"yaUT_newtest_1234": {
+			"name": "yaUT_newtest_1234",
+			"description": "",
+			"defaultPriority": 1,
+			"kind": ""
+		},
+		"yaUT_newTest_1234": {
+			"name": "yaUT_newTest_1234",
+			"description": "",
+			"defaultPriority": 1,
+			"kind": ""
 		}
 	},
 	"testGroups": {
@@ -88,18 +112,18 @@
 			],
 			"tests": [
 				{
-					"method": "yaUT_TestOrderCancellation",
+					"name": "yaUT_TestOrderCancellation",
 					"priority": 2
 				},
 				{
-					"method": "yaUT_TestPasswordReset"
+					"name": "yaUT_TestPasswordReset"
 				},
 				{
-					"method": "yaUT_TestUserInitiatesPayment",
+					"name": "yaUT_TestUserInitiatesPayment",
 					"priority": 1
 				},
 				{
-					"method": "yaUT_TestUserLogin",
+					"name": "yaUT_TestUserLogin",
 					"priority": 1
 				}
 			],
@@ -116,13 +140,13 @@
 			],
 			"tests": [
 				{
-					"method": "yaUT_TestOrderCreationStorage"
+					"name": "yaUT_TestOrderCreationStorage"
 				},
 				{
-					"method": "yaUT_TestOrderUpdateInventory"
+					"name": "yaUT_TestOrderUpdateInventory"
 				},
 				{
-					"method": "yaUT_TestOrderCancellation"
+					"name": "yaUT_TestOrderCancellation"
 				}
 			]
 		},
@@ -135,11 +159,11 @@
 			],
 			"tests": [
 				{
-					"method": "yaUT_TestUserLogin",
+					"name": "yaUT_TestUserLogin",
 					"priority": 1
 				},
 				{
-					"method": "yaUT_TestSuccessfulPaymentWorkflow",
+					"name": "yaUT_TestSuccessfulPaymentWorkflow",
 					"priority": 1
 				}
 			]
@@ -147,14 +171,36 @@
 		"MyGroup": {
 			"name": "MyGroup",
 			"description": "",
-			"tags": "",
-			"tests": [],
-			"includeGroups": []
+			"tags": []
 		},
 		"Group 2": {
 			"name": "Group 2",
-			"description": "",
-			"tags": "",
+			"description": "This is group 2 description. \rAdded some more stuff. ",
+			"tags": [
+				"f",
+				"t",
+				"y",
+				"56"
+			],
+			"tests": [
+				{
+					"name": "yaUT_TestOrderCancellation",
+					"priority": 2
+				}
+			],
+			"includeGroups": []
+		},
+		"Group Delta": {
+			"name": "Group Delta",
+			"description": "some description",
+			"tags": [
+				"a",
+				"b",
+				"c",
+				"d",
+				"e",
+				"f"
+			],
 			"tests": [],
 			"includeGroups": []
 		}

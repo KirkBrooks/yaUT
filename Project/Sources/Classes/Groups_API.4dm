@@ -38,7 +38,7 @@ DEFS
 property content : Object
 property jsonPath; fileName : Text
 property _schema; _validation : Object
-property _groups; _tests : Collection  // collections of the classes for each object
+property groups; tests : Collection  // collections of the classes for each object
 
 Class constructor($path : Text)
 	This.fileName:="undefined"
@@ -54,6 +54,10 @@ Class constructor($path : Text)
 	
 	This.getJsonContent()
 	
+	//mark:  --- getters
+	
+	
+	
 	//mark:  --- JSON content
 Function saveContent : cs.GroupsJson
 	var $class : cs.JsonDocument
@@ -62,13 +66,23 @@ Function saveContent : cs.GroupsJson
 	$class.writeObject()
 	return This
 	
-Function _updateContent
-	// update content with _groups and _tests
-	
 Function getJsonContent
 	// get the content from the jsonPath document
 	var $class : cs.JsonDocument
 	$class:=cs.JsonDocument.new(This.jsonPath)
+	
+	If ($class.exists=False)
+		// need to define a new, empty one using this name
+		$class.writeObject({version: "2.2"; \
+			lastUpdated: Timestamp; \
+			validated: True; \
+			testMethods: {}; \
+			testGroups: {}})
+		
+		ALERT($class.fullName+" was not found. A new file has been created.")
+		TRACE
+	End if 
+	
 	This.content:=$class.content
 	This.fileName:=$class.fullName
 	This._populateGroups()
@@ -77,20 +91,68 @@ Function getJsonContent
 	
 	//mark:  --- GROUPS
 Function _populateGroups
-	//  updates this._groups with current this.content
+	//  updates this.groups with current this.content
 	var $groupName : Text
-	This._groups:=[]
-	For each ($groupName; This.content.testGroups)  // tesstGroups is an OBJECT
-		This._groups.push(cs.GroupObj.new(This.content.testGroups[$groupName]; This.content))
+	This.groups:=[]
+	For each ($groupName; This.content.testGroups)  // testGroups is an OBJECT
+		This.groups.push(cs.GroupObj.new(This.content.testGroups[$groupName]; This))
 	End for each 
+	
+Function addGroup($group : Variant)
+	var $obj : Object
+	Case of 
+		: (Value type($group)=Is text)
+			$obj:={name: $group}
+		: (Value type($group)=Is object)
+			$obj:=$group
+		Else 
+			return 
+	End case 
+	
+	If (This.content.testGroups[$obj.name]=Null)
+		This.content.testGroups[$obj.name]:=cs.GroupObj.new($obj).toObject()  // handles the tags
+		This.saveContent()
+		This._populateGroups()
+	End if 
+	
 	
 	//mark:  --- TESTS
 Function _populateTests
 	var $methodName : Text
-	This._tests:=[]
+	This.tests:=[]
 	For each ($methodName; This.content.testMethods)  // testMethods is an OBJECT
-		This._tests.push(cs.TestMethodObj.new(This.content.testMethods[$methodName]; This.content))
+		This.tests.push(cs.TestMethodObj.new(This.content.testMethods[$methodName]; This))
 	End for each 
+	
+Function addTest($method)
+/* sort of a big deal
+We have to check that it's a valid name, then 
+make sure it's in the JSON and there is a 4D method for it
+*/
+	var $testObj : cs.TestMethodObj
+	
+	// does it exist in the Content?
+	$testObj:=cs.TestMethodObj.new($method; This)  //  adds and updates content if it's not there
+	
+	This._populateTests()
+	
+Function sync4Dmethods
+/*  audit the list of methods in the JSON with
+methods in 4D. 
+*/
+	ARRAY TEXT($aNames; 0)
+	METHOD GET NAMES($aNames; "yaUT_@"; *)
+	
+	For ($i; 1; Size of array($aNames))
+		$methodName:=$aNames{$i}
+		
+		If (This.tests[$methodName]=Null)
+			
+		End if 
+	End for 
+	
+	
+	
 	
 	//mark:  --- private
 Function _validateJson
@@ -112,3 +174,4 @@ Function _validateJson
 	
 	This._validation:=JSON Validate(This.content; This._schema)
 	
+Function 

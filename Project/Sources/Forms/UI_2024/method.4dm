@@ -13,25 +13,25 @@ var $tests_LB; $groups_LB : cs.listbox
 var $x; $y; $l; $t; $r; $b : Integer
 var $file : 4D.File
 var $obj : Object
-var $content : cs.GroupsJson
+var $API : cs.Groups_API
 
 If (Form=Null)
 	return 
 End if 
 
-
 $objectName:=String(FORM Event.objectName)
 $tests_LB:=Form.tests_LB || cs.listbox.new("tests_LB")
 $groups_LB:=Form.groups_LB || cs.listbox.new("groups_LB")
-$content:=Form.content || cs.GroupsJson.new()
+$API:=Form.API || cs.Groups_API.new()
 
 //mark:  --- form actions
 If (FORM Event.code=On Load)  //  catches all objects
-	SET WINDOW TITLE("JSON configuration = "+$content.fileName; Current form window)
+	Form.API:=$API
 	
-	Form.content:=$content
-	$tests_LB.setSource(OB Keys($content.testMethods))  // $content.testMethods is an object
-	$groups_LB.setSource($content.testGroups)  // $content.testGroups is a collection
+	SET WINDOW TITLE("JSON configuration = "+$API.fileName; Current form window)
+	
+	$tests_LB.setSource($API.tests)
+	$groups_LB.setSource($API.groups)
 	
 	Form.tests_LB:=$tests_LB
 	Form.groups_LB:=$groups_LB
@@ -78,9 +78,8 @@ If ($objectName="btn_addGroup")
 	
 	If ($obj.accepted)
 		OB REMOVE($obj; "accepted")
-		
-		$content.putGroup($obj)
-		$groups_LB.setSource($content.testGroups)
+		$API.addGroup($obj)
+		$groups_LB.setSource($API.groups)
 		
 	End if 
 End if 
@@ -93,7 +92,8 @@ If ($objectName="btn_addTest")
 	$obj:=Test_enterNew($x; $y)
 	
 	If ($obj.accepted)
-		$content.putTest($obj)
+		$API.addTest($obj)
+		$tests_LB.setSource($API.tests)
 	End if 
 End if 
 
@@ -101,14 +101,10 @@ If ($objectName="groups_LB")
 	
 	Case of 
 		: (Form event code=On Begin Drag Over) && ($groups_LB.isSelected)
-			$text:=$groups_LB.currentItem.name
-			$obj:={kind: "testGroup"; name: $text; properties: Form.content.testGroups[$text]}
-			SET TEXT TO PASTEBOARD(JSON Stringify($obj))
+			SET TEXT TO PASTEBOARD(JSON Stringify($groups_LB.currentItem.toObject()))
 			
 		: (Form event code=On Double Clicked) && ($groups_LB.isSelected)
-			$name:=$groups_LB.currentItem.name
-			Form.groupSubform.group:=$content.testGroups[$name]
-			
+			Form.groupSubform.group:=$groups_LB.currentItem
 			OBJECT SET SUBFORM(*; "groupSubform"; "group_detail")  // this causes the On load event to fire on the subform
 			
 	End case 
@@ -118,14 +114,12 @@ End if
 If ($objectName="tests_LB")
 	Case of 
 		: (Form event code=On Begin Drag Over) && ($tests_LB.isSelected)
-			$text:=$tests_LB.get_item()
-			$obj:={kind: "testMethod"; name: $text; properties: Form.content.testMethods[$text]}
+			$obj:=$tests_LB.currentItem.toObject()
+			$obj.kind:="testMethod"  //  overwrites the kind for this operation
 			SET TEXT TO PASTEBOARD(JSON Stringify($obj))
 			
 		: (Form event code=On Double Clicked) && ($tests_LB.isSelected)
-			$text:=$tests_LB.get_item()
-			// open the method
-			METHOD OPEN PATH($text; *)
+			METHOD OPEN PATH($tests_LB.currentItem.name; *)
 			
 	End case 
 	

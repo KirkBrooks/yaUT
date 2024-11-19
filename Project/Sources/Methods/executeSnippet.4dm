@@ -61,6 +61,7 @@ End if
 
 //mark:  --- do the menu
 var $class : cs.MenuBuilder
+var $itemText; $tag : Text
 
 $class:=cs.MenuBuilder.new()
 $menu:=""

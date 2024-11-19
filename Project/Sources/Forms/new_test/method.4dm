@@ -1,6 +1,10 @@
 /*  new_test - form method
  Created by: Kirk Brooks as Designer, Created: 10/12/24, 18:44:19
  ------------------
+This checks the method name:
+ - begins with yaUT_ 
+ - 31 or fewer chars
+Does not check if it exists
 */
 var $objectName : Text
 var $obj : Object
@@ -36,21 +40,11 @@ If ($objectName="btn_priority") && (Form event code=On Clicked)
 End if 
 
 If ($objectName="name")
-	
 	If (Form.name#"yaUT_@")
-		Form.name:="yaUT_"+Form.name
-	End if 
-	
-	$obj:=cs.GroupsJson.new().testMethods
-	
-	If ($obj[Form.name]#Null)
-		ALERT("There is already a test with that name.")
-		Form.name:=""
+		Form.name:=Substring("yaUT_"+Form.name; 1; 31)
 	End if 
 	
 End if 
-
-
 
 //mark:  --- update state and formats
 

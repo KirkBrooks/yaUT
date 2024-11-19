@@ -131,16 +131,16 @@ Function windowInfo($windowRef : Integer)->$obj : Object
 	$obj.coords:={l: $l; t: $t; r: $r; b: $b; width: $r-$l; height: $b-$t}
 	$obj.kind:=Window kind($windowRef)
 	$obj.pid:=Window process($windowRef)
-	$obj.pName:=Process info($obj.pid).name
+	// $obj.pName:=Process name($obj.pid)
 	
 Function getWindowList : Collection
 	// return collection of window refs w/ process info
-	var $col : Collection:=[]
+	var $col : Collection
 	var $i : Integer
 	ARRAY LONGINT($aWindows; 0)
 	
 	WINDOW LIST($aWindows)
-	
+	$col:=[]
 	For ($i; 1; Size of array($aWindows))
 		$col.push(This.windowInfo($aWindows{$i}))
 	End for 
@@ -155,6 +155,7 @@ Function getTimeZone : Integer
 	
 Function dateFromString($string : Text) : Date
 	var $year; $month; $day : Integer
+	var $str : Text
 	
 	Case of 
 		: (Match regex("\\d\\d\\d\\d-\\d\\d-\\d\\d"; $string; 1))
@@ -232,7 +233,7 @@ Function lastOfYear($date : Date) : Date
 Function weekNumberISO($inputDate : Date)->$result : Object
 	// Calculate ISO week number for a given date
 	// returns {year: 0; weekNum; 0; $startDate; !!; $endDate: !!}
-	var $jan1; $jan4; $mondayOfJan4; $weekStart; $weekEnd : Date
+	var $jan1; $jan4; $mondayOfJan4; $weekStart; $weekEnd; $prevYearDec31; $dec31 : Date
 	var $dayDiff; $weekNum; $dayNum : Integer
 	
 	$jan1:=Add to date(!00-00-00!; Year of($inputDate); 1; 1)

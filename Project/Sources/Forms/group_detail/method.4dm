@@ -2,13 +2,14 @@
  Created by: Kirk Brooks as Designer, Created: 10/12/24, 11:33:00
  ------------------
 Displays a group object. 
-
+ form.group is cs.GroupObj
 */
 
 var $objectName; $text : Text
 var $tests_LB; $groups_LB : cs.listbox
 var $l; $t; $r; $b; $x; $y : Integer
 var $obj : Object
+var $group : cs.GroupObj
 
 If (Form=Null)
 	return 
@@ -16,16 +17,20 @@ End if
 
 $objectName:=String(FORM Event.objectName)
 
+$group:=Form.group || cs.GroupObj.new(Form.group)
 $tests_LB:=Form.tests_LB || cs.listbox.new("tests_LB")
 $groups_LB:=Form.groups_LB || cs.listbox.new("groups_LB")
 
 //mark:  --- form actions
 If (FORM Event.code=On Load)  //  catches all objects
+	Form.group:=$group
+	
 	Form.tests_LB:=$tests_LB
 	Form.groups_LB:=$groups_LB
 	
 	$tests_LB.setSource(Form.group.tests)
 	$groups_LB.setSource(Form.group.includeGroups)
+	OBJECT SET VALUE("tags"; $group.tagsToString())
 	
 	Form.dropPayload:=Null
 	Form.deleteItem:={name: ""; visible: False; x: 0; y: 0}
@@ -45,6 +50,9 @@ If (Form event code=On Getting Focus)  // && (Form.deleteItem.name=$objectName)
 	Form.deleteItem.visible:=False
 End if 
 
+If (Form event code=On Data Change)
+	$group.updateContent()
+End if 
 
 //mark:  --- object actions
 If ($objectName="btn_deleteItem")  //  delete a listbox item
@@ -70,14 +78,10 @@ If ($objectName="btn_deleteGroup") && (Form event code=On Clicked)
 End if 
 
 If ($objectName="tests_LB")
+	
 	Case of 
 		: (Form event code=On Drop) && (Form.dropPayload#Null) && (String(Form.dropPayload.kind)="testMethod")
-			If (Form.group.tests.query("method = :1"; Form.dropPayload.name).first()=Null)
-				$obj:={method: Form.dropPayload.name; priority: Num(Form.dropPayload.properties.defaultPriority)}
-				Form.group.tests.push($obj)
-				Form._jsonDoc.writeObject(Form.content)
-				// $tests_LB.reset()
-			End if 
+			$group.addTest(Form.dropPayload.name; Form.dropPayload.defaultPriority)
 			
 			Form.dropPayload:=Null
 			
@@ -95,20 +99,7 @@ End if
 If ($objectName="groups_LB")
 	Case of 
 		: (Form event code=On Drop) && (Form.dropPayload#Null) && (String(Form.dropPayload.name)#"")
-			// is it already part
-			Case of 
-				: (Form.group.name=Form.dropPayload.name)
-					//
-				: (Form.group.includeGroups=Null)
-					Form.group.includeGroups:=[Form.dropPayload.name]
-					$groups_LB.setSource(Form.group.includeGroups)
-					Form._jsonDoc.writeObject(Form.content)
-					
-				: (Form.group.includeGroups.indexOf(Form.dropPayload.name)=-1)  // it's not
-					Form.group.includeGroups.push(Form.dropPayload.name)
-					Form._jsonDoc.writeObject(Form.content)
-					
-			End case 
+			$group.addIncludedGroup(Form.dropPayload.name)
 			
 			Form.dropPayload:=Null
 			
@@ -122,6 +113,10 @@ If ($objectName="groups_LB")
 	End case 
 	
 	$groups_LB.redraw()
+End if 
+
+If ($objectName="tags") && (Form event code=On Data Change)
+	$group.stringToTags(OBJECT Get value("tags"))
 End if 
 
 //mark:  --- update state and formats

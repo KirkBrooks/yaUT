@@ -93,9 +93,23 @@
 							"footer": {
 								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.method",
+							"dataSource": "This:C1470.name",
 							"enterable": false,
 							"width": 200
+						},
+						{
+							"header": {
+								"name": "Header3",
+								"text": "Pri"
+							},
+							"name": "Column3",
+							"footer": {
+								"name": "Footer3"
+							},
+							"dataSource": "This:C1470.priority",
+							"width": 20,
+							"maxWidth": 25,
+							"dataSourceTypeHint": "number"
 						}
 					]
 				},
@@ -158,7 +172,7 @@
 					"top": 71,
 					"width": 390,
 					"height": 17,
-					"dataSource": "Form:C1466.group.tags"
+					"dataSource": ""
 				},
 				"btn_deleteItem": {
 					"type": "button",

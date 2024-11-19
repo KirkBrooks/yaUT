@@ -6,6 +6,6 @@ executeSnippet()
 var $class : cs.Groups_API
 
 $class:=cs.Groups_API.new()
-$class._tests[0].setPriorityMenu()
+$class.groups[0]._save()
 
 

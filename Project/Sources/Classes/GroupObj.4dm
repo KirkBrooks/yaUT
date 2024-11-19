@@ -18,8 +18,15 @@ property tags : Collection
 property tests : Collection
 property includeGroups : Collection
 property _content : Object
+property _API : cs.Groups_API
 
-Class constructor($group : Variant; $content : Object)  //  name or groupObj
+Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
+	This._API:=$api
+	This._content:=$api.content || {}
+	If (This._content.testGroups=Null)
+		This._content.testGroups:={}
+	End if 
+	
 	Case of 
 		: (Value type($group)=Is text)
 			This.name:=$group
@@ -31,7 +38,13 @@ Class constructor($group : Variant; $content : Object)  //  name or groupObj
 		: (Value type($group)=Is object)
 			This.name:=$group.name
 			This.description:=String($group.description)
-			This.tags:=$group.tags || []
+			
+			If (Value type($group.tags)=Is text)
+				This.stringToTags($group.tags)
+			Else 
+				This.tags:=$group.tags || []
+			End if 
+			
 			This.tests:=$group.tests || []
 			This.includeGroups:=$group.includeGroups || []
 			
@@ -39,19 +52,20 @@ Class constructor($group : Variant; $content : Object)  //  name or groupObj
 			ALERT(Current method name+":  bad input")
 	End case 
 	
-	This._content:=$content || {}
-	If (This._content.testGroups=Null)
-		This._content.testGroups:={}
-	End if 
 	
 Function updateContent
 	// content.testGroups is an object
-	This._content.testGroups[This.name]:={\
+	This._content.testGroups[This.name]:=This.toObject()
+	This._API.saveContent()
+	
+Function toObject : Object
+	// return object in content form
+	return {\
 		name: This.name; \
 		description: This.description; \
 		tags: This.tags; \
-		tags: This.tests; \
-		tags: This.includeGroups}
+		tests: This.tests; \
+		includeGroups: This.includeGroups}
 	
 	//mark:  --- Tests
 Function getTestNames : Collection
@@ -85,6 +99,14 @@ Function removeTag($tag : Text)
 		This.tags.remove(This.tags.indexOf($tag))
 		This.updateContent()
 	End if 
+	
+Function tagsToString : Text
+	return This.tags.join(", ")
+	
+Function stringToTags($text : Text)
+	This.tags:=Split string($text; ","; sk ignore empty strings+sk trim spaces)
+	This.updateContent()
+	
 	
 	//mark:  --- Groups
 Function addIncludedGroup($groupName : Text)

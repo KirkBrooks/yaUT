@@ -118,7 +118,7 @@
 							"footer": {
 								"name": "Footer2"
 							},
-							"dataSource": "This:C1470.value",
+							"dataSource": "This:C1470.name",
 							"enterable": false,
 							"width": 200
 						}
