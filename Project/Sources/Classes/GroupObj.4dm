@@ -11,6 +11,12 @@ This doesn't read or write from the content
    "tests": [ {name: <method name>; priority: 1-5}, ...],
    "includeGroups": [<groupName>]  //  
    }
+
+_results[<methodName>]: {
+   "name": <methodName>,
+   "pass"; boolean,
+   "tests": collection  //  returned by the method
+}
 */
 property name : Text
 property description : Text
@@ -19,9 +25,10 @@ property tests : Collection
 property includeGroups : Collection
 property _content : Object
 property _API : cs.Groups_API
+property _results : Object
 
 Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
-	This._API:=$api
+	This._API:=$api || cs.Groups_API.new()
 	This._content:=$api.content || {}
 	If (This._content.testGroups=Null)
 		This._content.testGroups:={}
@@ -51,6 +58,10 @@ Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
 		Else 
 			ALERT(Current method name+":  bad input")
 	End case 
+	
+Function run
+	// run the testMethods in this Group
+	// the name of the method is the key. 
 	
 	
 Function updateContent
@@ -106,7 +117,6 @@ Function tagsToString : Text
 Function stringToTags($text : Text)
 	This.tags:=Split string($text; ","; sk ignore empty strings+sk trim spaces)
 	This.updateContent()
-	
 	
 	//mark:  --- Groups
 Function addIncludedGroup($groupName : Text)

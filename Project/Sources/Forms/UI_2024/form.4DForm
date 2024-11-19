@@ -14,6 +14,7 @@
 	"events": [
 		"onLoad",
 		"onClick",
+		"onOutsideCall",
 		"onDoubleClick",
 		"onLosingFocus",
 		"onDataChange",
@@ -240,7 +241,8 @@
 					"events": [
 						"onClick"
 					],
-					"style": "custom"
+					"style": "custom",
+					"visibility": "hidden"
 				},
 				"Rectangle1": {
 					"type": "rectangle",
@@ -279,7 +281,7 @@
 			}
 		}
 	],
-	"geometryStamp": 644,
+	"geometryStamp": 645,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

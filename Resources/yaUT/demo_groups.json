@@ -116,7 +116,8 @@
 					"priority": 2
 				},
 				{
-					"name": "yaUT_TestPasswordReset"
+					"name": "yaUT_TestPasswordReset",
+					"priority": 1
 				},
 				{
 					"name": "yaUT_TestUserInitiatesPayment",
@@ -140,14 +141,16 @@
 			],
 			"tests": [
 				{
-					"name": "yaUT_TestOrderCreationStorage"
+					"name": "yaUT_TestUserInitiatesPayment",
+					"priority": 1
 				},
 				{
-					"name": "yaUT_TestOrderUpdateInventory"
-				},
-				{
-					"name": "yaUT_TestOrderCancellation"
+					"name": "yaUT_TestPaymentGatewayIntegration",
+					"priority": 1
 				}
+			],
+			"includeGroups": [
+				"MyGroup"
 			]
 		},
 		"CriticalPathTests": {
@@ -167,42 +170,6 @@
 					"priority": 1
 				}
 			]
-		},
-		"MyGroup": {
-			"name": "MyGroup",
-			"description": "",
-			"tags": []
-		},
-		"Group 2": {
-			"name": "Group 2",
-			"description": "This is group 2 description. \rAdded some more stuff. ",
-			"tags": [
-				"f",
-				"t",
-				"y",
-				"56"
-			],
-			"tests": [
-				{
-					"name": "yaUT_TestOrderCancellation",
-					"priority": 2
-				}
-			],
-			"includeGroups": []
-		},
-		"Group Delta": {
-			"name": "Group Delta",
-			"description": "some description",
-			"tags": [
-				"a",
-				"b",
-				"c",
-				"d",
-				"e",
-				"f"
-			],
-			"tests": [],
-			"includeGroups": []
 		}
 	}
 }

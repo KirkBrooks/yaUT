@@ -100,20 +100,36 @@ Function _populateGroups
 	
 Function addGroup($group : Variant)
 	var $obj : Object
-	Case of 
-		: (Value type($group)=Is text)
-			$obj:={name: $group}
-		: (Value type($group)=Is object)
-			$obj:=$group
-		Else 
-			return 
-	End case 
+	$obj:=This._groupObj($group)
 	
 	If (This.content.testGroups[$obj.name]=Null)
 		This.content.testGroups[$obj.name]:=cs.GroupObj.new($obj).toObject()  // handles the tags
 		This.saveContent()
 		This._populateGroups()
 	End if 
+	
+Function removeGroup($group : Variant)
+	var $obj : Object
+	$obj:=This._groupObj($group)
+	If ($obj=Null) || (This.content.testGroups[$obj.name]=Null)
+		return 
+	End if 
+	
+	OB REMOVE(This.content.testGroups; $obj.name)
+	This.saveContent()
+	This._populateGroups()
+	
+Function _groupObj($group : Variant)->$obj : Object
+	Case of 
+		: (Value type($group)=Is text)
+			$obj:={name: $group}
+		: (Value type($group)=Is object) && (OB Instance of($group; cs.GroupObj))
+			$obj:=$group.toObject()
+		: (Value type($group)=Is object)
+			$obj:=$group
+		Else 
+			return 
+	End case 
 	
 	
 	//mark:  --- TESTS

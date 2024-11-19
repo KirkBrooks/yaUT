@@ -86,19 +86,6 @@
 					"columns": [
 						{
 							"header": {
-								"name": "Header2",
-								"text": "Test Methods"
-							},
-							"name": "Column2",
-							"footer": {
-								"name": "Footer2"
-							},
-							"dataSource": "This:C1470.name",
-							"enterable": false,
-							"width": 200
-						},
-						{
-							"header": {
 								"name": "Header3",
 								"text": "Pri"
 							},
@@ -110,6 +97,19 @@
 							"width": 20,
 							"maxWidth": 25,
 							"dataSourceTypeHint": "number"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Test Methods"
+							},
+							"name": "Column2",
+							"footer": {
+								"name": "Footer2"
+							},
+							"dataSource": "This:C1470.name",
+							"enterable": false,
+							"width": 200
 						}
 					]
 				},
@@ -127,13 +127,14 @@
 					"selectedItemsSource": "Form:C1466.groups_LB.selectedItems",
 					"headerHeight": "22px",
 					"sizingY": "grow",
-					"focusable": false,
+					"focusable": true,
 					"singleClickEdit": false,
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
 					"hideExtraBlankRows": true,
 					"resizingMode": "legacy",
 					"dropping": "custom",
+					"hideFocusRing": true,
 					"columns": [
 						{
 							"header": {

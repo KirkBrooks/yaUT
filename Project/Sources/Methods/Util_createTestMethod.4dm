@@ -33,9 +33,11 @@ End if
 $methodName:=String($methodObj.name)
 
 If ($methodName#"yaUT_@")
-	$methodName:=Substring("yaUT_"+$methodName; 1; 31)
+	$methodName:="yaUT_"+$methodName
 	$methodObj.name:=$methodName
 End if 
+
+$methodName:=Substring($methodName; 1; 31)  // 4D method name limit
 
 METHOD GET NAMES($aNames; $methodName)
 If (Size of array($aNames)>0)
@@ -45,5 +47,5 @@ End if
 $code:=Util_createTestMethodCode($methodObj)
 
 METHOD SET CODE($methodName; $code; *)
-yaUTFolders("moveTestMethods")
 return True
+yaUTFolders("moveTestMethods")

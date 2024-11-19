@@ -14,6 +14,7 @@ var $x; $y; $l; $t; $r; $b : Integer
 var $file : 4D.File
 var $obj : Object
 var $API : cs.Groups_API
+var $methodObj : cs.TestMethodObj
 
 If (Form=Null)
 	return 
@@ -41,6 +42,12 @@ End if
 
 
 //mark:  --- object actions
+If ($objectName="btn_updateTests")
+	//todo: the idea is for this to sync and check the test methods in 
+	// 4D against the ones in the JSON. The Json is case sensitive where
+	// 4D methods aren't - which can cause problems
+End if 
+
 If ($objectName="test_searchStr") && (Form event code=On After Edit)
 	// scalar list
 	$text:=Get edited text
@@ -78,7 +85,7 @@ If ($objectName="btn_addGroup")
 	
 	If ($obj.accepted)
 		OB REMOVE($obj; "accepted")
-		$API.addGroup($obj)
+		$API.addGroup($obj; $API)
 		$groups_LB.setSource($API.groups)
 		
 	End if 
@@ -105,6 +112,7 @@ If ($objectName="groups_LB")
 			
 		: (Form event code=On Double Clicked) && ($groups_LB.isSelected)
 			Form.groupSubform.group:=$groups_LB.currentItem
+			Form.groupSubform.API:=Form.API
 			OBJECT SET SUBFORM(*; "groupSubform"; "group_detail")  // this causes the On load event to fire on the subform
 			
 	End case 
@@ -113,9 +121,15 @@ End if
 
 If ($objectName="tests_LB")
 	Case of 
+		: (Contextual click) && (Form event code=On Clicked)
+			
+			
 		: (Form event code=On Begin Drag Over) && ($tests_LB.isSelected)
-			$obj:=$tests_LB.currentItem.toObject()
-			$obj.kind:="testMethod"  //  overwrites the kind for this operation
+			$obj:={kind: "testMethod"; tests: []}
+			For each ($methodObj; $tests_LB.selectedItems)
+				$obj.tests.push($methodObj.toObject())
+			End for each 
+			
 			SET TEXT TO PASTEBOARD(JSON Stringify($obj))
 			
 		: (Form event code=On Double Clicked) && ($tests_LB.isSelected)
