@@ -170,6 +170,22 @@
 					"priority": 1
 				}
 			]
+		},
+		"A": {
+			"name": "A",
+			"description": "",
+			"tags": [],
+			"tests": [
+				{
+					"name": "yaUT_TestUserRegistration",
+					"priority": 1
+				},
+				{
+					"name": "yaUT_TestUserLogin",
+					"priority": 1
+				}
+			],
+			"includeGroups": []
 		}
 	}
 }

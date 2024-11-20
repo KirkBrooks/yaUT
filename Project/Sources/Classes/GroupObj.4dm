@@ -12,11 +12,13 @@ This doesn't read or write from the content
    "includeGroups": [<groupName>]  //  
    }
 
-_results[<methodName>]: {
-   "name": <methodName>,
+_results:  {
+   [<methodName>]: {
    "pass"; boolean,
    "tests": collection  //  returned by the method
-}
+    },
+   [<groupName>]: boolean,
+   ...
 */
 property name : Text
 property description : Text
@@ -59,9 +61,31 @@ Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
 			ALERT(Current method name+":  bad input")
 	End case 
 	
-Function run
+Function run($results : Object)
+	var $col : Collection
+	var $methodObj : cs.TestMethodObj
+	
+	If (Count parameters=0)
+		$results:=This._results
+	End if 
+	
 	// run the testMethods in this Group
-	// the name of the method is the key. 
+	For each ($methodObj; This.tests)
+		// the name of the method is the key. 
+		
+		If ($results[$methodObj.name]=Null)
+			EXECUTE METHOD($methodObj.name; $col)
+			$results[$methodObj.name]:=$col
+		End if 
+		
+	End for each 
+	
+	// now run the included Groups
+	For each ($groupName : This.includeGroups)
+		If ($results[$groupName]=Null)
+			This._API
+		End if 
+	End for each 
 	
 	
 Function updateContent

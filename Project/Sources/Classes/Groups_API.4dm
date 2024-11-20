@@ -90,6 +90,12 @@ Function getJsonContent
 	This._validateJson()
 	
 	//mark:  --- GROUPS
+Function runGroup($groupName : Text; $results : Object)->$groupObj : cs.GroupObj
+	$groupObj:=This.groups[$groupName]
+	If ($groupObj#Null)
+		$groupObj.run()
+	End if 
+	
 Function _populateGroups
 	//  updates this.groups with current this.content
 	var $groupName : Text

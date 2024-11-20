@@ -200,11 +200,24 @@
 					],
 					"sizingY": "move",
 					"focusable": false
+				},
+				"btn_run": {
+					"type": "button",
+					"text": "Run",
+					"top": 269,
+					"left": 6,
+					"width": 66,
+					"height": 26,
+					"events": [
+						"onClick"
+					],
+					"sizingY": "move",
+					"focusable": false
 				}
 			}
 		}
 	],
-	"geometryStamp": 109,
+	"geometryStamp": 135,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",

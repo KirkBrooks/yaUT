@@ -71,6 +71,11 @@ If (Form event code=On Outside Call)
 End if 
 
 //mark:  --- object actions
+If ($objectName="btn_run")
+	TRACE
+	$group.run()
+End if 
+
 If ($objectName="btn_deleteItem")  //  delete a listbox item
 	Case of 
 		: (Form event code#On Clicked)  //  only run on clicked
