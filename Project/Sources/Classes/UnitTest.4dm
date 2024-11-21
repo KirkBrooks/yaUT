@@ -17,8 +17,8 @@ property _expectValueKind : Text
 property _lastErrors : Collection
 
 Class constructor($description : Text)
-	var lastErrorCol : Collection
 	Super()
+	var lastErrorCol : Collection
 	This._error:=$description="" ? "Constructor: A description is required" : ""
 	This._description:=$description
 	This._expectValue:=Null
@@ -53,16 +53,7 @@ Function get error : Text
 	
 Function get displayline : Text
 	//  return line of text suitable for display in a listbox or text field
-	Case of 
-		: (This.isErr)
-			return "  ⚠️ "+This._description+": "+String(This._error)
-			
-		: (This.pass)
-			return "  ✅   "+This._description
-			
-		Else 
-			return "  ❌   "+This._description
-	End case 
+	return cs._displayLine.new(This).displayline
 	
 Function get matcher : Text
 	return This.__not ? "not."+This._matcher : This._matcher
@@ -250,6 +241,12 @@ Function getSummary()->$col : Collection
 	For each ($property; ["description"; "pass"; "matcher"; "error"; "isErr"; "_expectValue"; "_expectValueKind"; "_expectFormula"; "_testValue"; "_testValueKind"; "_testFormula"; "ms"])
 		$col.push({key: $property; value: (This[$property]#Null ? String(This[$property]) : "")})
 	End for each 
+	
+Function insertBreakText($text : Text) : cs.UnitTest
+	This._expectValueKind:="break"
+	This._result:=True
+	return This
+	
 	
 	//mark:  --- privates
 Function _setResult($result : Boolean)

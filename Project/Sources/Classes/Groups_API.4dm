@@ -162,6 +162,9 @@ Function sync4Dmethods
 /*  audit the list of methods in the JSON with
 methods in 4D. 
 */
+	var $i : Integer
+	var $methodName : Text
+	
 	ARRAY TEXT($aNames; 0)
 	METHOD GET NAMES($aNames; "yaUT_@"; *)
 	

@@ -185,6 +185,28 @@
 					"priority": 1
 				}
 			],
+			"includeGroups": [
+				"B"
+			]
+		},
+		"B": {
+			"name": "B",
+			"description": "",
+			"tags": [],
+			"tests": [
+				{
+					"name": "yaUT_TestUserLogin",
+					"priority": 1
+				},
+				{
+					"name": "yaUT_TestPasswordReset",
+					"priority": 2
+				},
+				{
+					"name": "yaUT_TestOrderCreationStorage",
+					"priority": 1
+				}
+			],
 			"includeGroups": []
 		}
 	}

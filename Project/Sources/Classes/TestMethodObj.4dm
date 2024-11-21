@@ -16,9 +16,13 @@ property defaultPriority : Integer
 property _content : Object
 property _API : cs.Groups_API
 property _4Dname : Text
+property isRun : Boolean  //  see:  GroupObj.run
+property runPass : Boolean
+property runResults : Collection
 
 Class constructor($method : Variant; $api : cs.Groups_API)  //  name or methodObj
 	This._API:=$api
+	This.isRun:=False
 	This._content:=$api.content || {}
 	If (This._content.testMethods=Null)
 		This._content.testMethods:={}
@@ -81,6 +85,19 @@ that capitalization.
 	
 	
 	//mark:  --- Functions
+Function run() : Boolean
+	//  run the method
+	var $results : Collection
+	
+	If (Not(This.isRun))
+		EXECUTE METHOD(This.name; $results)
+		
+		This.isRun:=True
+		This.runPass:=($results.query("pass = :1"; False).length=0)
+		This.runResults:=$results
+	End if 
+	
+	
 Function updateContent
 	// content.testMethods is an object
 	This._content.testMethods[This.name]:=This.toObject()

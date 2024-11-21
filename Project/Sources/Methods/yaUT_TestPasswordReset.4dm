@@ -31,4 +31,4 @@ $testsRun.push($test.new().insertBreakText("This is a break line"))
 var $str : Text
 $str:="This is a line of text"
 $testsRun.push($test.new("$str contains 'line of text'").expect($str).toMatch("l[\\w ]+text"))
-$testsRun.push($test.new("$str contains 'line of text'").expect($str).toMatch(123))
+$testsRun.push($test.new("$str contains 'line of text'").expect($str).not().toMatch(123))

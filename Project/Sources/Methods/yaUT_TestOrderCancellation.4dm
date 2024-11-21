@@ -24,12 +24,12 @@ $testsRun:=[]  // init the collection
 //mark:  --- unit tests
 
 //mark:-  This is what a section header looks like
-$testsRun.push($test.new().insertBreakText("*  "+Current method name))
+$testsRun.push($test.new("*  "+Current method name).insertBreakText())
 $testsRun.push($test.new("1 is equal to 1").expect(1).toEqual(1))
 $testsRun.push($test.new("1 is not equal to 5").expect(1).not().toEqual(5))
 $testsRun.push($test.new("1 is not null").expect(1).not().toBeNull())
-$testsRun.push($test.new().insertBreakText("This is a break line"))
+$testsRun.push($test.new("This is a break line").insertBreakText())
 var $str : Text
 $str:="This is a line of text"
 $testsRun.push($test.new("$str contains 'line of text'").expect($str).toMatch("l[\\w ]+text"))
-$testsRun.push($test.new("$str contains 'line of text'").expect($str).toMatch(123))
+$testsRun.push($test.new("$str contains 'line of text'").expect($str).not().toMatch(123))

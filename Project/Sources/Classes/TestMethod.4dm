@@ -4,9 +4,6 @@
 Facade class for a unit test method. 
 $methodName is a unit test method in the database
 
-
-
-
 */
 
 Class constructor($methodName : Text)
@@ -40,20 +37,7 @@ Function get error : Text
 	return This._error
 	
 Function get displayline : Text
-	//  return line of text suitable for display in a listbox or text field
-	Case of 
-		: (Not(This.isRun))
-			return "   - not run"
-			
-		: (This.isErr)
-			return "⚠️ : "+String(This._error)
-			
-		: (This.pass)
-			return "✅  # tests: "+String(This.countTests)
-			
-		Else 
-			return "❌  # pass: "+String(This.countPass)+", # fail: "+String(This.countFail)
-	End case 
+	return cs._displayLine.new(This).displayline
 	
 Function get isValid : Boolean
 	return This._isValid

@@ -28,6 +28,7 @@ property includeGroups : Collection
 property _content : Object
 property _API : cs.Groups_API
 property _results : Object
+property isRun; runPass : Boolean
 
 Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
 	This._API:=$api || cs.Groups_API.new()
@@ -61,33 +62,73 @@ Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
 			ALERT(Current method name+":  bad input")
 	End case 
 	
-Function run($results : Object)
+	//mark:  --- execution
+Function run($results : Object)->$pass : Boolean
+/* 
+This function should only be called by the Group_run method to insure
+the instance of $api is clean and only used for this Group execution
+This is because groups may be nested. Once a group or test is run in this
+context it is marked as 'isRun' and won't be executed again. 
+	
+*/
+	
 	var $col : Collection
 	var $methodObj : cs.TestMethodObj
+	var $groupObj : cs.GroupObj
+	var $groupName : Text
+	var $obj : Object
 	
-	If (Count parameters=0)
-		$results:=This._results
+	$pass:=True
+	
+	If (Count parameters=0)  // means we are starting from this group
+		This._results:={}  // clear the results
+		$results:=This._results  // put this ref into $results
 	End if 
 	
 	// run the testMethods in this Group
-	For each ($methodObj; This.tests)
+	For each ($obj; This.tests)  //  could $obj be the TestObj?
 		// the name of the method is the key. 
+		$methodObj:=This._API.tests.query("name = :1"; $obj.name).first()
 		
-		If ($results[$methodObj.name]=Null)
-			EXECUTE METHOD($methodObj.name; $col)
-			$results[$methodObj.name]:=$col
+		If (Not($methodObj.isRun))
+			$methodObj.run()
 		End if 
 		
 	End for each 
 	
 	// now run the included Groups
-	For each ($groupName : This.includeGroups)
+	If (This.includeGroups.length=0)
+		return $pass
+	End if 
+	
+	For each ($groupName; This.includeGroups)
 		If ($results[$groupName]=Null)
-			This._API
+			$groupObj:=This._API.groups.query("name = :1"; $groupName).first()
+			
+			If ($groupObj=Null)
+				continue
+			End if 
+			
+			$pass:=$pass && $groupObj.run($results)
+			$results[$methodObj.name]:=$col
 		End if 
 	End for each 
 	
+	// see:   Group_run method
+	This.isRun:=True
+	This.runPass:=$pass
+	return $pass
 	
+Function getResultCollection->$col : Collection
+	var $methodName : Text
+	var $col : Collection
+	
+	$col:=[]
+	For each ($methodName; This._results)
+		$col.push({name: $methodName; displayLine: cs._displayLine.new(This)})
+	End for each 
+	
+	//mark:  --- content
 Function updateContent
 	// content.testGroups is an object
 	This._content.testGroups[This.name]:=This.toObject()
