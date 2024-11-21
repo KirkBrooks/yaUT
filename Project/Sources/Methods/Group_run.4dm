@@ -14,9 +14,11 @@ $altPath allows you to specify a particular JSON document to load.
  - Leave blank to use the default groups.json document
 */
 
-#DECLARE($groupName : Text; $altPath : Text)->$groupObj : cs.GroupObj
+#DECLARE($groupName : Text; $altPath : Text)->$col : Collection
 var $api : cs.Groups_API
+var $groupObj : cs.GroupObj
 
+$col:=[]
 $groupName:="A"
 
 $api:=cs.Groups_API.new($altPath)  // fresh instance of groups.json
@@ -32,4 +34,13 @@ If ($groupObj=Null)
 End if 
 
 $groupObj.run()
+
+// create the return collection
+// this is a flattened collection of all the groups run starting with this one
+
+// find all other groups run
+$col:=$api.groups.query("isRun = :1 and name # :2"; True; $groupObj.name)
+$col.insert(0; $groupObj)  //  put this group at the top
+
+
 

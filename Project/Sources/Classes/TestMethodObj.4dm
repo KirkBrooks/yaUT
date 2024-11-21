@@ -83,7 +83,6 @@ that capitalization.
 			// has more than one capitalization...  
 	End case 
 	
-	
 	//mark:  --- Functions
 Function run() : Boolean
 	//  run the method
@@ -96,7 +95,6 @@ Function run() : Boolean
 		This.runPass:=($results.query("pass = :1"; False).length=0)
 		This.runResults:=$results
 	End if 
-	
 	
 Function updateContent
 	// content.testMethods is an object

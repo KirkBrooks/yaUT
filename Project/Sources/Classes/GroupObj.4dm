@@ -12,13 +12,6 @@ This doesn't read or write from the content
    "includeGroups": [<groupName>]  //  
    }
 
-_results:  {
-   [<methodName>]: {
-   "pass"; boolean,
-   "tests": collection  //  returned by the method
-    },
-   [<groupName>]: boolean,
-   ...
 */
 property name : Text
 property description : Text
@@ -27,7 +20,6 @@ property tests : Collection
 property includeGroups : Collection
 property _content : Object
 property _API : cs.Groups_API
-property _results : Object
 property isRun; runPass : Boolean
 
 Class constructor($group : Variant; $api : cs.Groups_API)  //  name or groupObj
@@ -78,12 +70,8 @@ context it is marked as 'isRun' and won't be executed again.
 	var $groupName : Text
 	var $obj : Object
 	
-	$pass:=True
-	
-	If (Count parameters=0)  // means we are starting from this group
-		This._results:={}  // clear the results
-		$results:=This._results  // put this ref into $results
-	End if 
+	This.runPass:=True
+	This.isRun:=True
 	
 	// run the testMethods in this Group
 	For each ($obj; This.tests)  //  could $obj be the TestObj?
@@ -94,11 +82,12 @@ context it is marked as 'isRun' and won't be executed again.
 			$methodObj.run()
 		End if 
 		
+		This.runPass:=This.runPass && $methodObj.runPass
 	End for each 
 	
 	// now run the included Groups
 	If (This.includeGroups.length=0)
-		return $pass
+		return This.runPass
 	End if 
 	
 	For each ($groupName; This.includeGroups)
@@ -109,24 +98,22 @@ context it is marked as 'isRun' and won't be executed again.
 				continue
 			End if 
 			
-			$pass:=$pass && $groupObj.run($results)
-			$results[$methodObj.name]:=$col
+			This.runPass:=This.runPass && $groupObj.run($results)
+			
 		End if 
 	End for each 
 	
 	// see:   Group_run method
-	This.isRun:=True
-	This.runPass:=$pass
-	return $pass
+	return This.runPass
 	
-Function getResultCollection->$col : Collection
+Function getMethodResults->$col : Collection
+	// returns the result collection for the group's test methods
+	// This is only the test methods run for this group - doesn't include subGroups
 	var $methodName : Text
-	var $col : Collection
+	var $col; $tests : Collection
 	
-	$col:=[]
-	For each ($methodName; This._results)
-		$col.push({name: $methodName; displayLine: cs._displayLine.new(This)})
-	End for each 
+	$tests:=This.tests.extract("name")
+	$col:=This._API.tests.query("isRun = :1 AND name IN :2"; True; $tests)
 	
 	//mark:  --- content
 Function updateContent

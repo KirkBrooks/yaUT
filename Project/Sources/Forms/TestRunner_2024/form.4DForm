@@ -50,8 +50,8 @@
 					"type": "button",
 					"text": "Run",
 					"top": 6,
-					"left": 455,
-					"width": 98,
+					"left": 607,
+					"width": 78,
 					"height": 25,
 					"events": [
 						"onClick"
@@ -61,8 +61,8 @@
 				"btn_writeLog": {
 					"type": "button",
 					"text": "Write to Log",
-					"top": 6,
-					"left": 695,
+					"top": 8,
+					"left": 856,
 					"width": 98,
 					"height": 25,
 					"events": [
@@ -74,7 +74,7 @@
 					"type": "checkbox",
 					"text": "Show failing only",
 					"top": 7,
-					"left": 294,
+					"left": 705,
 					"width": 141,
 					"height": 22,
 					"events": [
@@ -88,7 +88,7 @@
 					"type": "listbox",
 					"left": 5,
 					"top": 44,
-					"width": 552,
+					"width": 468,
 					"height": 417,
 					"events": [
 						"onClick",
@@ -96,7 +96,7 @@
 						"onDataChange",
 						"onSelectionChange"
 					],
-					"listboxType": "collection",
+					"listboxType": "array",
 					"headerHeight": "2em",
 					"resizingMode": "legacy",
 					"sizingY": "grow",
@@ -107,27 +107,74 @@
 					"horizontalLineStroke": "transparent",
 					"verticalLineStroke": "transparent",
 					"fill": "transparent",
-					"dataSource": "Form:C1466.methods_LB.data",
-					"currentItemSource": "Form:C1466.methods_LB.currentItem",
-					"currentItemPositionSource": "Form:C1466.methods_LB.position",
-					"selectedItemsSource": "Form:C1466.methods_LB.selectedItems",
 					"rowHeightAutoMin": "1em",
 					"rowHeightAutoMax": "1600em",
+					"staticColumnCount": 1,
 					"columns": [
 						{
 							"header": {
-								"text": "Test Method",
+								"text": "Group",
 								"name": "Header1",
 								"stroke": "#808080"
 							},
-							"name": "testMethod",
+							"name": "group_col",
 							"footer": {
 								"name": "Footer1"
 							},
 							"enterable": false,
-							"dataSource": "This:C1470.name+\"\\n\"+This:C1470.displayLine",
-							"width": 198,
-							"rowHeightAuto": true
+							"width": 35,
+							"rowHeightAuto": true,
+							"dataSource": [
+								""
+							],
+							"fontWeight": "bold"
+						},
+						{
+							"header": {
+								"name": "Header2",
+								"text": "Method"
+							},
+							"name": "method_col",
+							"footer": {
+								"name": "Footer2"
+							}
+						},
+						{
+							"header": {
+								"name": "Header4",
+								"text": ""
+							},
+							"name": "dislplayLine",
+							"footer": {
+								"name": "Footer4"
+							},
+							"dataSourceTypeHint": "text",
+							"width": 300,
+							"minWidth": 20,
+							"maxWidth": 300,
+							"enterable": false,
+							"truncateMode": "none",
+							"textAlign": "center",
+							"verticalAlign": "middle"
+						},
+						{
+							"header": {
+								"name": "Header5",
+								"text": "data",
+								"horizontalPadding": 0,
+								"verticalPadding": 0
+							},
+							"name": "Column4",
+							"footer": {
+								"name": "Footer5"
+							},
+							"dataSourceTypeHint": "object",
+							"enterable": false,
+							"visibility": "hidden",
+							"truncateMode": "none",
+							"width": 25,
+							"minWidth": 25,
+							"maxWidth": 25
 						}
 					]
 				},
@@ -178,11 +225,23 @@
 							"fill": "automatic"
 						}
 					]
+				},
+				"groups_list": {
+					"type": "dropdown",
+					"left": 249,
+					"top": 6,
+					"width": 347,
+					"height": 22,
+					"events": [
+						"onDataChange"
+					],
+					"dataSource": "Form:C1466.groups_list",
+					"dataSourceTypeHint": "object"
 				}
 			}
 		}
 	],
-	"geometryStamp": 79,
+	"geometryStamp": 100,
 	"editor": {
 		"activeView": "View 1",
 		"defaultView": "View 1",
